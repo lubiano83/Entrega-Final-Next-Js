@@ -1,44 +1,18 @@
-"use client";
 import React from 'react';
-import mockData from '../../data/mockData';
-import { useParams } from 'next/navigation';
-import Image from 'next/image';
-import Counter from '../Counter';
-import { usePrice } from '../../hooks/usePrice';
+import DetailCard from './DetailCard';
 
-const ProductDetail = () => {
+const ProductDetail = async ({ id }) => {
 
-    const { id } = useParams();
-    const { setPrice } = usePrice();
+  const items = await fetch(`http://localhost:3000/api/detail/${id}`, {cache: "no-store"}).then(res => res.json());
+  const itemsArray = Array.isArray(items) ? items : [items];
 
-    const singleProduct = mockData.find(product => product.id.toString() === id.toString());
-
-    if(!singleProduct){
-      return console.log("singleProduct no existe");
-    };
-    
   return (
     <article className='bg-white flex justify-center items-center flex-col py-8 gap-4'>
-      <div className='flex items-center flex-wrap justify-center'>
-        <div className='bg-white'>
-            <Image src={singleProduct.imageUrl} alt={singleProduct.model} height={288} width={288} className='bg-white' />
-        </div>
-        <div className='p-4 text-gray-700 h-72 flex flex-col items-start justify-center gap-3 text-xl'>
-            <p><strong>Id:</strong> {singleProduct.id}</p>
-            <p><strong>Categoria:</strong> {singleProduct.category}</p>
-            <p><strong>Marca:</strong> {singleProduct.brand}</p>
-            <p><strong>Modelo:</strong> {singleProduct.model}</p>
-            <p><strong>Descripcion:</strong> {singleProduct.description}</p>
-            <p><strong>Cantidad:</strong> {singleProduct.quantity}</p>
-            <p><strong>Precio:</strong> ${singleProduct.price ? setPrice(singleProduct.price) : ""}</p>
-        </div>
-      </div>
-      <div className='px-7 text-gray-700 w-1/2 text-m'>
-        <p><strong>Detalle:</strong> {singleProduct.detail}</p>
-      </div>
-      <div>
-          <Counter />
-      </div>
+      {
+        itemsArray.map(item => (
+          <DetailCard key={item.id} {...item} />
+        ))
+      }
     </article>
   )
 }; export default ProductDetail;

@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 const MenuList = ({ show, handleShow, isDarkMode }) => {
 
   const path = usePathname();
-  const user = false;
+  const user = true;
 
   return (
     <div className={`${show ? "opacity-100 visible" : "opacity-0 invisible"} transition-all fixed inset-0 bg-black/50 flex justify-start z-20`}>

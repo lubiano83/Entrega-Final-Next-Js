@@ -1,9 +1,34 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react'
+import Button from '../Button';
 
-const contactForm = () => {
+const ContactForm = () => {
+
+  const [ values, setValues ] = useState({
+    email: "",
+    text: "",
+  });
+
+  const handleChange = (event) => {
+    setValues({
+      ...values, 
+      [event.target.name]: event.target.value 
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(values);
+  };
+
   return (
-    <div>
-      
-    </div>
+    <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center gap-4 w-full'>
+      <input type="email" required placeholder='Ingresa tu Email..' name="text" onChange={handleChange} className='w-1/2 min-w-72 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 border-gray-700 text-lg' />
+      <textarea required placeholder='Dejanos tu Mensaje..' name="email" onChange={handleChange} className='w-1/2 min-w-72 h-72 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 border-gray-700 text-lg' />
+      <div className='flex justify-center items-center gap-2'>
+        <Button type="reset">Limpiar</Button>
+        <Button type="submit">Enviar</Button>
+      </div>
+    </form>
   )
-}; export default contactForm;
+}; export default ContactForm;

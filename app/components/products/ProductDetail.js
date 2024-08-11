@@ -33,7 +33,7 @@ const ProductDetail = () => {
             <p><strong>Precio:</strong> ${singleProduct.price ? setPrice(singleProduct.price) : ""}</p>
         </div>
       </div>
-      <div className='px-7 text-gray-700 container text-m'>
+      <div className='px-7 text-gray-700 w-1/2 text-m'>
         <p><strong>Detalle:</strong> {singleProduct.detail}</p>
       </div>
       <div>

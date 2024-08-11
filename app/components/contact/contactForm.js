@@ -12,13 +12,13 @@ const ContactForm = () => {
   const handleChange = (event) => {
     setValues({
       ...values, 
-      [event.target.name]: event.target.value 
+      [event.target.name]: event.target.value
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(values);
+    await fetch(`http://localhost:3000/api/contact`, { method: 'POST', body: JSON.stringify(values) })
   };
 
   return (

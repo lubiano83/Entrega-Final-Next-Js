@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useDarkMode } from "../../hooks/useDarkMode";
 import SvgImage from './SvgImage';
 
-const Navbar = () => {
+const Navbar = ({children}) => {
 
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
@@ -18,6 +18,7 @@ const Navbar = () => {
             <Logo />
           </Link>
       </div>
+        {children}
         <SvgImage src={"/light-svgrepo-com-white.svg"} toggleDarkMode={toggleDarkMode}/>
         <Link href={"/pages/cart"}>
           <SvgImage src={"/cart-shopping-svgrepo-com-white.svg"} />

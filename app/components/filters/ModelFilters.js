@@ -21,8 +21,8 @@ const ModelFilters = ({toggleModelDropdown, isModelOpen, closeDropdowns, isDarkM
               <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 {category === "todos" || category !== "todos" || brand === "todos" || brand !== "todos" ?
                 <Link href={`/pages/products/${category}/${brand}`}>
-                  <span onClick={closeDropdowns} className={`block px-4 py-2 text-sm text-white hover:bg-gray-700 ${path === `/pages/products/${category}/${brand}` ? "underline" : "no-underline"}`} role="menuitem">
-                    Todos
+                  <span onClick={closeDropdowns} className={`block px-4 py-2 text-sm text-white hover:bg-gray-700 ${path === `/pages/products/${category}/${brand}` ? "underline" : "no-underline"} ${(category === "todos" && brand === "todos" ? "text-red-500 no-underline hover:bg-blue-400" : "text-white")}`} role="menuitem">
+                    { (category === "todos" && brand === "todos") ? "Debes escoger una categoría o marca primero." : "Todos"}
                   </span>
                 </Link> : ""}
                 {/* Listado de categorias */}

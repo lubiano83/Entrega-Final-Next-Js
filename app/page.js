@@ -8,7 +8,7 @@ export default async function Home({ params }) {
   const lastItemAdded = items.reverse().slice(0, 5);
 
   return (
-    <main className="flex flex-col w-full justify-center items-center bg-white h-full text-gray-700 py-8">
+    <main className="flex flex-col w-full justify-center items-center bg-white h-full text-gray-700 p-8">
      <Inicio category={category} brand={brand} filter={filter} lastItemAdded={lastItemAdded} />
     </main>
   );

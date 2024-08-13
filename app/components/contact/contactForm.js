@@ -17,8 +17,8 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    await fetch(`http://localhost:3000/api/contact`, { method: 'POST', body: JSON.stringify(values) })
+    // event.preventDefault();
+    await fetch(`http://localhost:3000/api/contact`, { method: 'POST', body: JSON.stringify(values)});
   };
 
   return (

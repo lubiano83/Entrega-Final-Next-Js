@@ -10,6 +10,7 @@ const mockData = [
         filter: "R13",
         quantity: 4,
         price: 59890,
+        status: true,
         detail: "El Hankook Optimo K715 es un neumático de alto rendimiento diseñado para ofrecer una conducción suave y eficiente en vehículos compactos. Su diseño avanzado garantiza un agarre excelente y un desgaste uniforme, proporcionando una mayor durabilidad y seguridad en carretera.",
       },
       {
@@ -22,6 +23,7 @@ const mockData = [
         filter: "45AH",
         quantity: 4,
         price: 69890,
+        status: true,
         detail: "La batería Hankook MF54321 ofrece un rendimiento excepcional con 45AH y 450CCA, ideal para vehículos que requieren una energía constante y confiable. Su tecnología avanzada garantiza una mayor vida útil y resistencia a las condiciones extremas.",
       },
       {
@@ -34,6 +36,7 @@ const mockData = [
         description: "5W-30",
         quantity: 6,
         price: 47290,
+        status: true,
         detail: "El aceite Shell HX8 5W-30 es un lubricante de motor totalmente sintético que proporciona una protección superior contra el desgaste y una excelente limpieza del motor. Ideal para motores modernos que requieren un rendimiento avanzado y eficiencia de combustible.",
       },
       {
@@ -46,6 +49,7 @@ const mockData = [
         filter: "Aire",
         quantity: 3,
         price: 9900,
+        status: true,
         detail: "El filtro de aire Mann C30171 está diseñado para ofrecer una filtración excepcional, protegiendo el motor de partículas dañinas y asegurando un rendimiento óptimo. Fabricado con materiales de alta calidad, garantiza una larga vida útil y eficiencia.",
       },
       {
@@ -58,6 +62,7 @@ const mockData = [
         filter: "Parfum",
         quantity: 10,
         price: 1800,
+        status: true,
         detail: "El aromatizante Paloma Parfum Vainilla proporciona un ambiente agradable y fresco en tu vehículo con una fragancia duradera de vainilla. Su diseño compacto y elegante se adapta perfectamente a cualquier interior.",
       },
       {
@@ -70,6 +75,7 @@ const mockData = [
         filter: "R14",
         quantity: 4,
         price: 59890,
+        status: true,
         detail: "El Hankook Optimo H724 es un neumático versátil que ofrece una excelente tracción y durabilidad en diversas condiciones de manejo. Su diseño avanzado reduce el ruido en la carretera y mejora la eficiencia de combustible.",
       },
       {
@@ -82,6 +88,7 @@ const mockData = [
         filter: "55AH",
         quantity: 5,
         price: 79890,
+        status: true,
         detail: "La batería Hankook MF55457 ofrece una capacidad de 55AH y 480CCA, proporcionando una energía confiable para vehículos que exigen un rendimiento constante. Ideal para climas extremos, garantiza un arranque fácil y eficiente.",
       },
       {
@@ -94,6 +101,7 @@ const mockData = [
         filter: "15W-40",
         quantity: 6,
         price: 29690,
+        status: true,
         detail: "El aceite Shell HX5 15W-40 es un lubricante semisintético que proporciona una excelente protección y limpieza del motor, adecuado para motores diésel y gasolina. Su formulación avanzada reduce la fricción y prolonga la vida útil del motor.",
       },
       {
@@ -106,6 +114,7 @@ const mockData = [
         filter: "Elemento",
         quantity: 3,
         price: 9700,
+        status: true,
         detail: "El filtro de aceite Mann HU718/5X está diseñado para ofrecer una filtración superior, eliminando las impurezas del aceite y garantizando un rendimiento óptimo del motor. Fabricado con materiales de primera calidad, asegura una larga vida útil y protección confiable.",
       },
       {
@@ -118,6 +127,7 @@ const mockData = [
         filter: "Woody",
         quantity: 3,
         price: 2400,
+        status: true,
         detail: "El aromatizante Paloma Woody Floral es la elección perfecta para quienes buscan una fragancia fresca y duradera en su vehículo. Con su diseño moderno y compacto, es fácil de colocar y proporciona un ambiente agradable durante largos periodos.",
       },
       {
@@ -130,6 +140,7 @@ const mockData = [
         filter: "R15",
         quantity: 4,
         price: 49890,
+        status: true,
         detail: "El neumático Hankook Optimo H308 está diseñado para ofrecer una conducción cómoda y segura. Su estructura avanzada proporciona una excelente tracción en condiciones húmedas y secas, mientras que su diseño mejora la eficiencia de combustible.",
       },
       {
@@ -142,6 +153,7 @@ const mockData = [
         filter: "60AH",
         quantity: 3,
         price: 98980,
+        status: true,
         detail: "La batería Hankook MF47600 proporciona una capacidad de 60AH y 600CCA, ideal para vehículos que necesitan un rendimiento robusto. Con tecnología avanzada para condiciones extremas, garantiza una arranque confiable y una larga vida útil.",
       },
       {
@@ -154,6 +166,7 @@ const mockData = [
         filter: "10W-40",
         quantity: 3,
         price: 35990,
+        status: true,
         detail: "El aceite Shell HX7 10W-40 es un lubricante semisintético que proporciona una excelente protección y limpieza para motores diésel y gasolina. Su formulación reduce el desgaste del motor y mejora el rendimiento general.",
       },
       {
@@ -166,6 +179,7 @@ const mockData = [
         filter: "Aceite",
         quantity: 3,
         price: 6280,
+        status: true,
         detail: "El filtro de aceite Mann W610-6 está diseñado para mantener el aceite del motor limpio y libre de contaminantes. Proporciona una filtración eficaz que protege el motor y asegura un funcionamiento eficiente a lo largo del tiempo.",
       },
       {
@@ -178,6 +192,7 @@ const mockData = [
         filter: "Happy-Bag",
         quantity: 5,
         price: 1890,
+        status: true,
         detail: "El aromatizante Paloma Happy Bag Sports ofrece una fragancia dinámica y fresca, ideal para quienes buscan un ambiente energizante en su vehículo. Su diseño compacto lo hace fácil de instalar y proporciona una experiencia duradera.",
       }
 

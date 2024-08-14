@@ -14,7 +14,7 @@ const ProductsList = async ({ category = "todos", brand = "todos", filter = "tod
       <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>
         {
           items.map(item => (
-            <ProductCard key={item.id} {...item} />
+            <ProductCard key={item.id} {...item}/>
           ))
         }
       </div>

@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import Button from './Button';
 
-const Counter = () => {
+const Counter = ({quantity}) => {
 
     const [counter, setCounter] = useState(1);
 
     const increment = () => {
-        if (counter < 10) setCounter(counter + 1);
+        if (counter < quantity) setCounter(counter + 1);
     };
 
     const decrement = () => {

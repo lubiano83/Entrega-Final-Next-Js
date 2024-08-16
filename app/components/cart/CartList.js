@@ -5,7 +5,7 @@ import Title from '../Title';
 
 const CartList = async () => {
 
-  const items = await fetch("http://localhost:3000/api/cart", {cache: "no-store"}).then(res => res.json());
+  const items = await fetch("http://localhost:3000/api/cart", {next: {revalidate: 300, tags: ['products']}}).then(res => res.json());
   
   const getTotalPrice = () => {
     let totalPrice = 0;
@@ -28,7 +28,7 @@ const CartList = async () => {
   return (
     <div className='bg-white h-full w-full flex flex-col justify-between items-center text-center px-8'>
       <div className='p-8'>
-        <Title>Productos en Carrito:</Title>
+        <Title style="text-3xl">Productos en Carrito:</Title>
       </div>
       <div className='w-full h-full flex flex-col justify-start gap-3'>
         {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import mockData from "@/app/data/mockData";
-import { revalidateTag, revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 const sleep = (timer) => {
     return new Promise((resolve) => setTimeout(resolve, timer));
@@ -9,6 +9,5 @@ const sleep = (timer) => {
 export async function GET(request){
     await sleep(1000);
     revalidateTag('products');
-    revalidatePath('/api/products/[category]/[brand]/[filter]');
     return NextResponse.json(mockData);
 };

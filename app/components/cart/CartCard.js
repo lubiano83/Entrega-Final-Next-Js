@@ -10,7 +10,7 @@ const CartCard = ({id, brand, model, price, quantity, description}) => {
   const { isDarkMode } = useDarkMode();
 
   return (
-    <div className={`flex flex-wrap justify-between items-center w-full ${isDarkMode ? "bg-orange-600" : "bg-blue-600"} px-4 py-1 gap-2 rounded-xl overflow-hidden text-white border-2 border-white shadow-md shadow-gray-700`}>
+    <div className={`flex flex-wrap justify-between items-center w-full ${isDarkMode ? "border-orange-600" : "border-blue-600"} bg-gray-700 px-4 py-1 gap-2 rounded-xl overflow-hidden text-white border-2 shadow-md shadow-gray-700`}>
       <div className='w-14'>
         <p>Id:</p>
         <p>{id}</p>

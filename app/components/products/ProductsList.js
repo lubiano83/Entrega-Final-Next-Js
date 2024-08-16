@@ -4,7 +4,7 @@ import DynamicTitle from './DynamicTitle';
 
 const ProductsList = async ({ category = "todos", brand = "todos", filter = "todos" }) => {
 
-  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}`, {cache: "no-store"}).then(res => res.json());
+  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}`, {next: {revalidate: 3600, tags: ['cart']}}).then(res => res.json());
 
   return (
     <section className='flex flex-col w-full gap-8 m-8'>

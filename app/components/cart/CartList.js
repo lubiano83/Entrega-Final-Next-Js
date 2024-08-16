@@ -17,6 +17,14 @@ const CartList = async () => {
     return totalPrice;
   };
 
+  const getTotalQuantity = () => {
+    let accu = 0;
+    items.forEach(prod => {
+        accu += prod.quantity
+    })
+    return accu
+  }
+
   return (
     <div className='bg-white h-full w-full flex flex-col justify-between items-center text-center px-8'>
       <div className='p-8'>
@@ -25,12 +33,12 @@ const CartList = async () => {
       <div className='w-full h-full flex flex-col justify-start gap-3'>
         {
           items.map(item => (
-            <CartCard key={item.id} {...item}/>
+            <CartCard key={item.id} {...item} />
           ))
         }
       </div>
       <div>
-        <TotalCart totalPrice={getTotalPrice()}/>
+        <TotalCart totalPrice={getTotalPrice()} totalQuantity={getTotalQuantity()}/>
       </div>
     </div>
   )

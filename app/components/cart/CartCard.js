@@ -1,7 +1,5 @@
 "use client";
 import React from 'react';
-import Image from 'next/image';
-import Button from '../Button';
 import { usePrice } from '@/app/hooks/usePrice';
 import SvgImage from '../SvgImage';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
@@ -28,7 +26,7 @@ const CartCard = ({id, brand, model, price, quantity, description}) => {
       <div className='w-36'>
         <p>${setPrice(price)}</p>
       </div>
-      <SvgImage src={"/delete-2-svgrepo-com.svg"}/>
+      <SvgImage src={"/delete-2-svgrepo-com.svg"} />
     </div>
   )
 }; export default CartCard;

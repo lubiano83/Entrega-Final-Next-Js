@@ -4,13 +4,15 @@ import Button from '../Button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePrice } from '@/app/hooks/usePrice';
+import { useDarkMode } from '@/app/hooks/useDarkMode';
 
 const ProductCard = ({ id, imageUrl, category, brand, model, quantity, price, description }) => {
 
   const { setPrice } = usePrice();
+  const { isDarkMode } = useDarkMode();
 
   return (
-    <article className='border-2 border-gray-800 w-72 rounded-3xl overflow-hidden bg-gray-700 shadow-md shadow-gray-700'>
+    <article className={`border-2 ${isDarkMode ? "border-orange-600" : "border-blue-600"} w-72 rounded-3xl overflow-hidden bg-gray-700 shadow-md shadow-gray-700`}>
       <div className='bg-white'>
         <Image priority={false} src={imageUrl} alt={`autoshop, ${category}, ${model}, ${brand}, ${description}`} height={288} width={288} />
       </div>

@@ -4,7 +4,7 @@ import Menu from './Menu';
 import Logo from '../Logo';
 import Link from 'next/link';
 import { useDarkMode } from "../../hooks/useDarkMode";
-import SvgImage from './SvgImage';
+import SvgImage from '../SvgImage';
 
 const Navbar = ({children}) => {
 
@@ -19,7 +19,7 @@ const Navbar = ({children}) => {
           </Link>
       </div>
         {children}
-        <SvgImage src={"/light-svgrepo-com-white.svg"} toggleDarkMode={toggleDarkMode}/>
+        <SvgImage src={"/light-svgrepo-com-white.svg"} handleClicl={toggleDarkMode}/>
         <Link href={"/pages/cart"}>
           <SvgImage src={"/cart-shopping-svgrepo-com-white.svg"} />
         </Link>

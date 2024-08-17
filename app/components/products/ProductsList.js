@@ -1,16 +1,19 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 import DynamicTitle from './DynamicTitle';
+import Button from '../Button';
 
-const ProductsList = async ({ category = "todos", brand = "todos", filter = "todos" }) => {
+const ProductsList = async ({ category = "todos", brand = "todos", filter = "todos", params }) => {
 
   let page = 1;
-  const limit = 10;
-  const nextPage = page + 1;
-  const prevPage = page > 1 ? page - 1 : 1;
+  let limit = 10;
 
   // Hacer la petición a la API del lado del servidor
   const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}`, {next: { revalidate: 3600, tags: ['cart'] }}).then(res => res.json());
+
+  const prevPage = page = 1 ? page : page -1;
+  const nextPage = page >= Math.ceil(items.length / limit) ? page : page + 1;
+  const totalPages = Math.ceil(items.length / limit);
 
   return (
     <section className='flex flex-col w-full gap-8 m-8'>
@@ -22,14 +25,19 @@ const ProductsList = async ({ category = "todos", brand = "todos", filter = "tod
           <ProductCard key={item.id} {...item}/>
         ))}
       </div>
-      <div>
-        <a href={`?page=${prevPage}`} className='text-gray-700'>
-          Anterior
+      {totalPages > 1 ? 
+      <div className='flex justify-center items-center gap-4'>
+        <a href={`?page=${prevPage}`}>
+          <Button>
+            Anterior
+          </Button>
         </a>
-        <a href={`?page=${nextPage}`} className='text-gray-700'>
-          Siguiente
+        <a href={`?page=${nextPage}`}>
+          <Button>
+            Siguiente
+          </Button>
         </a>
-      </div>
+      </div> : "" }
     </section>
   );
 }; export default ProductsList;

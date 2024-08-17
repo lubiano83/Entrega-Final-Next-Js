@@ -6,10 +6,6 @@ const sleep = (timer) => {
     return new Promise((resolve) => setTimeout(resolve, timer));
 };
 
-const getProducts = (limit) => {
-    return mockData.slice(0, limit);
-};
-
 export async function GET(request) {
     const searchParams = new URL(request.url).searchParams;
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 10;

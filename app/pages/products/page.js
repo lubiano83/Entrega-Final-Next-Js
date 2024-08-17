@@ -5,7 +5,7 @@ const Shop = () => {
 
   return (
     <div className='w-full h-full flex'>
-     <ProductsList category="todos" />
+     <ProductsList />
     </div>
   )
 }; export default Shop;

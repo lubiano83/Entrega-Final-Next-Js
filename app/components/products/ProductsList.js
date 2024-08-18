@@ -14,15 +14,16 @@ const ProductsList = async ({ category = "todos", brand = "todos", filter = "tod
 
   return (
     <section className='flex flex-col w-full gap-8 m-8 justify-between'>
-      <div className='flex flex-col justify-center items-center gap-4'>
-        <DynamicTitle />
+      <div className='flex flex-col w-full justify-start gap-8'>
+        <div className='flex flex-col justify-center items-center gap-4'>
+          <DynamicTitle />
+        </div>
+        <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>
+          {items.map(item => (
+            <ProductCard key={item.id} {...item}/>
+          ))}
+        </div>
       </div>
-      <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>
-        {items.map(item => (
-          <ProductCard key={item.id} {...item}/>
-        ))}
-      </div>
-      
       <div className='flex justify-center items-center gap-4'>
         {
           page > 1 ? 

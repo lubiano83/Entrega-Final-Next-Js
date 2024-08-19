@@ -10,7 +10,16 @@ export async function GET(request) {
     const searchParams = new URL(request.url).searchParams;
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 20;
     const page = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
+    const sort = searchParams.get('sort');
+    
     let filteredData = mockData;
+
+    if (sort === 'asc' || sort === 'desc') {
+        filteredData.sort((a, b) => {
+            return sort === 'desc' ? b.price - a.price : a.price - b.price;
+        });
+    }
+
     const start = (page - 1) * limit;
     const end = start + limit;
     const paginatedData = filteredData.slice(start, end);

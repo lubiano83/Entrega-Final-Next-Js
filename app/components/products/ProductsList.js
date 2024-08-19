@@ -3,10 +3,10 @@ import ProductCard from './ProductCard';
 import DynamicTitle from './DynamicTitle';
 import Button from '../Button';
 
-const ProductsList = async ({ category = "todos", brand = "todos", filter = "todos", page, limit }) => {
+const ProductsList = async ({ category = "all", brand = "all", filter = "all", page, limit, sort }) => {
 
   const totalItems = await fetch("http://localhost:3000/api/products").then(res => res.json());
-  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}`, {next: { revalidate: 3600, tags: ['cart'] }}).then(res => res.json());
+  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 3600, tags: ['cart'] }}).then(res => res.json());
   
   const totalPages = Math.ceil(totalItems.length / limit);
   const prevPage = page > 1 ? page - 1 : page;
@@ -24,10 +24,11 @@ const ProductsList = async ({ category = "todos", brand = "todos", filter = "tod
           ))}
         </div>
       </div>
+      {page > 1 ?
       <div className='flex justify-center items-center gap-4'>
         {
           page > 1 ? 
-          <a href={`?limit=${limit}&page=${prevPage}`}>
+          <a href={`?limit=${limit}&page=${prevPage}&sort=${sort}`}>
             <Button>
               Anterior
             </Button>
@@ -40,7 +41,7 @@ const ProductsList = async ({ category = "todos", brand = "todos", filter = "tod
         }
         {
           page < totalPages ? 
-          <a href={`?limit=${limit}&page=${nextPage}`}>
+          <a href={`?limit=${limit}&page=${nextPage}&sort=${sort}`}>
             <Button>
               Siguiente
             </Button>
@@ -53,6 +54,7 @@ const ProductsList = async ({ category = "todos", brand = "todos", filter = "tod
           )
         }
       </div>
+      : "" }
     </section>
   );
 }; export default ProductsList;

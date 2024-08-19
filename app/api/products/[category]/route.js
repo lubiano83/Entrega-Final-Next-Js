@@ -11,7 +11,16 @@ export async function GET(request, { params }) {
     const searchParams = new URL(request.url).searchParams;
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 20;
     const page = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
-    let filteredData = category === "todos" ? mockData : mockData.filter(item => item.category.toLowerCase() === category.toLowerCase());
+    const sort = searchParams.get('sort');
+
+    let filteredData = category === "all" ? mockData : mockData.filter(item => item.category.toLowerCase() === category.toLowerCase());
+
+    if (sort === 'asc' || sort === 'desc') {
+        filteredData.sort((a, b) => {
+            return sort === 'desc' ? b.price - a.price : a.price - b.price;
+        });
+    }
+
     const start = (page - 1) * limit;
     const end = start + limit;
     const paginatedData = filteredData.slice(start, end);

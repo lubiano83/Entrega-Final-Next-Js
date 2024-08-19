@@ -1,17 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
 
-const CategoryFilters = ({toggleCategoryDropdown, closeDropdowns, isDarkMode, path, isCategoryOpen}) => {
+const CategoryFilters = ({toggleDropdown, closeDropdowns, isDarkMode, path, isOpen}) => {
 
   return (
     <div className="relative">
           <button
-            onClick={toggleCategoryDropdown}
+            onClick={toggleDropdown}
             className={`text-white hover:text-gray-700 font-bold rounded-md focus:outline-none h-auto max-h-72 scroll-my-1`}
           >
             Categorías
           </button>
-          {isCategoryOpen && (
+          {isOpen && (
             <div className={`absolute mt-2 w-36 z-10 max-h-72 overflow-y-scroll rounded-md shadow-lg ${isDarkMode ? "bg-orange-400" : "bg-blue-400"} ring-1 ring-black ring-opacity-5`}>
               <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <Link href="/pages/products">

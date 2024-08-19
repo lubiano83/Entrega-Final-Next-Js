@@ -3,8 +3,9 @@ import Button from '@/app/components/Button';
 import Link from 'next/link';
 import LastAdded from './products/LastAdded';
 import Title from './Title';
+import LowerPrice from './products/LowerPrice';
 
-const Inicio = ({ lastItemAdded }) => {
+const Inicio = ({ lastItemAdded, fiveLowerPriceItems }) => {
 
   return (
     <div className="bg-white flex flex-col justify-center gap-8 m-8 items-center h-full w-full">
@@ -12,6 +13,10 @@ const Inicio = ({ lastItemAdded }) => {
         <Title style="text-2xl">Ultimos Productos Agregados:</Title>
         <div className='w-full flex justify-evenly items-center'>
           <LastAdded lastItemAdded={lastItemAdded} />
+        </div>
+        <Title style="text-2xl">Productos Mas Baratos:</Title>
+        <div className='w-full flex justify-evenly items-center'>
+          <LowerPrice fiveLowerPriceItems={fiveLowerPriceItems} />
         </div>
       <div className='flex justify-center items-center gap-2 flex-wrap mx-8'>
         <h4 className='text-xl text-gray-700'>Visita Nuestra Tienda:</h4>

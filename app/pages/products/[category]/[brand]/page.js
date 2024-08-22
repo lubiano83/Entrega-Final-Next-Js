@@ -1,5 +1,7 @@
 import React from 'react';
 import ProductsList from '@/app/components/products/ProductsList';
+import { Suspense } from 'react';
+import Title from '@/app/components/Title';
 
 const Brand = ({ params, searchParams }) => {
 
@@ -10,7 +12,9 @@ const Brand = ({ params, searchParams }) => {
 
   return (
     <div className='w-full h-full flex'>
-     <ProductsList category={category} brand={brand} limit={limit} page={page} sort={sort}/>
+      <Suspense fallback={ <Title style='text-3xl flex justify-center items-center w-full h-full'>Cargando...</Title> }>
+        <ProductsList category={category} brand={brand} limit={limit} page={page} sort={sort}/>
+      </Suspense>
     </div>
   )
 }; export default Brand;

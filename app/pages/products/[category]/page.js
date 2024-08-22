@@ -1,5 +1,7 @@
 import React from 'react';
 import ProductsList from '../../../components/products/ProductsList';
+import { Suspense } from 'react';
+import Title from '@/app/components/Title';
 
 const Category = ({ params, searchParams }) => {
 
@@ -10,7 +12,9 @@ const Category = ({ params, searchParams }) => {
 
   return (
     <div className='w-full h-full flex'>
-      <ProductsList category={category} limit={limit} page={page} sort={sort}/>
+      <Suspense fallback={ <Title style='text-3xl flex justify-center items-center w-full h-full'>Cargando...</Title> }>
+      <ProductsList category={category} limit={limit} page={page} sort={sort} />
+      </Suspense>
     </div>
   )
 }; export default Category;

@@ -1,28 +1,39 @@
 import { NextResponse } from "next/server";
-import mockData from "@/app/data/mockData";
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
+import { db } from "@/app/firebase/config";
 import { revalidateTag } from "next/cache";
 
-const sleep = (timer) => {
-    return new Promise((resolve) => setTimeout(resolve, timer));
-};
-
 async function getProducts({ limit, page, sort, params }) {
-    const { category, brand } = params;
-    let filteredData = category === "all" ? mockData : mockData.filter(item => item.category.toLowerCase() === category.toLowerCase());
-    filteredData = brand === "all" ? filteredData : filteredData.filter(item => item.brand.toLowerCase() === brand.toLowerCase());
 
-    if (sort === 'asc' || sort === 'desc') {
-        filteredData.sort((a, b) => {
-            return sort === 'desc' ? b.price - a.price : a.price - b.price;
-        });
-    }
+    try {
+        const { category, brand } = params;
+        const collectionRef = collection(db, "products");
+        let productsQuery = collectionRef;
 
-    const start = (page - 1) * limit;
-    const end = start + limit;
-    const paginatedData = filteredData.slice(start, end);
+        if (category !== "all") {
+            productsQuery = query(productsQuery, where('category', '==', category));
+        }
+
+        if (brand !== "all") {
+            productsQuery = query(productsQuery, where('brand', '==', brand));
+        }
     
-    await sleep(1000);
-    return paginatedData;
+        if (sort) {
+            productsQuery = query(collectionRef, orderBy("price", sort));
+        }
+
+        const snapshot = await getDocs(productsQuery);
+        const productsData = snapshot.docs.map((doc) => doc.data());
+    
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const paginatedData = productsData.slice(start, end);
+        
+        return paginatedData;
+    } catch (error) {
+        console.error("Error fetching products from Firestore:", error);
+        throw new Error("Error fetching products from Firestore");
+    }
 }
 
 export async function GET(request, { params }) {

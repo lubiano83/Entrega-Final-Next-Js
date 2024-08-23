@@ -1,33 +1,36 @@
 import { NextResponse } from "next/server";
-import mockData from "@/app/data/mockData";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "../../firebase/config";
 import { revalidateTag } from "next/cache";
 
-const sleep = (timer) => {
-    return new Promise((resolve) => setTimeout(resolve, timer));
-};
-
 async function getProducts({ limit, page, sort }) {
-    let filteredData = mockData;
+    try {
+        const collectionRef = collection(db, "products");
+        let productsQuery = query(collectionRef);
+        
+        if (sort) {
+            productsQuery = query(collectionRef, orderBy("price", sort));
+        }
 
-    if (sort === 'asc' || sort === 'desc') {
-        filteredData.sort((a, b) => {
-            return sort === 'desc' ? b.price - a.price : a.price - b.price;
-        });
-    }
-
-    const start = (page - 1) * limit;
-    const end = start + limit;
-    const paginatedData = filteredData.slice(start, end);
+        const snapshot = await getDocs(productsQuery);
+        const productsData = snapshot.docs.map((doc) => doc.data());
     
-    await sleep(1000); // Simular retraso
-    return paginatedData;
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const paginatedData = productsData.slice(start, end);
+    
+        return paginatedData;
+    } catch (error) {
+        console.error("Error fetching products from Firestore:", error);
+        throw new Error("Error fetching products from Firestore");
+    }
 }
 
 export async function GET(request) {
     const searchParams = new URL(request.url).searchParams;
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 20;
     const page = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
-    const sort = searchParams.get('sort');
+    const sort = searchParams.get('sort') || null;
 
     const products = await getProducts({ limit, page, sort });
 

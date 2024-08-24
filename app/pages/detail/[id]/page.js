@@ -1,7 +1,5 @@
 import React from 'react';
 import ProductDetail from '../../../components/products/ProductDetail';
-import { Suspense } from 'react';
-import Title from '@/app/components/Title';
 
 export async function generateMetadata ({params, searchParams}, parent) {
   const { id } = params;
@@ -19,9 +17,7 @@ const Detail = ({ params }) => {
 
   return (
     <div className="bg-white flex justify-evenly items-center h-full w-full">
-      <Suspense fallback={ <Title style='text-3xl flex justify-center items-center w-full h-full'>Cargando...</Title> }>
-        <ProductDetail id={id}/>
-      </Suspense>
+      <ProductDetail id={id}/>
     </div>
   )
 }; export default Detail;

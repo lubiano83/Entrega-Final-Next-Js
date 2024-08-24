@@ -6,11 +6,9 @@ import { revalidateTag } from "next/cache";
 async function getProducts({ limit, page, sort }) {
     try {
         const collectionRef = collection(db, "products");
-        let productsQuery = query(collectionRef);
+        const sortDirection = sort === 'desc' ? 'desc' : 'asc';
         
-        if (sort && (sort === 'asc' || sort === 'desc')) {
-            productsQuery = query(productsQuery, orderBy("price", sort));
-        }
+        let productsQuery = query(collectionRef, orderBy("price", sortDirection));
 
         const snapshot = await getDocs(productsQuery);
         const productsData = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));

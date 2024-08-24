@@ -14,10 +14,6 @@ async function getProducts({ limit, page, sort, params }) {
             productsQuery = query(productsQuery, where('category', '==', category));
         }
 
-        if (sort && (sort === 'asc' || sort === 'desc')) {
-            productsQuery = query(productsQuery, orderBy("price", sort));
-        }
-
         const snapshot = await getDocs(productsQuery);
         const productsData = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
 

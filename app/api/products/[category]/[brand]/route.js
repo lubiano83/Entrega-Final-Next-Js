@@ -18,7 +18,7 @@ async function getProducts({ limit, page, sort, params }) {
             productsQuery = query(productsQuery, where('brand', '==', brand));
         }
     
-        if (sort && (sort === 'asc' || sort === 'desc')) {
+        if (sort && (sort === 'sort=asc' || sort === 'sort=desc')) {
             productsQuery = query(productsQuery, orderBy("price", sort));
         }
 

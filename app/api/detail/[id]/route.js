@@ -1,25 +1,41 @@
 import { NextResponse } from "next/server";
-import mockData from "@/app/data/mockData";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/app/firebase/config";
 
-const sleep = (timer) => {
-    return new Promise((resolve) => setTimeout(resolve, timer));
-};
+async function getProductById(id) {
+    try {
+        const docRef = doc(db, "products", id);
+        const docSnapshot = await getDoc(docRef);
 
-async function getProductsById({ params }) {
-    const { id } = params;
-    const singleProduct = mockData.find(product => product.id.toString() === id.toString());
-    
-    await sleep(1000);
+        if (!docSnapshot.exists()) {
+            return "El producto no existe";
+        }
 
-    return singleProduct;
+        const productData = docSnapshot.data();
+        
+        return { id: docSnapshot.id, ...productData };
+    } catch (error) {
+        console.error("Error fetching product from Firestore:", error);
+        throw new Error("Error fetching product from Firestore");
+    }
 }
 
 export async function GET(request, { params }) {
-    const singleProduct = await getProductsById({ params });
-    
-    if (!singleProduct) {
-        return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    const { id } = params;
+
+    if (!id) {
+        return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
     }
 
-    return NextResponse.json(singleProduct);
-};
+    try {
+        const product = await getProductById(id);
+
+        if (!product) {
+            return NextResponse.json({ error: "Product not found" }, { status: 404 });
+        }
+
+        return NextResponse.json(product);
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}

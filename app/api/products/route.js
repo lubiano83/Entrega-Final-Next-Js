@@ -8,12 +8,12 @@ async function getProducts({ limit, page, sort }) {
         const collectionRef = collection(db, "products");
         let productsQuery = query(collectionRef);
         
-        if (sort) {
-            productsQuery = query(collectionRef, orderBy("price", sort));
+        if (sort && (sort === 'asc' || sort === 'desc')) {
+            productsQuery = query(productsQuery, orderBy("price", sort));
         }
 
         const snapshot = await getDocs(productsQuery);
-        const productsData = snapshot.docs.map((doc) => doc.data());
+        const productsData = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
     
         const start = (page - 1) * limit;
         const end = start + limit;
@@ -32,8 +32,12 @@ export async function GET(request) {
     const page = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
     const sort = searchParams.get('sort') || null;
 
-    const products = await getProducts({ limit, page, sort });
-
-    revalidateTag('cart');
-    return NextResponse.json(products);
+    try {
+        const products = await getProducts({ limit, page, sort });
+        revalidateTag('cart');
+        return NextResponse.json(products);
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+    }
 }

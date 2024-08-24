@@ -3,9 +3,8 @@ import React from 'react';
 import Image from 'next/image';
 import Counter from '../Counter';
 import { usePrice } from '@/app/hooks/usePrice';
-import { useParams } from 'next/navigation';
 
-const DetailCard = ({id, imageUrl, category, brand, model, quantity, price, description, status, detail }) => {
+const DetailCard = ({ id, imageUrl, category, brand, model, quantity, price, description, status, detail }) => {
 
     const { setPrice } = usePrice();
 
@@ -23,7 +22,7 @@ const DetailCard = ({id, imageUrl, category, brand, model, quantity, price, desc
                 <p><strong>Descripcion:</strong> {description}</p>
                 <p><strong>Cantidad:</strong> {quantity}</p>
                 <p><strong>Estado:</strong><span className={`${status === true && quantity > 0 ? "text-gray-700" : "text-red-500"}`}> {status === true && quantity > 0 ? "Disponible" : "No Disponible"}</span></p>
-                <p><strong>Precio:</strong> ${price ? setPrice(price) : ""}</p>
+                <p><strong>Precio:</strong> ${setPrice(price)}</p>
             </div>
         </div>
         <div className='px-7 text-gray-700 w-1/2 text-m'>

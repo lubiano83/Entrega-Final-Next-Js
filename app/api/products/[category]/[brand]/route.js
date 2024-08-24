@@ -10,20 +10,25 @@ async function getProducts({ limit, page, sort, params }) {
         const collectionRef = collection(db, "products");
         let productsQuery = collectionRef;
 
-        if (category && category !== "all") {
+        if (category !== "all") {
             productsQuery = query(productsQuery, where('category', '==', category));
         }
 
-        if (brand && brand !== "all") {
+        if (brand !== "all") {
             productsQuery = query(productsQuery, where('brand', '==', brand));
         }
     
+<<<<<<< HEAD
         if (sort && (sort === 'sort=asc' || sort === 'sort=desc')) {
             productsQuery = query(productsQuery, orderBy("price", sort));
+=======
+        if (sort) {
+            productsQuery = query(collectionRef, orderBy("price", sort));
+>>>>>>> parent of 3abd7ee (firebase totalmente listo)
         }
 
         const snapshot = await getDocs(productsQuery);
-        const productsData = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+        const productsData = snapshot.docs.map((doc) => doc.data());
     
         const start = (page - 1) * limit;
         const end = start + limit;
@@ -40,14 +45,10 @@ export async function GET(request, { params }) {
     const searchParams = new URL(request.url).searchParams;
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 20;
     const page = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
-    const sort = searchParams.get('sort') || null;
+    const sort = searchParams.get('sort');
 
-    try {
-        const products = await getProducts({ limit, page, sort, params });
-        revalidateTag('cart');
-        return NextResponse.json(products);
-    } catch (error) {
-        console.error("Error fetching products:", error);
-        return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
-    }
+    const products = await getProducts({ limit, page, sort, params });
+
+    revalidateTag('cart')
+    return NextResponse.json(products);
 }

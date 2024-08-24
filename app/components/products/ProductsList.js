@@ -6,7 +6,7 @@ import Button from '../Button';
 const ProductsList = async ({ category = "all", brand = "all", filter = "all", page, limit, sort }) => {
 
   const totalItems = await fetch("http://localhost:3000/api/products").then(res => res.json());
-  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 0, tags: ['cart'] }}).then(res => res.json());
+  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 3600, tags: ['cart'] }}).then(res => res.json());
   
   const totalPages = Math.ceil(totalItems.length / limit);
   const prevPage = page > 1 ? page - 1 : page;

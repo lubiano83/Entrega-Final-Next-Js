@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 import Button from './Button';
-import { useCartContext } from '../context/CartContext';
+import { useCart } from '../hooks/useCart';
 
 const Counter = ({item}) => {
 
-    const { addToCart } = useCartContext();
+    const { addToCart } = useCart();
     const [counter, setCounter] = useState(1);
 
     const increment = () => {

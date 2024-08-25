@@ -3,30 +3,36 @@ import React from 'react';
 import { usePrice } from '@/app/hooks/usePrice';
 import SvgImage from '../SvgImage';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
+import { useCart } from '@/app/hooks/useCart';
+import { useCapitalize } from '@/app/hooks/useCapitalize';
 
-const CartCard = ({id, brand, model, price, quantity, description}) => {
+const CartCard = ({item, counter, deleteProduct}) => {
 
   const { setPrice } = usePrice();
   const { isDarkMode } = useDarkMode();
+  const { cart } = useCart();
+  const { capitalize } = useCapitalize();
 
   return (
-    <div className={`flex flex-wrap justify-between items-center w-full ${isDarkMode ? "border-orange-600" : "border-blue-600"} bg-gray-700 px-4 py-1 gap-2 rounded-xl overflow-hidden text-white border-2 shadow-md shadow-gray-700`}>
-      <div className='w-14'>
-        <p>Id:</p>
-        <p>{id}</p>
-      </div>
-      <div className='w-64'>
-        <p>{brand} - {model}</p>
-        <p>{description}</p>
-      </div>
-      <div className='w-32'>
-        <p>Cantidad:</p>
-        <p>{quantity}</p>
-      </div>
-      <div className='w-36'>
-        <p>${setPrice(price)}</p>
-      </div>
-      <SvgImage src={"/delete-2-svgrepo-com.svg"} />
-    </div>
+    <>
+      { cart ? 
+        <div className={`flex flex-wrap justify-between items-center w-full ${isDarkMode ? "border-orange-600" : "border-blue-600"} bg-gray-700 px-4 py-1 gap-2 rounded-xl overflow-hidden text-white border-2 shadow-md shadow-gray-700`}>
+          <div className='w-52 flex justify-start'>
+            <p>Id: {item.id}</p>
+          </div>
+          <div className='w-52'>
+            <p>{capitalize(item.brand)} - {item.model}</p>
+            <p>{item.description}</p>
+          </div>
+          <div className='w-32'>
+            <p>Cantidad: {counter}</p>
+          </div>
+          <div className='w-36'>
+            <p>${item.price ? setPrice(item.price) : ""}</p>
+          </div>
+          <SvgImage src={"/delete-2-svgrepo-com.svg"} handleClick={deleteProduct()}/>
+        </div>
+    : "" }
+  </>
   )
 }; export default CartCard;

@@ -59,7 +59,7 @@ const NavigationMenu = () => {
         <CategoryFilters toggleDropdown={toggleCategoryDropdown} isOpen={isCategoryOpen}  closeDropdowns={closeDropdowns} isDarkMode={isDarkMode} path={path} />
         <BrandFilters toggleDropdown={toggleBrandDropdown} isOpen={isBrandOpen} closeDropdowns={closeDropdowns} isDarkMode={isDarkMode} path={path} category={category} />
         <ModelFilters toggleDropdown={toggleModelDropdown} isOpen={isModelOpen} closeDropdowns={closeDropdowns} isDarkMode={isDarkMode} path={path} category={category} brand={brand} />
-        <SortFilters toggleDropdown={toggleSortDropdown} isOpen={isSortOpen} closeDropdowns={closeDropdowns} isDarkMode={isDarkMode} path={path} category={category} brand={brand} filter={filter} />
+        {/* <SortFilters toggleDropdown={toggleSortDropdown} isOpen={isSortOpen} closeDropdowns={closeDropdowns} isDarkMode={isDarkMode} path={path} category={category} brand={brand} filter={filter} /> */}
       </div>
     </Banner>
   );

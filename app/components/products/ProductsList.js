@@ -27,11 +27,11 @@ const ProductsList = async ({ category = "all", brand = "all", filter = "all", p
           </Suspense>
         </div>
       </div>
-      {page > 1 ?
+      {totalPages > 1 ?
       <div className='flex justify-center items-center gap-4'>
         {
           page > 1 ? 
-          <a href={`?limit=${limit}&page=${prevPage}&sort=${sort}`}>
+          <a href={`?limit=${limit}&page=${prevPage}`}>
             <Button>
               Anterior
             </Button>
@@ -44,7 +44,7 @@ const ProductsList = async ({ category = "all", brand = "all", filter = "all", p
         }
         {
           page < totalPages ? 
-          <a href={`?limit=${limit}&page=${nextPage}&sort=${sort}`}>
+          <a href={`?limit=${limit}&page=${nextPage}`}>
             <Button>
               Siguiente
             </Button>

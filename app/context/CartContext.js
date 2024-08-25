@@ -7,8 +7,12 @@ export const CartProvider = ({children}) => {
 
     const [ cart, setCart ] = useState([]);
 
-    const addToCart = (item) => {
-        setCart([...cart, item])
+    const addToCart = (productToAdd) => {
+        if(!isInCart(productToAdd.item.id)) {
+            setCart(prev => [...prev, productToAdd]);
+        } else {
+            console.error("El producto ya fue agregado");
+        }
     };
 
     const getTotalPrice = () => {

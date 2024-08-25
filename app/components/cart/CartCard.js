@@ -6,7 +6,7 @@ import { useDarkMode } from '@/app/hooks/useDarkMode';
 import { useCart } from '@/app/hooks/useCart';
 import { useCapitalize } from '@/app/hooks/useCapitalize';
 
-const CartCard = ({item, counter, deleteProduct}) => {
+const CartCard = ({item, counter, removeItem}) => {
 
   const { setPrice } = usePrice();
   const { isDarkMode } = useDarkMode();
@@ -30,7 +30,7 @@ const CartCard = ({item, counter, deleteProduct}) => {
           <div className='w-36'>
             <p>${item.price ? setPrice(item.price) : ""}</p>
           </div>
-          <SvgImage src={"/delete-2-svgrepo-com.svg"} handleClick={deleteProduct()}/>
+          <SvgImage src={"/delete-2-svgrepo-com.svg"} handleClick={() => removeItem(item.id)} />
         </div>
     : "" }
   </>

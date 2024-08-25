@@ -11,16 +11,7 @@ const Category = ({ params, searchParams }) => {
 
   return (
     <div className='w-full h-full flex'>
-
-      <Suspense fallback={ <Title style='text-3xl flex justify-center items-center w-full h-full'>Cargando...</Title> }>
-        <ProductsList category={category} limit={limit} page={page} sort={sort} />
-      </Suspense>
-
-      <ProductsList category={category} limit={limit} page={page} sort={sort}/>
-
-
-      <ProductsList category={category} limit={limit} page={page} sort={sort}/>
-
+      <ProductsList category={category} limit={limit} page={page} sort={sort} />
     </div>
   )
 }; export default Category;

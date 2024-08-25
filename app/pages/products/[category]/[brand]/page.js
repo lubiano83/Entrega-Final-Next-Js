@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ProductsList from '@/app/components/products/ProductsList';
+import Title from '@/app/components/Title';
 
 export async function generateMetadata ({params}) {
   const { category, brand } = params;
@@ -43,8 +44,10 @@ const Brand = ({ params, searchParams }) => {
   const sort = searchParams.sort;
 
   return (
-    <div className='w-full h-full flex'>
-     <ProductsList category={category} brand={brand} limit={limit} page={page} sort={sort}/>
+    <div className='w-full h-full flex justify-center items-center'>
+      <Suspense fallback={<Title style="text-3xl">Cargando...</Title>}>
+        <ProductsList category={category} brand={brand} limit={limit} page={page} sort={sort}/>
+      </Suspense>
     </div>
   )
 }; export default Brand;

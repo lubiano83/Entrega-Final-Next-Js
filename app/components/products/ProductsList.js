@@ -1,8 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ProductCard from './ProductCard';
 import DynamicTitle from './DynamicTitle';
 import Button from '../Button';
-import Title from '../Title';
 
 const ProductsList = async ({ category = "all", brand = "all", filter = "all", page, limit, sort }) => {
 
@@ -20,11 +19,9 @@ const ProductsList = async ({ category = "all", brand = "all", filter = "all", p
           <DynamicTitle />
         </div>
         <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>
-          <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
           {items.map(item => (
             <ProductCard key={item.id} {...item}/>
           ))}
-          </Suspense>
         </div>
       </div>
       {totalPages > 1 ?

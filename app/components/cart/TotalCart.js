@@ -2,13 +2,16 @@
 import React from 'react';
 import Button from '../Button';
 import { usePrice } from '@/app/hooks/usePrice';
+import { useCart } from '@/app/hooks/useCart';
 
 const TotalCart = ({totalPrice, totalQuantity}) => {
 
   const { setPrice } = usePrice();
+  const { clearCart } = useCart();
 
     const handlePayment = () => {
         alert("¡Muchas Gracias por tu Compra!");
+        clearCart()
     };    
 
   return (

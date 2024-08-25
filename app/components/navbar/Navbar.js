@@ -19,7 +19,7 @@ const Navbar = ({children}) => {
           </Link>
       </div>
         {children}
-        <SvgImage src={"/light-svgrepo-com-white.svg"} handleClicl={toggleDarkMode}/>
+        <SvgImage src={"/light-svgrepo-com-white.svg"} handleClick={toggleDarkMode}/>
         <Link href={"/pages/cart"}>
           <SvgImage src={"/cart-shopping-svgrepo-com-white.svg"} />
         </Link>

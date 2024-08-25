@@ -1,13 +1,12 @@
 import React from 'react';
 import ProductDetail from '../../../components/products/ProductDetail';
 
-export async function generateMetadata ({params, searchParams}, parent) {
+export async function generateMetadata ({params}) {
   const { id } = params;
   const items = await fetch(`http://localhost:3000/api/detail/${id}`);
-
+  
   return {
-    title: `${items.brand} - ${items.model}`,
-    description: items.description,
+    title: `AutoShop - ${id}`,
   };
 };
 

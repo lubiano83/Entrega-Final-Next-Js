@@ -17,7 +17,7 @@ const CartCard = ({item, counter, removeItem}) => {
     <>
       { cart ? 
         <div className={`flex flex-wrap justify-between items-center w-full ${isDarkMode ? "border-orange-600" : "border-blue-600"} bg-gray-700 px-4 py-1 gap-2 rounded-xl overflow-hidden text-white border-2 shadow-md shadow-gray-700`}>
-          <div className='w-52 flex justify-start'>
+          <div className='w-56 flex justify-start'>
             <p>Id: {item.id}</p>
           </div>
           <div className='w-52'>

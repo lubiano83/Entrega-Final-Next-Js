@@ -1,6 +1,7 @@
 import "./globals.css";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
+import { CartProvider } from "./context/CartContext";
 
 // metadata estatica
 export const metadata = {
@@ -20,9 +21,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className="min-h-screen grid grid-rows-[auto_1fr_auto]">
+        <CartProvider>
           <Navbar />
           {children}
           <Footer />
+        </CartProvider>
       </body>
     </html>
   );

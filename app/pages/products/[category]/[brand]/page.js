@@ -1,6 +1,24 @@
 import React from 'react';
 import ProductsList from '@/app/components/products/ProductsList';
 
+export function generateStaticParams () {
+  return [
+    {category: "all"},
+    {category: "neumaticos"},
+    {category: "baterias"},
+    {category: "aceites"},
+    {category: "filtros"},
+    {category: "aromatizantes"},
+    {brand: "all"},
+    {brand: "hankook"},
+    {brand: "shell"},
+    {brand: "mann"},
+    {brand: "paloma"},
+  ]
+}
+
+export const revalidate = 3600;
+
 const Brand = ({ params, searchParams }) => {
 
   const { category, brand } = params;

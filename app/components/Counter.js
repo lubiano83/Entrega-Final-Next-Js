@@ -1,13 +1,15 @@
 "use client";
 import React, { useState } from 'react';
 import Button from './Button';
+import { useCartContext } from '../context/CartContext';
 
-const Counter = ({quantity}) => {
+const Counter = ({item}) => {
 
+    const { addToCart } = useCartContext();
     const [counter, setCounter] = useState(1);
 
     const increment = () => {
-        if (counter < quantity) setCounter(counter + 1);
+        if (counter < item.quantity) setCounter(counter + 1);
     };
 
     const decrement = () => {
@@ -15,7 +17,7 @@ const Counter = ({quantity}) => {
     };
 
     const handleAdd = () => {
-      console.log(counter);
+      addToCart({item, counter})
       setCounter(1);
     };
 

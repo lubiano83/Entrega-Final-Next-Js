@@ -3,11 +3,12 @@ import React from 'react';
 import Image from 'next/image';
 import Counter from '../Counter';
 import { usePrice } from '@/app/hooks/usePrice';
-import { useParams } from 'next/navigation';
+import { useCapitalize } from '@/app/hooks/useCapitalize';
 
-const DetailCard = ({id, imageUrl, category, brand, model, quantity, price, description, status, detail }) => {
+const DetailCard = ({id, imageUrl, category, brand, model, quantity, price, description, status, detail, item }) => {
 
     const { setPrice } = usePrice();
+    const { capitalize } = useCapitalize();
 
   return (
     <>
@@ -17,8 +18,8 @@ const DetailCard = ({id, imageUrl, category, brand, model, quantity, price, desc
             </div>
             <div className='p-4 text-gray-700 h-72 flex flex-col items-start justify-center gap-2 text-xl'>
                 <p><strong>Id:</strong> {id}</p>
-                <p><strong>Categoria:</strong> {category}</p>
-                <p><strong>Marca:</strong> {brand}</p>
+                <p><strong>Categoria:</strong> {capitalize(category)}</p>
+                <p><strong>Marca:</strong> {capitalize(brand)}</p>
                 <p><strong>Modelo:</strong> {model}</p>
                 <p><strong>Descripcion:</strong> {description}</p>
                 <p><strong>Cantidad:</strong> {quantity}</p>
@@ -30,7 +31,7 @@ const DetailCard = ({id, imageUrl, category, brand, model, quantity, price, desc
         <p><strong>Detalle:</strong> {detail}</p>
         </div>
         <div>
-            { status === true && quantity > 0 ? <Counter quantity={quantity} /> : "" }
+            { status === true && quantity > 0 ? <Counter item={item} /> : "" }
         </div>
     </>
   )

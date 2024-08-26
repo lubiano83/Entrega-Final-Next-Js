@@ -13,7 +13,7 @@ const Inicio = () => {
         <Title style="text-4xl">Bienvenidos a AutoShop!!</Title>
         <Title style="text-2xl">Ultimos Productos Agregados:</Title>
         <div className='w-full flex justify-evenly items-center'>
-          <LastAdded />
+            <LastAdded />
         </div>
         <Title style="text-2xl">Productos Mas Baratos:</Title>
         <div className='w-full flex justify-evenly items-center'>

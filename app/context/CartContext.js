@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useState } from "react";
+import Swal from 'sweetalert2';
 
 export const CartContext = createContext();
 
@@ -11,7 +12,13 @@ export const CartProvider = ({children}) => {
         if(!isInCart(productToAdd.item.id)) {
             setCart(prev => [...prev, productToAdd]);
         } else {
-            alert("El producto ya esta en el carrito");
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "Este producto ya esta en el Carrito!!",
+                showConfirmButton: false,
+                timer: 1500
+              });
         }
     };
 

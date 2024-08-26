@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '../Button';
 import { usePrice } from '@/app/hooks/usePrice';
 import { useCart } from '@/app/hooks/useCart';
+import Swal from 'sweetalert2';
 
 const TotalCart = ({totalPrice, totalQuantity}) => {
 
@@ -10,8 +11,14 @@ const TotalCart = ({totalPrice, totalQuantity}) => {
   const { clearCart } = useCart();
 
     const handlePayment = () => {
-        alert("¡Muchas Gracias por tu Compra!");
-        clearCart()
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Muchas gracias por tu Compra!!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      clearCart()
     };    
 
   return (

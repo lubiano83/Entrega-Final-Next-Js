@@ -10,8 +10,8 @@ import { useCart } from '@/app/hooks/useCart';
 const Navbar = ({children}) => {
 
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const { getTotalQuantity } = useCart();
-
+  const { totalQuantity } = useCart();
+  
   return (
     <div className={`bg-blue-600 flex justify-around px-4 items-center py-4 ${isDarkMode ? 'bg-orange-600' : 'bg-blue-600'}`}>
       <div className='flex gap-1'>
@@ -26,7 +26,7 @@ const Navbar = ({children}) => {
           <Link href={"/pages/cart"}>
             <SvgImage src={"/cart-large-minimalistic-svgrepo-com.svg"} />
           </Link>
-          <p className='absolute top-7 text-xs'>{getTotalQuantity()}</p>
+          <p className='absolute top-7 text-xs'>{totalQuantity === 0 ? "" : totalQuantity}</p>
         </div>
     </div>
   )

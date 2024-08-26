@@ -5,10 +5,12 @@ import Logo from '../Logo';
 import Link from 'next/link';
 import { useDarkMode } from "../../hooks/useDarkMode";
 import SvgImage from '../SvgImage';
+import { useCart } from '@/app/hooks/useCart';
 
 const Navbar = ({children}) => {
 
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { getTotalQuantity } = useCart();
 
   return (
     <div className={`bg-blue-600 flex justify-around px-4 items-center py-4 ${isDarkMode ? 'bg-orange-600' : 'bg-blue-600'}`}>
@@ -20,9 +22,12 @@ const Navbar = ({children}) => {
       </div>
         {children}
         <SvgImage src={"/light-svgrepo-com-white.svg"} handleClick={toggleDarkMode}/>
-        <Link href={"/pages/cart"}>
-          <SvgImage src={"/cart-shopping-svgrepo-com-white.svg"} />
-        </Link>
+        <div className='flex justify-center items-center'>
+          <Link href={"/pages/cart"}>
+            <SvgImage src={"/cart-large-minimalistic-svgrepo-com.svg"} />
+          </Link>
+          <p className='absolute top-7 text-xs'>{getTotalQuantity()}</p>
+        </div>
     </div>
   )
 }; export default Navbar;

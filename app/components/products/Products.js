@@ -14,7 +14,7 @@ const Products = async ({ category = "all", brand = "all", filter = "all", page,
 
   return (
     <section className='flex flex-col w-full gap-8 p-8 justify-between items-center h-full'>
-        <div className='flex flex-col gap-8 justify-between items-center w-full'>
+        <div className='flex flex-col gap-2 justify-between items-center w-full'>
             <DynamicTitle brand={brand} category={category} />
             <ProductsList data={items} category={category} brand={brand} filter={filter} />
         </div>

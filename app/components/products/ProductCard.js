@@ -19,12 +19,12 @@ const ProductCard = ({ id, imageUrl, category, brand, model, quantity, price, de
         <Image priority={false} src={imageUrl} alt={`autoshop, ${category}, ${model}, ${brand}, ${description}`} height={288} width={288} />
       </div>
       <div className='p-4 text-white'>
-        <p>Categoria: {capitalize(category)}</p>
-        <p>Marca: {capitalize(brand)}</p>
+        <p>Categoria: {category ? capitalize(category) : ""}</p>
+        <p>Marca: {brand ? capitalize(brand) : ""}</p>
         <p>Modelo: {model}</p>
         <p>Descripcion: {description}</p>
         <p>Cantidad: {quantity}</p>
-        <p>Precio: ${setPrice(price)}</p>
+        <p>Precio: ${price ? setPrice(price) : ""}</p>
       </div>
       <div className='text-center pb-4'>
         <Link href={`/pages/detail/${id}`}>

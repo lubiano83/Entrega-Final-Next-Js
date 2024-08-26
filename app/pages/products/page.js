@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import ProductsList from '../../components/products/ProductsList';
+import Products from '@/app/components/products/Products';
 import Title from '@/app/components/Title';
 
 export const metadata = {
@@ -15,7 +15,7 @@ export const metadata = {
   },
 };
 
-const Products = ({ searchParams }) => {
+const All = ({ searchParams }) => {
   
   const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
   const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
@@ -24,8 +24,8 @@ const Products = ({ searchParams }) => {
   return (
     <div className='w-full h-full flex justify-center items-center'>
       <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
-        <ProductsList limit={limit} page={page} sort={sort} />
+        <Products limit={limit} page={page} sort={sort} />
       </Suspense>
     </div>
   );
-}; export default Products;
+}; export default All;

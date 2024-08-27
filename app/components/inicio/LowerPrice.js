@@ -4,7 +4,7 @@ import Title from '../Title';
 
 const LowerPrice = async () => {
 
-  const lowerPriceItems = await fetch(`http://localhost:3000/api/products?limit=5&sort=asc`, {next: {revalidate: 0, tags: ['products']}}).then(res => res.json());
+  const lowerPriceItems = await fetch(`http://localhost:3000/api/products?limit=4&sort=asc`, {next: {revalidate: 0, tags: ['products']}}).then(res => res.json());
 
   return (
     <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>

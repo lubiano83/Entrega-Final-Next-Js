@@ -12,7 +12,7 @@ const ProductsList = ({ data, category, brand, filter }) => {
       <InputFilter data={data} category={category} brand={brand} filter={filter} setProductsFiltered={setProductsFiltered} />
       <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>
         {productsFiltered.map(item => (
-          <ProductCard key={item.id} {...item} item={item}/>
+          <ProductCard key={item.id} {...item} />
         ))}
       </div>
     </section>

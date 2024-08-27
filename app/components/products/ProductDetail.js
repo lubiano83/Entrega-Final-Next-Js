@@ -10,7 +10,7 @@ const ProductDetail = async ({ id }) => {
     <article className='bg-white flex justify-center items-center flex-col py-8 gap-4'>
       {
         itemsArray.map(item => (
-          <DetailCard key={item.id} {...item} item={item} />
+          <DetailCard key={item.id} item={item} />
         ))
       }
     </article>

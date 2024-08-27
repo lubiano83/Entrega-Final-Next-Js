@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import ProductCard from './ProductCard';
+import ProductCard from '../products/ProductCard';
 import Title from '../Title';
 
 const LastAdded = async () => {

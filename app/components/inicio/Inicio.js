@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from '@/app/components/Button';
 import Link from 'next/link';
-import HigherPrice from '../products/HigherPrice';
+import HigherPrice from '../inicio/HigherPrice';
 import Title from '../Title';
-import LowerPrice from '../products/LowerPrice';
-import LastAdded from '../products/LastAdded';
+import LowerPrice from '../inicio/LowerPrice';
+import LastAdded from '../inicio/LastAdded';
 
 const Inicio = () => {
 

@@ -2,6 +2,12 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import Button from '../Button';
+import { collection, addDoc } from '@firebase/firestore';
+import { db } from '@/app/firebase/config';
+
+const createProduct = async (values) => {
+  return addDoc(collection(db, "products"), values);
+};
 
 const CreateForm = () => {
   const initialValues = {
@@ -29,8 +35,12 @@ const CreateForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
-    sendMessage();
+    try {
+      await createProduct(values);
+      sendMessage();
+    } catch (error) {
+      console.error("Error adding product: ", error);
+    }
   };
 
   const handleReset = () => {

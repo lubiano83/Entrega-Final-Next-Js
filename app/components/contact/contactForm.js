@@ -11,15 +11,15 @@ const ContactForm = () => {
 
   const [values, setValues] = useState(initialValues);
 
-  const handleChange = (event) => {
+  const handleChange = (e) => {
     setValues({
       ...values, 
-      [event.target.name]: event.target.value
+      [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     await fetch(`http://localhost:3000/api/contact`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(values)});
     sendMessage();
   };

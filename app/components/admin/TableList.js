@@ -1,6 +1,6 @@
 import React from 'react';
 import TableCard from './TableCard';
-import Button from '../Button';
+import Pagination from '../Pagination';
 
 const TableList = async ({ category = "all", brand = "all", filter = "all", limit, page, sort}) => {
 
@@ -12,8 +12,8 @@ const TableList = async ({ category = "all", brand = "all", filter = "all", limi
   const nextPage = page <= totalPages ? page + 1 : page;
 
   return (
-    <div className='w-full mb-8 flex flex-col justify-between h-full'>
-      <table className='w-full mb-8'>
+    <div className='w-full flex flex-col justify-between h-full gap-8'>
+      <table className='w-full'>
         <thead className='w-full'>
           <tr className="flex gap-4 items-center text-gray-700 text-center px-8 mb-2 w-full justify-between">
             <th className="w-64">Id:</th>
@@ -34,37 +34,7 @@ const TableList = async ({ category = "all", brand = "all", filter = "all", limi
           }
         </tbody>
       </table>
-      {totalPages > 1 ?
-            <div className='flex justify-center items-center gap-4'>
-                {
-                page > 1 ? 
-                <a href={`?limit=${limit}&page=${prevPage}&sort=${sort}`}>
-                    <Button>
-                    Anterior
-                    </Button>
-                </a> : totalPages === 1 ? "" : (
-                <div className='opacity-50'>
-                <Button>
-                    Anterior
-                </Button>
-                </div>)
-                }
-                {
-                page < totalPages ? 
-                <a href={`?limit=${limit}&page=${nextPage}&sort=${sort}`}>
-                    <Button>
-                    Siguiente
-                    </Button>
-                </a> : totalPages === 1 ? "" : (
-                <div className='opacity-50'>
-                    <Button>
-                    Siguiente
-                    </Button>
-                </div>
-                )
-                }
-            </div>
-        : "" }
+      <Pagination totalPages={totalPages} limit={limit} prevPage={prevPage} nextPage={nextPage} page={page} sort={sort} />
     </div>
   );
 }; export default TableList;

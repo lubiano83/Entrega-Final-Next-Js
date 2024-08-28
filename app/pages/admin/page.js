@@ -1,16 +1,15 @@
-import TableList from '@/app/components/admin/TableList';
+import Button from '@/app/components/Button';
+import Link from 'next/link';
 import React from 'react';
 
-const Admin = ({params, searchParams}) => {
-
-  const { category, brand, filter } = params;
-  const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
-  const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
-  const sort = searchParams.sort;
+const Admin = () => {
 
   return (
-    <h1 className='h-full text-gray-700 bg-white text-2xl p-8 w-full'>
-      <TableList category={category} brand={brand} filter={filter} limit={limit} page={page} sort={sort} />
-    </h1>
+    <div className='h-full bg-white flex flex-col justify-center items-center gap-8'>
+      <Link href={"/pages/admin/table"}>
+        <Button>Panel de Control</Button>    
+      </Link>
+      <Button>Ingresar Productos</Button>
+    </div>
   )
 }; export default Admin;

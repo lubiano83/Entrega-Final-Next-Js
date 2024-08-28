@@ -2,6 +2,7 @@ import React from 'react';
 import ProductsList from './ProductsList';
 import DynamicTitle from './DynamicTitle';
 import Button from '../Button';
+import Pagination from '../Pagination';
 
 const Products = async ({ category = "all", brand = "all", filter = "all", page, limit, sort }) => {
 
@@ -18,37 +19,7 @@ const Products = async ({ category = "all", brand = "all", filter = "all", page,
             <DynamicTitle brand={brand} category={category} />
             <ProductsList data={items} category={category} brand={brand} filter={filter} />
         </div>
-        {totalPages > 1 ?
-            <div className='flex justify-center items-center gap-4'>
-                {
-                page > 1 ? 
-                <a href={`?limit=${limit}&page=${prevPage}&sort=${sort}`}>
-                    <Button>
-                    Anterior
-                    </Button>
-                </a> : totalPages === 1 ? "" : (
-                <div className='opacity-50'>
-                <Button>
-                    Anterior
-                </Button>
-                </div>)
-                }
-                {
-                page < totalPages ? 
-                <a href={`?limit=${limit}&page=${nextPage}&sort=${sort}`}>
-                    <Button>
-                    Siguiente
-                    </Button>
-                </a> : totalPages === 1 ? "" : (
-                <div className='opacity-50'>
-                    <Button>
-                    Siguiente
-                    </Button>
-                </div>
-                )
-                }
-            </div>
-        : "" }
+        <Pagination totalPages={totalPages} limit={limit} prevPage={prevPage} nextPage={nextPage} page={page} sort={sort}/>
     </section>
   );
 }; export default Products;

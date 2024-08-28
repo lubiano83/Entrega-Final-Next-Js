@@ -21,8 +21,7 @@ const CartCard = ({item, counter, removeItem}) => {
             <p>Id: {item.id}</p>
           </div>
           <div className='w-52'>
-            <p>{capitalize(item.brand)} - {item.model}</p>
-            <p>{item.description}</p>
+            <p>{capitalize(item.brand)}, {item.model}, {item.description}</p>
           </div>
           <div className='w-32'>
             <p>Cantidad: {counter}</p>

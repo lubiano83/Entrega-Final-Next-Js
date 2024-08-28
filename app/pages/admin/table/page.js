@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import TableList from '@/app/components/admin/TableList';
 import Title from '@/app/components/Title';
 
-const Table = ({params, searchParams}) => {
+const Table = ({ searchParams }) => {
 
     const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
     const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
@@ -11,7 +11,7 @@ const Table = ({params, searchParams}) => {
   return (
     <div className='h-full bg-white text-2xl p-8 w-full flex justify-center items-center'>
         <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
-            <TableList filter={filter} limit={limit} page={page} sort={sort} />
+            <TableList limit={limit} page={page} sort={sort} />
         </Suspense>
     </div>
   )

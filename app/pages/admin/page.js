@@ -1,15 +1,21 @@
 import Button from '@/app/components/Button';
+import Title from '@/app/components/Title';
 import Link from 'next/link';
 import React from 'react';
 
 const Admin = () => {
 
   return (
-    <div className='h-full bg-white flex flex-col justify-center items-center gap-8'>
-      <Link href={"/pages/admin/table"}>
-        <Button>Panel de Control</Button>    
-      </Link>
-      <Button>Ingresar Productos</Button>
+    <div className='h-full bg-white flex flex-col justify-start m-8 items-center gap-8'>
+      <Title style="text-2xl">¿Que necesitas hacer?</Title>
+      <div className='flex flex-wrap justify-center items-center gap-4 w-full h-full'>
+        <Link href={"/pages/admin/table"}>
+          <Button>Panel de Control</Button>  
+        </Link>
+        <Link href={"/pages/admin/create"}>
+          <Button>Ingresar Productos</Button>
+        </Link>
+      </div>
     </div>
   )
 }; export default Admin;

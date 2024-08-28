@@ -21,13 +21,14 @@ const CartCard = ({item, counter, removeItem}) => {
             <p>Id: {item.id}</p>
           </div>
           <div className='w-52'>
-            <p>{capitalize(item.brand)}, {item.model}, {item.description}</p>
+            <p>{capitalize(item.brand)}, {item.model}</p>
+            <p>{item.description}</p>
           </div>
           <div className='w-32'>
             <p>Cantidad: {counter}</p>
           </div>
           <div className='w-36'>
-            <p>${item.price ? setPrice(item.price) : ""}</p>
+            <p>${item.price ? setPrice(item.price * counter) : ""}</p>
           </div>
           <SvgImage src={"/delete-2-svgrepo-com.svg"} handleClick={() => removeItem(item.id)} />
         </div>

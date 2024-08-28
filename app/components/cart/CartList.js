@@ -10,8 +10,8 @@ const CartList = () => {
   const { cart, getTotalPrice, getTotalQuantity, removeItem, totalQuantity } = useCart();
 
   return (
-    <div className='bg-white h-full w-full flex flex-col justify-between items-center text-center px-8'>
-      <div className='p-8'>
+    <div className='bg-white h-full w-full flex flex-col justify-between items-center text-center px-8 gap-8'>
+      <div className='pt-8'>
         <Title style="text-3xl">Productos en Carrito:</Title>
       </div>
       <div className='w-full h-full flex flex-col justify-center gap-3 text-gray-700'>

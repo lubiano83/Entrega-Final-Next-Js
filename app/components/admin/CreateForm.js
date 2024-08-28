@@ -94,6 +94,4 @@ const CreateForm = () => {
       </div>
     </form>
   );
-};
-
-export default CreateForm;
+}; export default CreateForm;

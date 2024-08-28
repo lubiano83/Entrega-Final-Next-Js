@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useDarkMode } from "../../hooks/useDarkMode";
 import SvgImage from '../SvgImage';
 import { useCart } from '@/app/hooks/useCart';
+// import LoginForm from '../auth/LoginForm';
 
 const Navbar = ({children}) => {
 
@@ -22,6 +23,9 @@ const Navbar = ({children}) => {
       </div>
         {children}
         <SvgImage src={"/light-svgrepo-com-white.svg"} handleClick={toggleDarkMode}/>
+        {/* <Link href={"/pages/login"}>
+          <SvgImage src={"/user-svgrepo-com.svg"} />
+        </Link> */}
         <div className='flex justify-center items-center'>
           <Link href={"/pages/cart"}>
             <SvgImage src={"/cart-large-minimalistic-svgrepo-com.svg"} />

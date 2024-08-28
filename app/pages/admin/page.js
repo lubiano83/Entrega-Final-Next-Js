@@ -8,7 +8,7 @@ const Admin = () => {
   return (
     <div className='h-full bg-white flex flex-col justify-start m-8 items-center gap-8'>
       <Title style="text-2xl">¿Que necesitas hacer?</Title>
-      <div className='flex flex-wrap justify-center items-center gap-4 w-full h-full'>
+      <div className='flex flex-col justify-start items-center gap-4 w-full h-full'>
         <Link href={"/pages/admin/table"}>
           <Button>Panel de Control</Button>  
         </Link>

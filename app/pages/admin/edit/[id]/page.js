@@ -1,10 +1,11 @@
+import EditForm from '@/app/components/admin/EditForm';
 import React from 'react'
 
-const EditPage = ({params}) => {
-
-  const { id } = params;
+const EditPage = () => {
 
   return (
-    <div className='text-gray-700 flex justify-center items-center h-full'>Esta es la pagina para editar productos!! {id}</div>
+    <div className='text-gray-700 flex justify-center items-center h-full'>
+      <EditForm />
+    </div>
   )
 }; export default EditPage;

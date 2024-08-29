@@ -3,18 +3,17 @@ import React from 'react';
 import Banner from '../../components/Banner';
 import { useAuth } from '@/app/hooks/useAuth';
 
-const AdminLayout = ({children, login}) => {
+const AdminLayout = ({children}) => {
 
   const { user } = useAuth();
 
+  console.log(user);
+  
+
   return (
     <div className='bg-white h-full flex flex-col justify-between items-center text-center'>
-      <Banner>Bienvenido...</Banner>
-      {
-        user.logged
-      ? children
-      : login
-      }
+      <Banner>{user.logged ? `Bienvenido ${user.email}...` : "Debes ingresar para tener acceso..."}</Banner>
+      {children}
     </div>
   )
 }; export default AdminLayout;

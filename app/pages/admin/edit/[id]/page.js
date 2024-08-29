@@ -1,11 +1,13 @@
+import React from 'react';
 import EditForm from '@/app/components/admin/EditForm';
-import React from 'react'
 
-const EditPage = () => {
+const EditPage = ({parmas}) => {
+
+  const { id } = parmas;
 
   return (
     <div className='text-gray-700 flex justify-center items-center h-full'>
-      <EditForm />
+      <EditForm id={id} />
     </div>
   )
 }; export default EditPage;

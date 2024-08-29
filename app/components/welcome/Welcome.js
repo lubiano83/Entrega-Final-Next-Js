@@ -1,12 +1,12 @@
 import React from 'react';
 import Button from '@/app/components/Button';
 import Link from 'next/link';
-import HigherPrice from '../inicio/HigherPrice';
+import HigherPrice from './HigherPrice';
 import Title from '../Title';
-import LowerPrice from '../inicio/LowerPrice';
-import LastAdded from '../inicio/LastAdded';
+import LowerPrice from './LowerPrice';
+import LastAdded from './LastAdded';
 
-const Inicio = () => {
+const Welcome = () => {
 
   return (
     <div className="bg-white flex flex-col justify-center gap-8 items-center h-full w-full">
@@ -31,4 +31,4 @@ const Inicio = () => {
       </div>
     </div>
   )
-}; export default Inicio;
+}; export default Welcome;

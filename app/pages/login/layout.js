@@ -17,7 +17,7 @@ export const metadata = {
 const LoginLayout = ({children}) => {
   return (
     <div className='bg-white h-full flex flex-col justify-between items-center text-center'>
-      <Banner>asdasdasd</Banner>
+      <Banner>Ingresa o registrate con nosotros!!</Banner>
       {children}
     </div>
   )

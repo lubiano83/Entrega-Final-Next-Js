@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
 
-    const { registerUser, loginUser, googleLogin, checkEmailExists } = useAuth();
+    const { user, registerUser, loginUser, googleLogin, checkEmailExists } = useAuth();
     const router = useRouter();
 
     const initialValues = {
@@ -23,6 +23,14 @@ const LoginForm = () => {
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
+
+    const isEmailValid = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const isFormValid = isEmailValid(values.email) && values.password !== "";
+
 
     const handleSubmit = async (e, action) => {
         e.preventDefault();
@@ -96,12 +104,16 @@ const LoginForm = () => {
                 <Title style="text-2xl">Login:</Title>
                 <input type="email" value={values.email} required placeholder='Coloca tu Email..' name="email" onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}/>
                 <input type="password" value={values.password} required placeholder='Coloca tu Password..' name="password" onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}/>
-                <div className='flex justify-center items-center gap-2'>
+                { isFormValid && isEmailValid(values.email)
+                ? <div className='flex justify-center items-center gap-2'>
                     <Button handleClick={(e) => handleSubmit(e, "register")}>Registrar</Button>
                     <Button handleClick={(e) => handleSubmit(e, "login")}>Ingresar</Button>
                 </div>
+                : <div className='flex justify-center items-center gap-2 opacity-50'>
+                <Button>Registrar</Button>
+                <Button>Ingresar</Button>
+            </div> }
             </form>
-            {/* <Button handleClick={googleLogin}>Ingresar con Google</Button> */}
         </div>
     );
 }; export default LoginForm;

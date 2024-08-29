@@ -91,7 +91,7 @@ const LoginForm = () => {
     };
 
     return (
-        <div className={`w-1/2 min-w-72 p-8 gap-4 rounded-3xl flex flex-col justify-center items-center ${isDarkMode ? "bg-orange-600" : "bg-blue-600"} bg-opacity-25`}>
+        <div className={`w-1/2 min-w-72 p-8 gap-4 rounded-3xl flex flex-col justify-center items-center bg-gray-700 bg-opacity-25`}>
             <form onSubmit={handleSubmit} className={`flex flex-col justify-center items-center gap-4 w-full`}>
                 <Title style="text-2xl">Login:</Title>
                 <input type="email" value={values.email} required placeholder='Coloca tu Email..' name="email" onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}/>
@@ -101,7 +101,7 @@ const LoginForm = () => {
                     <Button handleClick={(e) => handleSubmit(e, "login")}>Ingresar</Button>
                 </div>
             </form>
-            <Button handleClick={googleLogin}>Ingresar con Google</Button>
+            {/* <Button handleClick={googleLogin}>Ingresar con Google</Button> */}
         </div>
     );
 }; export default LoginForm;

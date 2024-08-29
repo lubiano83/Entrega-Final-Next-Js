@@ -19,7 +19,7 @@ const MenuList = ({ show, handleShow, isDarkMode }) => {
           <Link href={"/pages/products"}><div className={`text-white p-2 hover:text-gray-700 font-bold ${path === "/pages/products" ? "underline" : "no-underline"}`} >Tienda</div></Link>
           <Link href={"/pages/cart/"}><div className={`text-white p-2 hover:text-gray-700 font-bold ${path === "/pages/products" ? "underline" : "no-underline"}`} >Carrito</div></Link>
           <Link href={"/pages/contact"}><div className={`text-white p-2 hover:text-gray-700 font-bold ${path === "/pages/contacto" ? "underline" : "no-underline"}`}>Contacto</div></Link>
-          { user.logged === true ? <p onClick={logOut} className='text-white p-2 hover:text-gray-700 font-bold'>Salir</p> : <Link href={"/pages/login"}><div className={`text-white p-2 hover:text-gray-700 font-bold ${path === "/pages/login" ? "underline" : "no-underline"}`}>Login</div></Link> }
+          { user.logged === true ? <p onClick={logOut} className='text-white p-2 hover:text-gray-700 font-bold'>Logout</p> : <Link href={"/pages/login"}><div className={`text-white p-2 hover:text-gray-700 font-bold ${path === "/pages/login" ? "underline" : "no-underline"}`}>Login</div></Link> }
         </ul>
       </aside>
     </div>

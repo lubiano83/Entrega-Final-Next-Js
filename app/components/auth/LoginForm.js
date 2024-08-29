@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
 
-    const { registerUser, loginUser, logOut, googleLogin, checkEmailExists } = useAuth();
+    const { registerUser, loginUser, googleLogin, checkEmailExists } = useAuth();
     const router = useRouter();
 
     const initialValues = {
@@ -29,17 +29,6 @@ const LoginForm = () => {
         try {
             if (action === "register") {
                 if (checkEmailExists(values.email)) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "Este email ya está registrado..",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    setTimeout(() => {
-                        handleReset();
-                    }, 1500);
-                } else {
                     await registerUser(values);
                     Swal.fire({
                         position: "center",
@@ -52,6 +41,14 @@ const LoginForm = () => {
                         handleReset();
                         router.back();
                     }, 1500);
+                } else {
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "Este email ya está registrado..",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }
             } else if (action === "login") {
                 if (checkEmailExists(values.email)) {
@@ -75,9 +72,6 @@ const LoginForm = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    setTimeout(() => {
-                        handleReset();
-                    }, 1500);
                 }
             }
         } catch (error) {

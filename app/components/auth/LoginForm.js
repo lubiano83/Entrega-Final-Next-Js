@@ -32,7 +32,7 @@ const LoginForm = () => {
                     return (
                         Swal.fire({
                             position: "center",
-                            icon: "warning",
+                            icon: "error",
                             title: "Este email ya esta registrado..",
                             showConfirmButton: false,
                             timer: 1500
@@ -55,17 +55,31 @@ const LoginForm = () => {
                     router.back()
                 }, 1500);
             } else if (action === "login") {
+                if(!checkEmailExists(values.email)){
+                    return (
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Ingreso exitoso!!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        }),
+                        setTimeout(() => {
+                            handleReset();
+                            router.back();
+                        }, 1500)
+                    )
+                } 
                 await loginUser(values);
                 Swal.fire({
                     position: "center",
-                    icon: "success",
-                    title: "Ingreso exitoso!!",
+                    icon: "error",
+                    title: "Este email no esta registrado..",
                     showConfirmButton: false,
                     timer: 1500
                 });
                 setTimeout(() => {
                     handleReset();
-                    router.back()
                 }, 1500);
             }
         } catch (error) {
@@ -85,17 +99,17 @@ const LoginForm = () => {
     };
 
     return (
-        // <div className={`fixed w-screen h-screen inset-0 z-10 flex justify-center items-center ${isDarkMode ? "bg-orange-600" : "bg-blue-600"} bg-opacity-25`}>
+        <div className={`w-1/2 min-w-72 p-8 gap-4 rounded-3xl flex flex-col justify-center items-center ${isDarkMode ? "bg-orange-600" : "bg-blue-600"} bg-opacity-25`}>
             <form onSubmit={handleSubmit} className={`flex flex-col justify-center items-center gap-4 w-full`}>
                 <Title style="text-2xl">Login:</Title>
-                <input type="email" value={values.email} required placeholder='Coloca tu Email..' name="email" onChange={handleChange} className={`w-1/2 min-w-72 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}/>
-                <input type="password" value={values.password} required placeholder='Coloca tu Password..' name="password" onChange={handleChange} className={`w-1/2 min-w-72 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}/>
+                <input type="email" value={values.email} required placeholder='Coloca tu Email..' name="email" onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}/>
+                <input type="password" value={values.password} required placeholder='Coloca tu Password..' name="password" onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}/>
                 <div className='flex justify-center items-center gap-2'>
                     <Button handleClick={(e) => handleSubmit(e, "register")}>Registrar</Button>
                     <Button handleClick={(e) => handleSubmit(e, "login")}>Ingresar</Button>
                 </div>
-                <Button handleClick={googleLogin}>Ingresar con Google</Button>
             </form>
-        // </div>
+            <Button handleClick={googleLogin}>Ingresar con Google</Button>
+        </div>
     );
 }; export default LoginForm;

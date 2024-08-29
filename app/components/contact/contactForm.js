@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Button from '../Button';
 import Swal from 'sweetalert2';
+import { useDarkMode } from '@/app/hooks/useDarkMode';
+import Title from '../Title';
 
 const ContactForm = () => {
   const initialValues = {
@@ -10,6 +12,7 @@ const ContactForm = () => {
   };
 
   const [values, setValues] = useState(initialValues);
+  const { isDarkMode } = useDarkMode();
 
   const handleChange = (e) => {
     setValues({
@@ -42,13 +45,16 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center gap-4 w-full'>
-      <input type="email" required placeholder='Ingresa tu Email..' name="email" value={values.email} onChange={handleChange} className='w-1/2 min-w-72 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 border-gray-700 text-lg' />
-      <textarea required placeholder='Dejanos tu Mensaje..' name="text" value={values.text} onChange={handleChange} className='w-1/2 min-w-72 h-72 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 border-gray-700 text-lg' />
-      <div className='flex justify-center items-center gap-2'>
-        <Button type="reset" handleClick={handleReset}>Limpiar</Button>
-        <Button type="submit">Enviar</Button>
-      </div>
-    </form>
+    <div className={`w-1/2 min-w-72 p-8 gap-4 rounded-3xl flex flex-col justify-center items-center ${isDarkMode ? "bg-orange-600" : "bg-blue-600"} bg-opacity-25`}>
+      <Title style="text-3xl">Contactanos...</Title>
+      <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center gap-4 w-full'>
+        <input type="email" required placeholder='Ingresa tu Email..' name="email" value={values.email} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
+        <textarea required placeholder='Dejanos tu Mensaje..' name="text" value={values.text} onChange={handleChange} className={`w-full min-w-60 h-72 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
+        <div className='flex justify-center items-center gap-2'>
+          <Button type="reset" handleClick={handleReset}>Limpiar</Button>
+          <Button type="submit">Enviar</Button>
+        </div>
+      </form>
+    </div>
   )
 }; export default ContactForm;

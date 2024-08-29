@@ -24,9 +24,6 @@ const LoginForm = () => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
-    console.log(values.email);
-    
-
     const handleSubmit = async (e, action) => {
         e.preventDefault();
         try {

@@ -28,59 +28,57 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             if (action === "register") {
-                if(checkEmailExists(values.email)){
-                    return (
-                        Swal.fire({
-                            position: "center",
-                            icon: "error",
-                            title: "Este email ya esta registrado..",
-                            showConfirmButton: false,
-                            timer: 1500
-                        }),
-                        setTimeout(() => {
-                            handleReset();
-                        }, 1500)
-                    )
-                } 
-                await registerUser(values);
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Registro exitoso!!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                setTimeout(() => {
-                    handleReset();
-                    router.back()
-                }, 1500);
+                if (checkEmailExists(values.email)) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "Este email ya está registrado..",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setTimeout(() => {
+                        handleReset();
+                    }, 1500);
+                } else {
+                    await registerUser(values);
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Registro exitoso!!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setTimeout(() => {
+                        handleReset();
+                        router.back();
+                    }, 1500);
+                }
             } else if (action === "login") {
-                if(!checkEmailExists(values.email)){
-                    return (
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "Ingreso exitoso!!",
-                            showConfirmButton: false,
-                            timer: 1500
-                        }),
-                        setTimeout(() => {
-                            handleReset();
-                            router.back();
-                        }, 1500)
-                    )
-                } 
-                await loginUser(values);
-                Swal.fire({
-                    position: "center",
-                    icon: "error",
-                    title: "Este email no esta registrado..",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                setTimeout(() => {
-                    handleReset();
-                }, 1500);
+                if (checkEmailExists(values.email)) {
+                    await loginUser(values);
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Ingreso exitoso!!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setTimeout(() => {
+                        handleReset();
+                        router.back();
+                    }, 1500);
+                } else {
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "Este email no está registrado..",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setTimeout(() => {
+                        handleReset();
+                    }, 1500);
+                }
             }
         } catch (error) {
             console.error("Error:", error.message);
@@ -92,7 +90,7 @@ const LoginForm = () => {
                 timer: 1500
             });
         }
-    };
+    };    
 
     const handleReset = () => {
         setValues(initialValues);

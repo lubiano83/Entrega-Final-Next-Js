@@ -34,53 +34,32 @@ const LoginForm = () => {
     const handleSubmit = async (e, action) => {
         e.preventDefault();
         try {
-            const exists = await checkEmailExists(values.email);
             if (action === 'register') {
-                if (exists) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "El correo electrónico ya está en uso.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                } else {
-                    await registerUser(values);
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Registro exitoso.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    setTimeout(() => {
-                        handleReset();
-                        router.back();
-                    }, 1500);
-                }
+                await registerUser(values);
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Registro exitoso.",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setTimeout(() => {
+                    handleReset();
+                    router.back();
+                }, 1500);
             } else if (action === 'login') {
-                if (!exists) {
-                    await loginUser(values);
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Inicio de sesión exitoso.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    setTimeout(() => {
-                        handleReset();
-                        router.back();
-                    }, 1500);
-                } else {
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "Correo electrónico no registrado.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
+                await loginUser(values);
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Inicio de sesión exitoso.",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setTimeout(() => {
+                    handleReset();
+                    router.back();
+                }, 1500);
             }
         } catch (error) {
             console.error('Error:', error.message);

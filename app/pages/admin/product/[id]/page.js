@@ -1,5 +1,5 @@
 import React from 'react';
-import EditForm from '@/app/components/admin/edit/EditForm';
+import Edit from '@/app/components/admin/edit/Edit';
 
 const Product = async ({params}) => {
 
@@ -7,7 +7,7 @@ const Product = async ({params}) => {
 
   return (
     <div className='text-gray-700 flex justify-center items-center h-full w-full'>
-      <EditForm id={id}/>
+      <Edit id={id}/>
     </div>
   )
 }; export default Product;

@@ -1,12 +1,12 @@
 import React from 'react';
-import EditCard from './EditCard';
+import EditForm from './EditForm';
 
 const EditList = ({ itemsArray }) => {
 
   return (
     <div className='flex flex-wrap justify-center items-center w-full'>
       {itemsArray.map(item => (
-        <EditCard key={item.id} {...item} item={item}/>
+        <EditForm key={item.id} {...item}/>
       ))}
     </div>
   )

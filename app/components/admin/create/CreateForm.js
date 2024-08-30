@@ -95,15 +95,10 @@ const CreateForm = () => {
         <input type="number" required placeholder='Ingresa un Cantidad..' name="quantity" value={values.quantity} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
         <input type="number" required placeholder='Ingresa un Precio..' name="price" value={values.price} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
         <input type="text" required placeholder='Ingresa un Detalle..' name="detail" value={values.detail} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
-        { user.email === "lubiano83@gmail.com" ?
         <div className='flex justify-center items-center gap-2'>
           <Button type="reset" handleClick={handleReset}>Limpiar</Button>
           <Button type="submit">Enviar</Button>
         </div>
-        : <div className='flex justify-center items-center gap-2 opacity-50'>
-        <Button>Limpiar</Button>
-        <Button>Enviar</Button>
-        </div> }
       </form>
     </div>
   );

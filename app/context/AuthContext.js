@@ -3,6 +3,7 @@ import { auth, provider } from "../firebase/config";
 import { createContext, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, fetchSignInMethodsForEmail } from "firebase/auth";
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 export const AuthContext = createContext();
 
@@ -15,20 +16,7 @@ export const AuthProvider = ({children}) => {
     };
 
     const [ user, setUser ] = useState(initialValues);
-
-    const registerUser = async (values) => {
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password)
-        
-            setUser({
-                logged: true,
-                email: userCredential.user.email,
-                user: userCredential.user.uid
-            })
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
+    const router = useRouter();
 
     const checkEmailExists = async (email) => {
         try {
@@ -38,9 +26,26 @@ export const AuthProvider = ({children}) => {
             console.error("Error comprobando el email:", error.message);
             return false;
         }
+    };    
+
+    const registerUser = async (values) => {
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password)
+        
+            setUser({
+                logged: true,
+                email: userCredential.user.email,
+                user: userCredential.user.uid
+            })
+
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     const loginUser = async (values) => {
+
         try {
             const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
     
@@ -49,6 +54,7 @@ export const AuthProvider = ({children}) => {
                 email: userCredential.user.email,
                 user: userCredential.user.uid
             })
+
         } catch (error) {
             console.log(error.message);
         }
@@ -69,6 +75,9 @@ export const AuthProvider = ({children}) => {
                 showConfirmButton: false,
                 timer: 1500
             })
+            setTimeout(() => {
+                router.push("/");
+            }, 1500);
         } catch (error) {
             console.log(error.message);
         }

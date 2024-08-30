@@ -1,6 +1,6 @@
 import React from 'react';
 import TableCard from './TableCard';
-import Pagination from '../Pagination';
+import Pagination from '../../Pagination';
 
 const TableList = async ({ category = "all", brand = "all", filter = "all", limit, page, sort}) => {
 

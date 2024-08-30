@@ -27,7 +27,7 @@ const ProductCard = ({ id, imageUrl, category, brand, model, quantity, price, de
         <p>Precio: ${price ? setPrice(price) : ""}</p>
       </div>
       <div className='text-center pb-4'>
-        <Link href={`/pages/detail/${id}`}>
+        <Link href={`/pages/product/${id}`}>
           <Button>Detalle</Button>
         </Link>
       </div>

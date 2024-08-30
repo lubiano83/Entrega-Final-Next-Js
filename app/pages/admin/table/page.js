@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import TableList from '@/app/components/admin/TableList';
+import TableList from '@/app/components/admin/table/TableList';
 import Title from '@/app/components/Title';
 
 const Table = ({ searchParams }) => {

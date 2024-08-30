@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import Button from '../Button';
+import Button from '../../Button';
 import { collection, addDoc } from '@firebase/firestore';
 import { db, storage } from '@/app/firebase/config';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useDarkMode } from '@/app/hooks/useDarkMode';
-import Title from '../Title';
+import Title from '../../Title';
 
 const createProduct = async (values) => {
   return addDoc(collection(db, "products"), values);

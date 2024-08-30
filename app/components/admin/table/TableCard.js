@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import SvgImage from '../SvgImage';
+import SvgImage from '../../SvgImage';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
 import { useCapitalize } from '@/app/hooks/useCapitalize';
 import { usePrice } from '@/app/hooks/usePrice';
@@ -31,7 +31,7 @@ const TableCard = ({ id, imageUrl, category, brand, model, description, quantity
               )}
           </td>
           <td className='flex justify-center items-center w-20'>
-            <Link href={`/pages/admin/edit/${id}`}>
+            <Link href={`/pages/admin/product/${id}`}>
               <SvgImage src={"/edit-2-svgrepo-com.svg"} />
             </Link>
           </td>

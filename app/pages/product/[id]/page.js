@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductDetail from '../../../components/products/ProductDetail';
+import ProductDetail from '../../../components/detail/ProductDetail';
 
 export async function generateMetadata ({params}) {
   const { id } = params;

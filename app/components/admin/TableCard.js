@@ -12,6 +12,8 @@ const TableCard = ({ id, imageUrl, category, brand, model, description, quantity
     const { capitalize } = useCapitalize();
     const { setPrice } = usePrice();
 
+    console.log(id);
+
   return (
    <>
       <tr className={`h-12 text-lg flex justify-between items-center gap-4 bg-gray-700 text-white px-8 py-2 rounded-xl text-center border-2 ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}>
@@ -31,7 +33,7 @@ const TableCard = ({ id, imageUrl, category, brand, model, description, quantity
               )}
           </td>
           <td className='flex justify-center items-center w-20'>
-            <Link href={`/pages/admin/edit/${id}`}>
+            <Link href={`/pages/admin/product/${id}`}>
               <SvgImage src={"/edit-2-svgrepo-com.svg"} />
             </Link>
           </td>

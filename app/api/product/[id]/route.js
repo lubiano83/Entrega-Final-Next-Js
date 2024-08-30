@@ -20,22 +20,22 @@ async function getProductById(id) {
     }
 }
 
-async function updateProductById(id, data) {
-    try {
-        const docRef = doc(db, "products", id);
-        const docSnapshot = await getDoc(docRef);
+// async function updateProductById(id, data) {
+//     try {
+//         const docRef = doc(db, "products", id);
+//         const docSnapshot = await getDoc(docRef);
 
-        if (!docSnapshot.exists()) {
-            return "El producto no existe";
-        }
+//         if (!docSnapshot.exists()) {
+//             return "El producto no existe";
+//         }
 
-        await updateDoc(docRef, data);
-        return { id, ...data };
-    } catch (error) {
-        console.error("Error updating product in Firestore:", error);
-        throw new Error("Error updating product in Firestore");
-    }
-}
+//         await updateDoc(docRef, data);
+//         return { id, ...data };
+//     } catch (error) {
+//         console.error("Error updating product in Firestore:", error);
+//         throw new Error("Error updating product in Firestore");
+//     }
+// }
 
 export async function GET(request, { params }) {
     const { id } = params;
@@ -57,28 +57,28 @@ export async function GET(request, { params }) {
     }
 }
 
-export async function PUT(request, { params }) {
-    const { id } = params;
+// export async function PUT(request, { params }) {
+//     const { id } = params;
 
-    if (!id) {
-        return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
-    }
+//     if (!id) {
+//         return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
+//     }
 
-    try {
-        const data = await request.json();
+//     try {
+//         const data = await request.json();
 
-        if (!data || Object.keys(data).length === 0) {
-            return NextResponse.json({ error: "No data provided for update" }, { status: 400 });
-        }
+//         if (!data || Object.keys(data).length === 0) {
+//             return NextResponse.json({ error: "No data provided for update" }, { status: 400 });
+//         }
 
-        const updatedProduct = await updateProductById(id, data);
+//         const updatedProduct = await updateProductById(id, data);
 
-        if (!updatedProduct) {
-            return NextResponse.json({ error: "Product not found" }, { status: 404 });
-        }
+//         if (!updatedProduct) {
+//             return NextResponse.json({ error: "Product not found" }, { status: 404 });
+//         }
 
-        return NextResponse.json(updatedProduct);
-    } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-}
+//         return NextResponse.json(updatedProduct);
+//     } catch (error) {
+//         return NextResponse.json({ error: error.message }, { status: 500 });
+//     }
+// }

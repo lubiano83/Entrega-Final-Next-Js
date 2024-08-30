@@ -35,8 +35,6 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             const exists = await checkEmailExists(values.email);
-            console.log(`Email existe: ${exists}`);
-            
             if (action === 'register') {
                 if (exists) {
                     Swal.fire({
@@ -55,18 +53,13 @@ const LoginForm = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    handleReset();
+                    setTimeout(() => {
+                        handleReset();
+                        router.back();
+                    }, 1500);
                 }
             } else if (action === 'login') {
                 if (!exists) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "Correo electrónico no registrado.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                } else {
                     await loginUser(values);
                     Swal.fire({
                         position: "center",
@@ -75,7 +68,18 @@ const LoginForm = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    handleReset();
+                    setTimeout(() => {
+                        handleReset();
+                        router.back();
+                    }, 1500);
+                } else {
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "Correo electrónico no registrado.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }
             }
         } catch (error) {

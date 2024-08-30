@@ -1,7 +1,7 @@
 import React from 'react';
 
-const EditForm = ({ id }) => {
+const EditForm = () => {
   return (
-    <div>EditForm: {id}</div>
+    <div>EditForm:</div>
   )
 }; export default EditForm;

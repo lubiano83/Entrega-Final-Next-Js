@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
 
-    const { user, registerUser, loginUser, checkEmailExists } = useAuth();
+    const { registerUser, loginUser, checkEmailExists } = useAuth();
     const router = useRouter();
 
     const initialValues = {
@@ -31,70 +31,57 @@ const LoginForm = () => {
 
     const isFormValid = isEmailValid(values.email) && values.password !== "";
 
-    const emailExist = checkEmailExists(values.email)
-
     const handleSubmit = async (e, action) => {
         e.preventDefault();
         try {
-            if (action === "register") {
-                if (emailExist === false) {
-                    await registerUser(values)
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Registro exitoso!!",
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    setTimeout(() => {
-                        handleReset();
-                        router.back();
-                    }, 1500)
-                } else {
+            const exists = await checkEmailExists(values.email);
+            console.log(`Email existe: ${exists}`);
+            
+            if (action === 'register') {
+                if (exists) {
                     Swal.fire({
                         position: "center",
                         icon: "error",
-                        title: "Este email ya está registrado...",
+                        title: "El correo electrónico ya está en uso.",
                         showConfirmButton: false,
                         timer: 1500
-                    })
-                    
+                    });
+                } else {
+                    await registerUser(values);
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Registro exitoso.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    handleReset();
                 }
-            } else if (action === "login") {
-                if (emailExist === false) {
+            } else if (action === 'login') {
+                if (!exists) {
                     Swal.fire({
                         position: "center",
                         icon: "error",
-                        title: "Este email no está registrado...",
+                        title: "Correo electrónico no registrado.",
                         showConfirmButton: false,
                         timer: 1500
-                    })
+                    });
                 } else {
-                    await loginUser(values)
+                    await loginUser(values);
                     Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: "Ingreso exitoso!!",
+                        title: "Inicio de sesión exitoso.",
                         showConfirmButton: false,
                         timer: 1500
-                    })
-                    setTimeout(() => {
-                        handleReset();
-                        router.back();
-                    }, 1500)
+                    });
+                    handleReset();
                 }
             }
         } catch (error) {
-            console.error("Error:", error.message);
-            Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "Operación Fallida!!",
-                showConfirmButton: false,
-                timer: 1500
-            });
+            console.error('Error:', error.message);
         }
-    };    
+    };
 
     const handleReset = () => {
         setValues(initialValues);

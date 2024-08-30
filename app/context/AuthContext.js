@@ -23,15 +23,14 @@ export const AuthProvider = ({children}) => {
             const signInMethods = await fetchSignInMethodsForEmail(auth, email);
             return signInMethods.length > 0;
         } catch (error) {
-            console.error("Error comprobando el email:", error.message);
-            return false;
+            console.log(error.message);
         }
-    };    
+    };
 
     const registerUser = async (values) => {
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password)
+            const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
         
             setUser({
                 logged: true,

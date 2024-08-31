@@ -9,9 +9,6 @@ import { useCapitalize } from '@/app/hooks/useCapitalize';
 
 const ProductCard = ({ id, imageUrl, category, brand, model, quantity, price, description }) => {
 
-  console.log(id);
-  
-
   const { setPrice } = usePrice();
   const { isDarkMode } = useDarkMode();
   const { capitalize } = useCapitalize()

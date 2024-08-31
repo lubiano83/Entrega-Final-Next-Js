@@ -5,7 +5,7 @@ import Pagination from '../Pagination';
 const TableList = async ({ category = "all", brand = "all", filter = "all", limit, page, sort}) => {
 
   const totalItems = await fetch("http://localhost:3000/api/products/all").then(res => res.json());
-  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 0, tags: ['cart'] }}).then(res => res.json());
+  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 3600, tags: ['product', 'cart'] }}).then(res => res.json());
 
   const totalPages = Math.ceil(totalItems.length / limit);
   const prevPage = page > 1 ? page - 1 : page;

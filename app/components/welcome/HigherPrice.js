@@ -4,7 +4,7 @@ import Title from '../Title';
 
 const HigherPrice = async () => {
 
-  const items = await fetch(`http://localhost:3000/api/products?limit=4&sort=desc`, {next: {revalidate: 0, tags: ['products']}}).then(res => res.json());
+  const items = await fetch(`http://localhost:3000/api/products?limit=4&sort=desc`, {next: {revalidate: 3600, tags: ['products', 'product', 'cart']}}).then(res => res.json());
   const itemsArray = Array.isArray(items) ? items : [items];
 
   return (

@@ -32,7 +32,7 @@ export async function GET(request) {
 
     try {
         const products = await getProducts({ limit, page, sort });
-        revalidateTag('cart');
+        revalidateTag('products');
         return NextResponse.json(products);
     } catch (error) {
         console.error("Error fetching products:", error);

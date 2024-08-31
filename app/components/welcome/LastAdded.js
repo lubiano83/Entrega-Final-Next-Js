@@ -4,7 +4,7 @@ import Title from '../Title';
 
 const LastAdded = async () => {
 
-  const items = await fetch(`http://localhost:3000/api/products/all`, {next: {revalidate: 0, tags: ['products']}}).then(res => res.json());
+  const items = await fetch(`http://localhost:3000/api/products/all`, {next: {revalidate: 3600, tags: ['products', 'product', 'cart']}}).then(res => res.json());
   const itemsArray = Array.isArray(items) ? items : [items];
   const LastAddedItems = itemsArray.reverse().slice(0, 4);
 

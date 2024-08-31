@@ -10,7 +10,16 @@ export const CartProvider = ({children}) => {
 
     const addToCart = (productToAdd) => {
         if(!isInCart(productToAdd.item.id)) {
-            setCart(prev => [...prev, productToAdd]);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Producto agregado con éxito.",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout(() => {
+                setCart(prev => [...prev, productToAdd]);
+            }, 1500);
         } else {
             Swal.fire({
                 position: "center",
@@ -18,7 +27,7 @@ export const CartProvider = ({children}) => {
                 title: "Este producto ya esta en el Carrito!!",
                 showConfirmButton: false,
                 timer: 1500
-              });
+            });
         }
     };
 

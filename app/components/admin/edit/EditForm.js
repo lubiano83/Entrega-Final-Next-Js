@@ -29,7 +29,7 @@ const EditForm = ({ id }) => {
     filter: "",
     quantity: "",
     price: "",
-    status: true,
+    status: true, // default to true
     detail: ""
   };
 
@@ -58,7 +58,7 @@ const EditForm = ({ id }) => {
     } else {
       setValues({
         ...values,
-        [name]: type === 'checkbox' ? checked : value
+        [name]: type === 'checkbox' ? checked : value // Update status based on checkbox value
       });
     }
   };
@@ -82,13 +82,29 @@ const EditForm = ({ id }) => {
   };
 
   const handleDelete = async () => {
-    try {
-      await deleteProduct(id);
-      sendMessage("Producto eliminado con éxito!!");
-      router.back();
-    } catch (error) {
-      console.error("Error deleting product: ", error);
-    }
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "¡Sí, eliminar!",
+      cancelButtonColor: "#d33",
+      confirmButtonColor: "#3085d6"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          sendMessage("Producto eliminado con éxito!!");
+          await deleteProduct(id);
+        } catch (error) {
+          console.error("Error al eliminar el producto: ", error);
+          Swal.fire({
+            title: "Error",
+            text: "Hubo un problema al eliminar el producto.",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
 
   const handleReset = () => {
@@ -124,6 +140,13 @@ const EditForm = ({ id }) => {
           <input type="number" placeholder='Ingresa una Cantidad..' name="quantity" value={values.quantity} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
           <input type="number" placeholder='Ingresa un Precio..' name="price" value={values.price} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
           <input type="text" placeholder='Ingresa un Detalle..' name="detail" value={values.detail} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
+          
+          {/* Añade el input de checkbox para el status */}
+          <label className={`flex items-center gap-2 text-lg text-gray-700`}>
+            <input type="checkbox" name="status" checked={values.status} onChange={handleChange} />
+            { values.status === true ? "Producto disponible" : "Producto no disponible" }
+          </label>
+
           <div className='flex justify-center items-center gap-2'>
             <Button type="reset" handleClick={handleReset}>Limpiar</Button>
             <Button type="submit">Guardar</Button>

@@ -96,7 +96,7 @@ const CreateForm = () => {
           <input type="text" required placeholder='Ingresa un Detalle..' name="detail" value={values.detail} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
           <div className='flex justify-center items-center gap-2'>
             <Button type="reset" handleClick={handleReset}>Limpiar</Button>
-            <Button type="submit">Enviar</Button>
+            <Button type="submit">Agregar</Button>
           </div>
         </form>
       </div>

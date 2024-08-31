@@ -44,7 +44,7 @@ export async function GET(request, { params }) {
 
   try {
     const products = await getProducts({ limit, page, sort, params });
-    revalidateTag("cart");
+    revalidateTag("products");
     return NextResponse.json(products);
   } catch (error) {
     console.error("Error fetching products:", error.message, error.stack);

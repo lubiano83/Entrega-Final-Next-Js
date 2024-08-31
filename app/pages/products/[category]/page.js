@@ -5,11 +5,11 @@ import Title from '@/app/components/Title';
 export async function generateMetadata ({params}) {
   const { category } = params;
   return {
-    title: `AutoShop: ${category}`,
+    title: `AutoShop: ${category === "all" ? "todos" : category}`,
     description: "Venta en respuestos y accesorios de vehiculos en linea",
     keywords: ["autoshop", "repuestos", "accesorios", "autos", "baterias", "neumaticos", "online", ],
     openGraph: { // extension para el uso de redes sociales.
-      title: `AutoShop: ${category}`,
+      title: `AutoShop: ${category === "all" ? "todos" : category}`,
       description: "AutoShop ahora con su tienda online",
       type: "website",
       publishedTime: "2023-01-01T00:00:00Z",

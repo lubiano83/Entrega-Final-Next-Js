@@ -31,7 +31,7 @@ const TableCard = ({ id, imageUrl, category, brand, model, description, quantity
               )}
           </td>
           <td className='flex justify-center items-center w-20'>
-            <Link href={`/pages/admin/product/${id}`}>
+            <Link href={`/pages/admin/edit/${id}`}>
               <SvgImage src={"/edit-2-svgrepo-com.svg"} />
             </Link>
           </td>

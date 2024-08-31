@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useAuth } from '@/app/hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 const MenuList = ({ show, handleShow, isDarkMode }) => {
 

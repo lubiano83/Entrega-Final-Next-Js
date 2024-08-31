@@ -77,9 +77,9 @@ const CreateForm = () => {
       showConfirmButton: false,
       timer: 1500
     });
+    router.refresh();
     setTimeout(() => {
       handleReset();
-      router.reload();
     }, 1500);
   };
 

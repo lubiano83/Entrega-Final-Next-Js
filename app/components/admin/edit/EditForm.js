@@ -120,8 +120,9 @@ const EditForm = ({ id }) => {
       showConfirmButton: false,
       timer: 1500
     });
+    router.refresh();
     setTimeout(() => {
-      window.location.reload();
+      router.back();
     }, 1500);
   };
 

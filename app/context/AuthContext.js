@@ -1,5 +1,5 @@
 "use client";
-import { auth, provider } from "../firebase/config";
+import { auth } from "../firebase/config";
 import { createContext, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, fetchSignInMethodsForEmail } from "firebase/auth";
 import Swal from 'sweetalert2';
@@ -82,16 +82,8 @@ export const AuthProvider = ({children}) => {
         }
     };    
 
-    const googleLogin = async () => {
-        try {
-            await signInWithPopup(auth, provider)
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-
     return (
-        <AuthContext.Provider value={{ user, registerUser, loginUser, logOut, googleLogin, checkEmailExists }}>
+        <AuthContext.Provider value={{ user, registerUser, loginUser, logOut, checkEmailExists }}>
             {children}
         </AuthContext.Provider>
     )

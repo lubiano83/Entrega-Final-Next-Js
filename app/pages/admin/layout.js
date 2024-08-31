@@ -9,8 +9,8 @@ const AdminLayout = ({children}) => {
 
   return (
     <div className='bg-white h-full flex flex-col justify-between items-center text-center'>
-      <Banner>{user.logged ? `Bienvenido ${user.email}...` : "Debes ingresar para tener acceso..."}</Banner>
-      {children}
+      <Banner>{user.email === "lubiano83@gmail.com" ? `Bienvenido ${user.email}...` : "Debes tener acceso para esta seccion..."}</Banner>
+      {user.logged === "lubiano83@gmail.com" && children }
     </div>
   )
 }; export default AdminLayout;

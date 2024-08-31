@@ -7,7 +7,7 @@ const Edit = async ({id}) => {
   const itemsArray = Array.isArray(items) ? items : [items];
 
   return (
-    <div className='w-full'>
+    <div className='w-full m-8'>
       <EditList itemsArray={itemsArray} />
     </div>
   )

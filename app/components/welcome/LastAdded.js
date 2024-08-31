@@ -4,8 +4,9 @@ import Title from '../Title';
 
 const LastAdded = async () => {
 
-  const LastAdded = await fetch(`http://localhost:3000/api/products/all`, {next: {revalidate: 0, tags: ['products']}}).then(res => res.json());
-  const LastAddedItems = LastAdded.reverse().slice(0, 4);
+  const items = await fetch(`http://localhost:3000/api/products/all`, {next: {revalidate: 0, tags: ['products']}}).then(res => res.json());
+  const itemsArray = Array.isArray(items) ? items : [items];
+  const LastAddedItems = itemsArray.reverse().slice(0, 4);
 
   return (
     <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>

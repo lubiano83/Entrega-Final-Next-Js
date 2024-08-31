@@ -4,21 +4,40 @@ import Button from '../Button';
 import { usePrice } from '@/app/hooks/usePrice';
 import { useCart } from '@/app/hooks/useCart';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/hooks/useAuth';
 
 const TotalCart = ({totalPrice, totalQuantity}) => {
 
   const { setPrice } = usePrice();
   const { clearCart } = useCart();
+  const { user } = useAuth();
+  const router = useRouter();
 
     const handlePayment = () => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Muchas gracias por tu Compra!!",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      clearCart()
+      if(user.logged){
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Muchas gracias por tu Compra!!",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setTimeout(() => {
+          clearCart()
+        }, 1500);
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Primero debes entrar con tu cuenta.",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setTimeout(() => {
+          router.push("/pages/login")
+        }, 1500);
+      }
     };    
 
   return (

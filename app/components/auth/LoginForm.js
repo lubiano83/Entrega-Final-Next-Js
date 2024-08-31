@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
 
-    const { registerUser, loginUser, checkEmailExists } = useAuth();
+    const { registerUser, loginUser } = useAuth();
     const router = useRouter();
 
     const initialValues = {

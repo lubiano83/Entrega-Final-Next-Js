@@ -93,8 +93,8 @@ const EditForm = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          sendMessage("Producto eliminado con éxito!!");
           await deleteProduct(id);
+          sendMessage("Producto eliminado con éxito!!");
         } catch (error) {
           console.error("Error al eliminar el producto: ", error);
           Swal.fire({
@@ -121,8 +121,7 @@ const EditForm = ({ id }) => {
       timer: 1500
     });
     setTimeout(() => {
-      handleReset();
-      router.back();
+      window.location.reload();
     }, 1500);
   };
 

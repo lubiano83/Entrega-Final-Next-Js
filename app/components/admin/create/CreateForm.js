@@ -7,6 +7,7 @@ import { db, storage } from '@/app/firebase/config';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useDarkMode } from '@/app/hooks/useDarkMode';
 import Title from '../../Title';
+import { useRouter } from 'next/navigation';
 
 const createProduct = async (values) => {
   return addDoc(collection(db, "products"), values);
@@ -29,6 +30,7 @@ const CreateForm = () => {
   const [values, setValues] = useState(initialValues);
   const [imageFile, setImageFile] = useState(null);
   const { isDarkMode } = useDarkMode();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -77,6 +79,7 @@ const CreateForm = () => {
     });
     setTimeout(() => {
       handleReset();
+      router.reload();
     }, 1500);
   };
 

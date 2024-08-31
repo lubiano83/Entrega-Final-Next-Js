@@ -1,7 +1,7 @@
 "use client";
 import { auth } from "../firebase/config";
-import { createContext, useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, fetchSignInMethodsForEmail } from "firebase/auth";
+import { createContext, useState, useEffect } from "react";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, fetchSignInMethodsForEmail } from "firebase/auth";
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
@@ -15,8 +15,25 @@ export const AuthProvider = ({children}) => {
         uid: null
     };
 
-    const [ user, setUser ] = useState(initialValues);
+    const [user, setUser] = useState(initialValues);
     const router = useRouter();
+
+    // Load user data from localStorage on initial render
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    useEffect(() => {
+        // Save user data to localStorage whenever it changes
+        if (user.logged) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
+        }
+    }, [user]);
 
     const checkEmailExists = async (email) => {
         try {
@@ -28,15 +45,16 @@ export const AuthProvider = ({children}) => {
     };
 
     const registerUser = async (values) => {
-
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
         
-            setUser({
+            const newUser = {
                 logged: true,
                 email: userCredential.user.email,
-                user: userCredential.user.uid
-            })
+                uid: userCredential.user.uid
+            };
+
+            setUser(newUser);
 
         } catch (error) {
             console.log(error.message);
@@ -44,15 +62,16 @@ export const AuthProvider = ({children}) => {
     };
 
     const loginUser = async (values) => {
-
         try {
             const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
     
-            setUser({
+            const newUser = {
                 logged: true,
                 email: userCredential.user.email,
-                user: userCredential.user.uid
-            })
+                uid: userCredential.user.uid
+            };
+
+            setUser(newUser);
 
         } catch (error) {
             console.log(error.message);
@@ -62,25 +81,27 @@ export const AuthProvider = ({children}) => {
     const logOut = async () => {
         try {
             await signOut(auth);
-            setUser({
+            const newUser = {
                 logged: false,
                 email: null,
                 uid: null
-            }),
+            };
+
+            setUser(newUser);
             Swal.fire({
                 position: "center",
                 icon: "warning",
                 title: "Te has desconectado...",
                 showConfirmButton: false,
                 timer: 1500
-            })
+            });
             setTimeout(() => {
                 router.push("/");
             }, 1500);
         } catch (error) {
             console.log(error.message);
         }
-    };    
+    };
 
     return (
         <AuthContext.Provider value={{ user, registerUser, loginUser, logOut, checkEmailExists }}>

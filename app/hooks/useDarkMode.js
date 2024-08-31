@@ -6,7 +6,6 @@ export const useDarkMode = () => {
 
   useEffect(() => {
     try {
-      // Verificar si hay una preferencia guardada en localStorage
       const storedTheme = localStorage.getItem("theme");
       if (storedTheme === "dark") {
         setIsDarkMode(true);
@@ -31,7 +30,6 @@ export const useDarkMode = () => {
           document.documentElement.classList.remove("dark");
           localStorage.setItem("theme", "light");
         }
-        // Recargar la página para aplicar el nuevo tema
         window.location.reload();
         return newMode;
       });

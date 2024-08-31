@@ -20,7 +20,7 @@ const TableCard = ({ id, imageUrl, category, brand, model, description, quantity
             <SvgImage src={"/pic-svgrepo-com.svg"} />
           </a></td>
           <td className="w-40">{capitalize(category)}</td>
-          <td className="w-80">{capitalize(brand)} - {model} - {description}</td>
+          <td className="w-80">{capitalize(brand)}, {model}, {description}</td>
           <td className="w-28">{quantity}</td>
           <td className="w-32">${price ? setPrice(price) : ""}</td>
           <td className="flex justify-center items-center w-20">

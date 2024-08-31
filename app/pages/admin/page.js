@@ -13,7 +13,7 @@ const Admin = () => {
           <Button>Panel de Control</Button>  
         </Link>
         <Link href={"/pages/admin/create"}>
-          <Button>Ingresar Productos</Button>
+          <Button>Ingresar Producto</Button>
         </Link>
       </div>
     </div>

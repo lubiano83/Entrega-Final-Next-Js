@@ -1,20 +1,26 @@
-"use client";
-import React, { useState } from 'react';
+import React from 'react';
 import ProductCard from './ProductCard';
-import InputFilter from '../filters/InputFilters';
+import DynamicTitle from './DynamicTitle';
+import Pagination from '../Pagination';
 
-const ProductsList = ({ data, category, brand, filter }) => {
+const ProductsList = async ({ category = "all", brand = "all", filter = "all", page, limit, sort }) => {
 
-  const [productsFiltered, setProductsFiltered] = useState(data);
+  const totalItems = await fetch("http://localhost:3000/api/products/all").then(res => res.json());
+  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 3600, tags: ['cart', 'product', 'products'] }}).then(res => res.json());
+
+  const totalPages = Math.ceil(totalItems.length / limit);
+  const prevPage = page > 1 ? page - 1 : page;
+  const nextPage = page <= totalPages ? page + 1 : page;
 
   return (
-    <section className='flex flex-col w-full h-full gap-8 justify-between items-center'>
-      <InputFilter data={data} category={category} brand={brand} filter={filter} setProductsFiltered={setProductsFiltered} />
+    <section className='flex flex-col w-full h-full gap-8 justify-center items-center m-8'>
+      <DynamicTitle brand={brand} category={category} />
       <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>
-        {productsFiltered.map(item => (
+        {items.map(item => (
           <ProductCard key={item.id} {...item} />
         ))}
       </div>
+      <Pagination totalPages={totalPages} limit={limit} prevPage={prevPage} nextPage={nextPage} page={page} sort={sort}/>
     </section>
   );
 }; export default ProductsList;

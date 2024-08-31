@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import Products from '@/app/components/products/Products';
 import Title from '@/app/components/Title';
+import ProductsList from '@/app/components/products/ProductsList';
 
 export async function generateMetadata ({params}) {
   const { category } = params;
@@ -42,7 +42,7 @@ const Category = ({ params, searchParams }) => {
   return (
     <div className='w-full h-full flex justify-center items-center'>
       <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
-        <Products category={category} limit={limit} page={page} sort={sort} />
+        <ProductsList category={category} limit={limit} page={page} sort={sort} />
       </Suspense>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import Products from '@/app/components/products/Products';
 import Title from '@/app/components/Title';
+import ProductsList from '@/app/components/products/ProductsList';
 
 export const metadata = {
   title: "AutoShop: todos",
@@ -24,7 +24,7 @@ const All = ({ searchParams }) => {
   return (
     <div className='w-full h-full flex justify-center items-center'>
       <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
-        <Products limit={limit} page={page} sort={sort} />
+        <ProductsList limit={limit} page={page} sort={sort} />
       </Suspense>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import Edit from '@/app/components/admin/edit/Edit';
+import EditList from '@/app/components/admin/edit/EditList';
 
 const Product = async ({params}) => {
 
@@ -7,7 +7,7 @@ const Product = async ({params}) => {
 
   return (
     <div className='text-gray-700 flex justify-center items-center h-full w-full'>
-      <Edit id={id}/>
+      <EditList id={id}/>
     </div>
   )
 }; export default Product;

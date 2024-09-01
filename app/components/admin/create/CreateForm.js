@@ -52,7 +52,7 @@ const CreateForm = () => {
       formData.append('detail', values.detail);
 
       try {
-        const response = await fetch('/api/product/create', { method: 'POST', body: formData });
+        const response = await fetch('/api/product', { method: 'POST', body: formData });
 
         if (!response.ok) {
           throw new Error('Failed to create product');

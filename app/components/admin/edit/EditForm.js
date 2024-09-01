@@ -73,7 +73,7 @@ const EditForm = ({ id }) => {
         formData.append('image', imageFile);
       }
 
-      const response = await fetch(`/api/product/${id}/edit`, {
+      const response = await fetch(`/api/product/${id}`, {
         method: 'PATCH',
         body: formData,
       });
@@ -105,7 +105,7 @@ const EditForm = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`/api/product/${id}/edit`, {
+          const response = await fetch(`/api/product/${id}`, {
             method: 'DELETE',
           });
 

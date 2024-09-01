@@ -23,9 +23,29 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch(`http://localhost:3000/api/contact`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(values)});
-    sendMessage();
+    try {
+      const response = await fetch(`/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values)
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+  
+      sendMessage();
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Hubo un problema al enviar el mensaje.",
+        showConfirmButton: true,
+      });
+    }
   };
+  
 
   const handleReset = () => {
     setValues(initialValues);

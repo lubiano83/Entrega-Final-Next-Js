@@ -10,8 +10,10 @@ const Welcome = () => {
 
   return (
     <div className="bg-white flex flex-col justify-center gap-8 items-center h-full w-full">
-        <Title style="text-4xl">Bienvenidos a AutoShop!!</Title>
-        <Title style="text-2xl">Ultimos Productos Agregados:</Title>
+        <div className='flex flex-col justify-center items-center gap-4'>
+          <Title style="text-4xl">Bienvenidos a AutoShop!!</Title>
+          <Title style="text-2xl">Ultimos Productos Agregados:</Title>
+        </div>
         <div className='w-full flex justify-evenly items-center'>
             <LastAdded />
         </div>

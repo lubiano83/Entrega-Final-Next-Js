@@ -106,7 +106,7 @@ const CreateForm = () => {
               { values.status === true ? "Producto disponible" : "Producto no disponible" }
             </label>
         </div>
-        <div className='flex justify-center gap-5'>
+        <div className='flex justify-center gap-2'>
           <Button color="danger" size="md" style="w-24" type="reset" onClick={handleReset}>Limpiar</Button>
           <Button color="primary" size="md" style="w-24" type="submit">Ingresar</Button>
         </div>

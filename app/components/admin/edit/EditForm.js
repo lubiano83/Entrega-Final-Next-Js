@@ -16,7 +16,7 @@ const EditForm = ({ id }) => {
     filter: "",
     quantity: "",
     price: "",
-    status: true, // default to true
+    status: true,
     detail: ""
   };
 

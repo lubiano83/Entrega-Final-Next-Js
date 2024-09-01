@@ -17,7 +17,7 @@ const TableCard = ({ id, imageUrl, category, brand, model, description, quantity
       <tr className={`h-12 text-lg flex justify-between items-center gap-4 bg-gray-700 text-white px-8 py-2 rounded-xl text-center border-2 ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}>
           <td className="w-64">{id}</td>
           <td className="w-20 flex justify-center items-center"><a href={imageUrl} target="_blank" rel="noopener noreferrer">
-            <SvgImage src={"/pic-svgrepo-com.svg"} />
+            {imageUrl ? <SvgImage src={"/pic-svgrepo-com.svg"}/> : "---" }
           </a></td>
           <td className="w-40">{capitalize(category)}</td>
           <td className="w-80">{capitalize(brand)}, {model}, {description}</td>

@@ -20,7 +20,7 @@ export async function POST(request) {
     if (!imageFile) {
       return NextResponse.json({ error: 'No image file uploaded' }, { status: 400 });
     }
-
+    
     const storageRef = ref(storage, `products/${imageFile.name}`);
     await uploadBytes(storageRef, imageFile);
     const fileUrl = await getDownloadURL(storageRef);
@@ -39,6 +39,7 @@ export async function POST(request) {
     };
 
     await addDoc(collection(db, 'products'), productData);
+
     return NextResponse.json({ message: 'Producto creado con éxito' }, { status: 201 });
   } catch (error) {
     console.error('Error al crear el producto:', error);

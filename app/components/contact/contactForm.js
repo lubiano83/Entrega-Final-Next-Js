@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../Button';
 import Swal from 'sweetalert2';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
 import Title from '../Title';
+import { useAuth } from '@/app/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 const ContactForm = () => {
   const initialValues = {
@@ -13,6 +15,17 @@ const ContactForm = () => {
 
   const [values, setValues] = useState(initialValues);
   const { isDarkMode } = useDarkMode();
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user && user.email) {
+      setValues(prevValues => ({
+        ...prevValues,
+        email: user.email
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     setValues({
@@ -45,7 +58,6 @@ const ContactForm = () => {
       });
     }
   };
-  
 
   const handleReset = () => {
     setValues(initialValues);
@@ -61,20 +73,23 @@ const ContactForm = () => {
     });
     setTimeout(() => {
       handleReset();
+      router.refresh();
     }, 1500);
   };
 
   return (
     <div className={`w-1/2 min-w-72 p-8 gap-4 rounded-3xl flex flex-col justify-center items-center bg-gray-700 bg-opacity-25`}>
-      <Title style="text-3xl">Contactanos...</Title>
+      <Title style="text-3xl">Contáctanos...</Title>
       <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center gap-4 w-full'>
-        <input type="email" required placeholder='Ingresa tu Email..' name="email" value={values.email} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
-        <textarea required placeholder='Dejanos tu Mensaje..' name="text" value={values.text} onChange={handleChange} className={`w-full min-w-60 h-72 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
+        {user.logged ?
+        <input type="email" required placeholder='Ingresa tu Email..' name="email" value={values.email} onChange={handleChange} disabled={!!user} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
+        : <input type="email" required placeholder='Ingresa tu Email..' name="email" value={values.email} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} /> }
+        <textarea required placeholder='Déjanos tu Mensaje..' name="text" value={values.text} onChange={handleChange} className={`w-full min-w-60 h-72 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
         <div className='flex justify-center items-center gap-2'>
           <Button type="reset" handleClick={handleReset}>Limpiar</Button>
           <Button type="submit">Enviar</Button>
         </div>
       </form>
     </div>
-  )
+  );
 }; export default ContactForm;

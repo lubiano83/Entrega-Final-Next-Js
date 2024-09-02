@@ -15,7 +15,7 @@ const Admin = () => {
         <Link href={"/pages/admin/create"}>
           <Button>Ingresar Producto</Button>
         </Link>
-        <Link href={"/pages/admin/messages"}>
+        <Link href={`/pages/admin/messages`}>
           <Button>Ver Mensajes</Button>
         </Link>
       </div>

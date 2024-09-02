@@ -1,13 +1,11 @@
-import React from 'react'
-import MessagesList from '@/app/components/admin/messages/MessagesList';
+import React from 'react';
+import MessageList from '@/app/components/admin/messages/MessageList';
 
-const Messages = ({params}) => {
-
-    const { email } = params; 
+const Messages = () => {
 
   return (
     <div className='h-full w-full bg-white flex flex-col justify-start p-8 items-center gap-8 text-gray-700'>
-        <MessagesList email={email} />
+        <MessageList />
     </div>
   )
 }; export default Messages;

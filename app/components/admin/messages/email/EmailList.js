@@ -15,7 +15,7 @@ const EmailList = async ({ email }) => {
   const itemsArray = Array.isArray(items) ? items : [items];
 
   return (
-    <div className='w-full'>
+    <div className='w-full h-full'>
       {
         itemsArray.map(item => (
           <EmailCard key={item.email} {...item} />

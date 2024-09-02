@@ -9,11 +9,11 @@ const EmailCard = ({ email, messages }) => {
   }
 
   return (
-    <div className={`py-2 border-2 flex flex-col justify-center items-start px-8 rounded-2xl shadow-md w-full bg-gray-700 text-white ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}>
+    <div className={`py-2 border-2 flex flex-col justify-start overflow-scroll items-start px-8 rounded-2xl shadow-md h-full w-full bg-gray-700 text-white ${isDarkMode ? "border-orange-600" : "border-blue-600"}`}>
       <h2 className={`text-lg font-semibold ${isDarkMode ? "text-orange-600" : "text-blue-600"}`}>{email}:</h2>
       <ul className="w-full text-left">
         {messages.map((message, index) => (
-            <li key={index} className='flex flex-col'>
+            <li key={index} className='flex flex-col pb-1 border-b-2'>
               <p className='text-md'>{message.text}</p>
               <small className='text-sm text-gray-400'>{new Date(message.timestamp).toLocaleString()}</small>
             </li>

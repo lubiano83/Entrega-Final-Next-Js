@@ -25,7 +25,7 @@ const CartCard = ({item, counter, removeItem}) => {
             <p>{item.description}</p>
           </div>
           <div className='w-32'>
-            <p>Cantidad: {counter}</p>
+            <p>Cantidad: { counter === 0 ? "No hay stock de este producto" : counter }</p>
           </div>
           <div className='w-36'>
             <p>${item.price ? setPrice(item.price * counter) : ""}</p>

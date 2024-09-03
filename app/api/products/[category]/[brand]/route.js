@@ -3,11 +3,15 @@ import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
 import { revalidateTag } from "next/cache";
 
-async function getProducts({ limit, page, sort, params }) {
-  try {
-    const { category, brand } = params;
-    const collectionRef = collection(db, "products");
+export async function GET(request, { params }) {
+  const { category, brand } = params;
+  const searchParams = new URL(request.url).searchParams;
+  const limit = searchParams.get("limit") ? parseInt(searchParams.get("limit"), 10) : 20;
+  const page = searchParams.get("page") ? parseInt(searchParams.get("page"), 10) : 1;
+  const sort = searchParams.get("sort") || null;
 
+  try {
+    const collectionRef = collection(db, "products");
     let productsQuery = query(collectionRef);
 
     if (category && category !== "all") {
@@ -29,23 +33,8 @@ async function getProducts({ limit, page, sort, params }) {
     const end = start + limit;
     const paginatedData = productsData.slice(start, end);
 
-    return paginatedData;
-  } catch (error) {
-    console.error("Error fetching products from Firestore:", error.message, error.stack);
-    throw new Error("Error fetching products from Firestore");
-  }
-}
-
-export async function GET(request, { params }) {
-  const searchParams = new URL(request.url).searchParams;
-  const limit = searchParams.get("limit") ? parseInt(searchParams.get("limit"), 10) : 20;
-  const page = searchParams.get("page") ? parseInt(searchParams.get("page"), 10) : 1;
-  const sort = searchParams.get("sort") || null;
-
-  try {
-    const products = await getProducts({ limit, page, sort, params });
     revalidateTag("products");
-    return NextResponse.json(products);
+    return NextResponse.json(paginatedData);
   } catch (error) {
     console.error("Error fetching products:", error.message, error.stack);
     return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });

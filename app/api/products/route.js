@@ -8,6 +8,7 @@ export async function GET(request) {
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 20;
     const page = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
     const sort = searchParams.get('sort') || null;
+    
     try {
         const collectionRef = collection(db, "products");
         const sortDirection = sort === 'desc' ? 'desc' : 'asc';
@@ -20,6 +21,7 @@ export async function GET(request) {
         const start = (page - 1) * limit;
         const end = start + limit;
         const paginatedData = productsData.slice(start, end);
+
         revalidateTag('products');
         return NextResponse.json(paginatedData);
     } catch (error) {

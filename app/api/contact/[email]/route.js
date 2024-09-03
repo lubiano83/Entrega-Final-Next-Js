@@ -4,7 +4,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 export async function GET(request, { params }) {
   try {
-    const email = params.email;
+    const { email } = params;
 
     if (!email) {
       return NextResponse.json({ error: 'El parámetro de email es necesario' }, { status: 400 });

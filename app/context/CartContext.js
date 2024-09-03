@@ -1,27 +1,14 @@
 "use client";
 import { createContext, useState } from "react";
 import Swal from 'sweetalert2';
-import { useAuth } from "../hooks/useAuth";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({children}) => {
 
     const [ cart, setCart ] = useState([]);
-    const { user } = useAuth();
 
     const addToCart = (productToAdd) => {
-
-        if(!user.email){
-            return (
-            Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: "Debes ingresar con tu cuenta primero",
-                showConfirmButton: false,
-                timer: 1500
-            }));
-        }
 
         if(!isInCart(productToAdd.item.id)) {
             Swal.fire({

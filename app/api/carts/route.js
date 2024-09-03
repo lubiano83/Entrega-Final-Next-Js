@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '../../firebase/config';
-import { doc, setDoc, getDoc, getDocs, collection } from 'firebase/firestore';
+import { addDoc, query, where, getDocs, collection } from 'firebase/firestore';
 
 export async function GET() {
   try {
@@ -38,33 +38,34 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Faltan datos necesarios' }, { status: 400 });
     }
 
-    const docRef = doc(db, 'carts', data.email);
-    const docSnapshot = await getDoc(docRef);
-
+    // Procesa los productos antes de guardarlos
     const processedProducts = data.products.map(product => ({
       id: product.id,
       brand: product.brand,
       model: product.model,
       description: product.description,
-      quantity: product.counter,
+      quantity: product.counter, // Asegúrate de que 'counter' sea el campo correcto para la cantidad
       price: product.price
     }));
 
-    if (docSnapshot.exists()) {
-      const existingData = docSnapshot.data();
-      await setDoc(docRef, {
-        products: processedProducts,
-        lastUpdated: new Date().toISOString(),
-        isSold: false,
-      }, { merge: true });
-    } else {
-      await setDoc(docRef, {
-        email: data.email,
-        products: processedProducts,
-        lastUpdated: new Date().toISOString(),
-        isSold: false,
-      });
+    // Obtén la referencia de la colección de 'carts'
+    const cartsCollection = collection(db, 'carts');
+
+    // Opcional: Verifica si ya existe un carrito para este usuario (puedes omitir este paso si no es necesario)
+    const q = query(cartsCollection, where("email", "==", data.email));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      console.log('El carrito ya existe para este usuario.');
+      return NextResponse.json({ error: 'El carrito ya existe para este usuario.' }, { status: 400 });
     }
+
+    // Crea un nuevo documento con ID generado automáticamente
+    await addDoc(cartsCollection, {
+      email: data.email,
+      products: processedProducts,
+      lastUpdated: new Date().toISOString(),
+      isSold: false
+    });
 
     return NextResponse.json({ message: 'Carrito guardado con éxito' }, { status: 201 });
   } catch (error) {

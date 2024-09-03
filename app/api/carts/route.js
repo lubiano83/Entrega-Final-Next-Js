@@ -1,9 +1,7 @@
-// /pages/api/carts/index.js
 import { NextResponse } from 'next/server';
-import { db } from '../../firebase/config';  // Ajusta el path según la ubicación de tu archivo de configuración Firebase
+import { db } from '../../firebase/config';
 import { doc, setDoc, getDoc, getDocs, collection } from 'firebase/firestore';
 
-// Handler para obtener carritos de compras no vendidos
 export async function GET() {
   try {
     const collectionRef = collection(db, 'carts');
@@ -12,7 +10,6 @@ export async function GET() {
     const carts = querySnapshot.docs.map(doc => {
       const data = doc.data();
 
-      // Filtrar carritos que aún no han sido vendidos
       if (!data.isSold) {
         return {
           email: doc.id,
@@ -20,9 +17,8 @@ export async function GET() {
         };
       }
       return null;
-    }).filter(cart => cart !== null); // Filtrar nulos si no cumplen la condición
-
-    // Ordenar los carritos por fecha de creación o actualización
+    }).filter(cart => cart !== null);
+    
     carts.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
 
     return NextResponse.json(carts, { status: 200 });
@@ -45,15 +41,16 @@ export async function POST(request) {
     const docRef = doc(db, 'carts', data.email);
     const docSnapshot = await getDoc(docRef);
 
-    // Prepara solo los campos necesarios para almacenar en Firestore
     const processedProducts = data.products.map(product => ({
       id: product.id,
+      brand: product.brand,
+      model: product.model,
+      description: product.description,
       quantity: product.counter,
       price: product.price
     }));
 
     if (docSnapshot.exists()) {
-      // Si el carrito ya existe, actualizarlo
       const existingData = docSnapshot.data();
       await setDoc(docRef, {
         products: processedProducts,
@@ -61,7 +58,6 @@ export async function POST(request) {
         isSold: false,
       }, { merge: true });
     } else {
-      // Si el carrito no existe, crearlo
       await setDoc(docRef, {
         email: data.email,
         products: processedProducts,

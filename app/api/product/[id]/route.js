@@ -5,13 +5,14 @@ import { revalidateTag } from "next/cache";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export async function GET(request, { params }) {
-    const { id } = params;
+  
+  try {
+        const { id } = params;
+      
+        if (!id) {
+            return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
+        }
 
-    if (!id) {
-        return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
-    }
-
-    try {
         const docRef = doc(db, "products", id);
         const docSnapshot = await getDoc(docRef);
 
@@ -31,10 +32,11 @@ export async function GET(request, { params }) {
 }
 
 export async function PATCH(request, { params }) {
-    const { id } = params;
-    const formData = await request.formData();
-    
-    try {
+  
+  try {
+      const { id } = params;
+      const formData = await request.formData();
+
       const productRef = doc(db, "products", id);
       const productSnap = await getDoc(productRef);
   
@@ -71,9 +73,9 @@ export async function PATCH(request, { params }) {
 }
   
 export async function DELETE(request, { params }) {
-    const { id } = params;
-
-    try {
+  
+  try {
+        const { id } = params;
         const productRef = doc(db, "products", id);
         await deleteDoc(productRef);
         return NextResponse.json({ message: 'Producto eliminado con éxito' });

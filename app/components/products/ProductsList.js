@@ -5,8 +5,8 @@ import Pagination from '../Pagination';
 
 const ProductsList = async ({ category = "all", brand = "all", filter = "all", page, limit, sort }) => {
 
-  const totalItems = await fetch("http://localhost:3000/api/products/all").then(res => res.json());
-  const items = await fetch(`http://localhost:3000/api/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 3600, tags: ['cart', 'product', 'products'] }}).then(res => res.json());
+  const totalItems = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}/products/all`).then(res => res.json());
+  const items = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 3600, tags: ['cart', 'product', 'products'] }}).then(res => res.json());
 
   const totalPages = Math.ceil(totalItems.length / limit);
   const prevPage = page > 1 ? page - 1 : page;

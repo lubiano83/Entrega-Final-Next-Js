@@ -4,7 +4,7 @@ import Title from '../Title';
 
 const HigherPrice = async () => {
 
-  const items = await fetch(`http://localhost:3000/api/products?limit=4&sort=desc`, {next: {revalidate: 3600, tags: ['products', 'product', 'cart']}}).then(res => res.json());
+  const items = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}/products?limit=4&sort=desc`, {next: {revalidate: 3600, tags: ['products', 'product', 'cart']}}).then(res => res.json());
   const itemsArray = Array.isArray(items) ? items : [items];
 
   return (

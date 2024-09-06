@@ -4,13 +4,14 @@ import { db } from "@/app/firebase/config";
 import { revalidateTag } from "next/cache";
 
 export async function GET(request, { params }) {
-  const { category, brand } = params;
-  const searchParams = new URL(request.url).searchParams;
-  const limit = searchParams.get("limit") ? parseInt(searchParams.get("limit"), 10) : 20;
-  const page = searchParams.get("page") ? parseInt(searchParams.get("page"), 10) : 1;
-  const sort = searchParams.get("sort") || null;
-
+  
   try {
+    const { category, brand } = params;
+    const searchParams = new URL(request.url).searchParams;
+    const limit = searchParams.get("limit") ? parseInt(searchParams.get("limit"), 10) : 20;
+    const page = searchParams.get("page") ? parseInt(searchParams.get("page"), 10) : 1;
+    const sort = searchParams.get("sort") || null;
+    
     const collectionRef = collection(db, "products");
     let productsQuery = query(collectionRef);
 

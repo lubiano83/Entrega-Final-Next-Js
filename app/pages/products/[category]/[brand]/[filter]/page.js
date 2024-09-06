@@ -56,7 +56,7 @@ const Filter = ({ params, searchParams }) => {
   const { category, brand, filter } = params;
   const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
   const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
-  const sort = searchParams.sort;
+  const sort = searchParams.sort || null;
 
   return (
     <div className='w-full h-full flex justify-center items-center'>

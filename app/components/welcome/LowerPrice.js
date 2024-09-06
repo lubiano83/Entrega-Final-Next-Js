@@ -4,7 +4,23 @@ import Title from '../Title';
 
 const LowerPrice = async () => {
 
-  const items = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}/products?limit=4&sort=asc`, {next: {revalidate: 3600, tags: ['products', 'product', 'cart']}}).then(res => res.json());
+  let items = [];
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_URL}/products?limit=4&sort=asc`, {
+      next: { revalidate: 3600, tags: ['products', 'product', 'cart'] }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    items = await response.json();
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+
   const itemsArray = Array.isArray(items) ? items : [items];
 
   return (

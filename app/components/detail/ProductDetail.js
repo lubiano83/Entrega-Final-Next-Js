@@ -3,7 +3,21 @@ import DetailCard from './DetailCard';
 
 const ProductDetail = async ({ id }) => {
   
-  const items = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}/product/${id}`, {next: {revalidate: 3600, tags: ['products', 'cart', 'product']}}).then(res => res.json());
+  let items = [];
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_URL}/product/${id}`, {next: {revalidate: 3600, tags: ['products', 'cart', 'product']}})
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    items = await response.json();
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+
   const itemsArray = Array.isArray(items) ? items : [items];
   
   return (

@@ -4,7 +4,21 @@ import Title from '../Title';
 
 const LastAdded = async () => {
 
-  const items = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}/products/all`, {next: {revalidate: 3600, tags: ['products', 'product', 'cart']}}).then(res => res.json());
+  let items = [];
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_URL}/products/all`, {next: {revalidate: 3600, tags: ['products', 'product', 'cart']}})
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    items = await response.json();
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+
   const itemsArray = Array.isArray(items) ? items : [items];
   const LastAddedItems = itemsArray.reverse().slice(0, 4);
 

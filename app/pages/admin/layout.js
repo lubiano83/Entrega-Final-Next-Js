@@ -12,7 +12,7 @@ const AdminLayout = ({children}) => {
     <div className='bg-white h-full flex flex-col justify-between items-center text-center'>
       <Banner>{user.email === "lubiano83@gmail.com" ? `Bienvenido José Pablo Lubiano...` : "¡Debes tener acceso para esta seccion!"}</Banner>
       <div className='flex justify-center items-center h-full w-full'>
-        { user.email === "lubiano83@gmail.com" ? children : <Title style="text-3xl">Lo siento...</Title> }
+        { user.logged ? children : <Title style="text-3xl">Lo siento...</Title> }
       </div>
     </div>
   )

@@ -5,10 +5,12 @@ import Button from '../../Button';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
 import Title from '../../Title';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/hooks/useAuth';
 
 const EditForm = ({ id }) => {
 
   const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
+  const { user } = useAuth();
 
   const initialValues = {
     imageUrl: "",
@@ -171,12 +173,21 @@ const EditForm = ({ id }) => {
             <input type="checkbox" name="status" checked={values.status} onChange={handleChange} />
             { values.status ? "Producto disponible" : "Producto no disponible" }
           </label>
-
-          <div className='flex justify-center items-center gap-2'>
-            <Button type="reset" handleClick={handleReset}>Limpiar</Button>
-            <Button type="submit">Guardar</Button>
+        {user.email === "lubiano83@gmail.com" ? 
+          <div className='flex flex-col justify-center items-center gap-2'>
+            <div className='flex justify-center items-center gap-2'>
+              <Button type="reset" handleClick={handleReset}>Limpiar</Button>
+              <Button type="submit">Guardar</Button>
+            </div>
+            <Button type="button" handleClick={handleDelete}>Eliminar</Button>
           </div>
-          <Button type="button" handleClick={handleDelete}>Eliminar</Button>
+          : <div className='flex flex-col justify-center items-center gap-2 opacity-50'>
+              <div className='flex justify-center items-center gap-2'>
+                <Button>Limpiar</Button>
+                <Button>Guardar</Button>
+              </div>
+              <Button>Eliminar</Button>
+            </div> }
         </form>
       </div>
     </>

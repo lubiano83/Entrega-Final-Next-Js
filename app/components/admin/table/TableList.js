@@ -3,9 +3,12 @@ import TableCard from './TableCard';
 import Pagination from '../../Pagination';
 
 const TableList = async ({ category = "all", brand = "all", filter = "all", limit, page, sort}) => {
+
+  const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
+
   try {
-    const totalItems = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/all`).then(res => res.json());
-    const items = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 0, tags: ['cart'] }}).then(res => res.json());
+    const totalItems = await fetch(`${baseURL}/products/all`).then(res => res.json());
+    const items = await fetch(`${baseURL}/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 0, tags: ['cart'] }}).then(res => res.json());
   
     const totalPages = Math.ceil(totalItems.length / limit);
     const prevPage = page > 1 ? page - 1 : page;
@@ -38,6 +41,6 @@ const TableList = async ({ category = "all", brand = "all", filter = "all", limi
       </div>
     );
   } catch (error) {
-    console.log(error.message);
+    console.log("TableList:", error.message);
   }
 }; export default TableList;

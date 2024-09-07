@@ -37,7 +37,7 @@ const DetailCard = ({id, imageUrl, category, brand, model, quantity, price, desc
           </>
         )
     } catch (error) {
-        console.log(error.message);
+        console.log("DetailCard:", error.message);
     }
 
 }; export default DetailCard;

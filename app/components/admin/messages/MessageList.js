@@ -2,8 +2,11 @@ import React from 'react';
 import MessageCard from './MessageCard';
 
 const MessageList = async () => {
+
+  const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
+
   try {
-    const items = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contacts`, {cache: "no-store"}).then(res => res.json());
+    const items = await fetch(`${baseURL}/contacts`, {cache: "no-store"}).then(res => res.json());
     const itemsArray = Array.isArray(items) ? items : [items];
   
     return (
@@ -16,6 +19,6 @@ const MessageList = async () => {
       </div>
     );
   } catch (error) {
-    console.log(error.message);
+    console.log("MessageList:", error.message);
   }
 }; export default MessageList;

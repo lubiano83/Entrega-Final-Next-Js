@@ -35,7 +35,7 @@ const ProductCard = ({ id, imageUrl, category, brand, model, quantity, price, de
       </article>
     )
   } catch (error) {
-    console.log(error.message);
+    console.log("ProductCard:", error.message);
   }
 
 }; export default ProductCard;

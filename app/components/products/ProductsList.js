@@ -4,6 +4,11 @@ import DynamicTitle from './DynamicTitle';
 import Pagination from '../Pagination';
 
 const ProductsList = async ({ category = "all", brand = "all", filter = "all", page, limit, sort }) => {
+
+  if(!page || !limit || !sort) {
+    console.log("No llegan los datos");
+  }
+
   try {
     const totalItems = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_URL}/products/all`).then(res => res.json());
     const items = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_API_URL}/products/${category}/${brand}/${filter}?limit=${limit}&page=${page}&sort=${sort}`, {next: { revalidate: 3600, tags: ['cart', 'product', 'products'] }}).then(res => res.json());
@@ -25,6 +30,5 @@ const ProductsList = async ({ category = "all", brand = "all", filter = "all", p
     );
   } catch (error) {
     console.log(error.message);
-    throw error;
   }
 }; export default ProductsList;

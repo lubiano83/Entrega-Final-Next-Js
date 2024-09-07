@@ -20,6 +20,5 @@ const LowerPrice = async () => {
     )
   } catch (error) {
     console.log(error.message);
-    throw error;
   }
 }; export default LowerPrice;

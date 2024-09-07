@@ -16,16 +16,19 @@ export const metadata = {
 };
 
 const All = ({ searchParams }) => {
+  try {
+    const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
+    const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
+    const sort = searchParams.sort || null;
   
-  const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
-  const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
-  const sort = searchParams.sort || null;
-
-  return (
-    <div className='w-full h-full flex justify-center items-center'>
-      <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
-        <ProductsList limit={limit} page={page} sort={sort} />
-      </Suspense>
-    </div>
-  );
+    return (
+      <div className='w-full h-full flex justify-center items-center'>
+        <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
+          <ProductsList limit={limit} page={page} sort={sort} />
+        </Suspense>
+      </div>
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
 }; export default All;

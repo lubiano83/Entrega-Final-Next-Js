@@ -10,7 +10,7 @@ const LastAdded = async () => {
   
     return (
       <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>
-        <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
+        <Suspense fallback={ <Title style="text-3xl">Loading...</Title> }>
           {
               LastAddedItems.map(item => (
                   <ProductCard key={item.id} {...item} />
@@ -21,6 +21,5 @@ const LastAdded = async () => {
     )
   } catch (error) {
     console.log(error.message);
-    throw error;
   }
 }; export default LastAdded;

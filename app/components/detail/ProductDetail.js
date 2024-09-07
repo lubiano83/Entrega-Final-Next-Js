@@ -17,6 +17,5 @@ const ProductDetail = async ({ id }) => {
     )
   } catch (error) {
     console.log(error.message);
-    throw error;
   }
 }; export default ProductDetail;

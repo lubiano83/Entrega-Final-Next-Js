@@ -7,6 +7,9 @@ import Title from '../../Title';
 import { useRouter } from 'next/navigation';
 
 const CreateForm = () => {
+
+  const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
+
   const initialValues = {
     category: "",
     brand: "",
@@ -52,7 +55,7 @@ const CreateForm = () => {
       formData.append('detail', values.detail);
 
       try {
-        const response = await fetch(`api/product`, { method: 'POST', body: formData });
+        const response = await fetch(`${baseURL}/product`, { method: 'POST', body: formData });
 
         if (!response.ok) {
           throw new Error('Failed to create product');

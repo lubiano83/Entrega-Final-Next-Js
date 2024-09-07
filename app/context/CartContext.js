@@ -1,11 +1,26 @@
 "use client";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import Swal from 'sweetalert2';
 
 export const CartContext = createContext();
 
-export const CartProvider = ({children}) => {
+export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        const storedCart = localStorage.getItem('cart');
+        if (storedCart) {
+            setCart(JSON.parse(storedCart));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (cart.length > 0) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+            localStorage.removeItem('cart');
+        }
+    }, [cart]);
 
     const addToCart = (productToAdd) => {
         if (!isInCart(productToAdd.item.id)) {
@@ -21,7 +36,7 @@ export const CartProvider = ({children}) => {
             Swal.fire({
                 position: "center",
                 icon: "warning",
-                title: "Este producto ya está en el carrito.",
+                title: "Este producto ya está en el Carrito!!",
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -36,10 +51,13 @@ export const CartProvider = ({children}) => {
         return cart.reduce((total, prod) => total + prod.counter, 0);
     };
 
-    const totalQuantity = getTotalQuantity()
+    const totalQuantity = getTotalQuantity();
 
     const removeItem = (id) => {
-        setCart(cart.filter(prod => prod.item.id !== id));
+        setCart(prev => {
+            const updatedCart = prev.filter(prod => prod.item.id !== id);
+            return updatedCart;
+        });
     };
 
     const clearCart = () => {

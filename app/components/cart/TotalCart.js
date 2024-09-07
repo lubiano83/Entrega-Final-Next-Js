@@ -8,10 +8,13 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/hooks/useAuth';
 
 const TotalCart = ({ totalPrice, totalQuantity }) => {
+    
     const { setPrice } = usePrice();
     const { cart, clearCart } = useCart();
     const { user } = useAuth();
     const router = useRouter();
+
+    const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
 
     const handlePayment = async () => {
         if (user.logged) {

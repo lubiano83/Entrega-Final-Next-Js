@@ -2,8 +2,11 @@ import React from 'react';
 import EditForm from './EditForm';
 
 const EditList = async ({ id }) => {
+
+  const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
+
   try {
-    const items = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`, {next: {revalidate: 3600, tags: ['products', 'cart']}}).then(res => res.json());
+    const items = await fetch(`${baseURL}/product/${id}`, {next: {revalidate: 3600, tags: ['products', 'cart']}}).then(res => res.json());
     const itemsArray = Array.isArray(items) ? items : [items];
   
     return (
@@ -14,6 +17,6 @@ const EditList = async ({ id }) => {
       </div>
     )
   } catch (error) {
-    console.log(error.message);
+    console.log("EditList:", error.message);
   }
 }; export default EditList;

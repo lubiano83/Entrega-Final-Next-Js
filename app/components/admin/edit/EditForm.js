@@ -7,6 +7,9 @@ import Title from '../../Title';
 import { useRouter } from 'next/navigation';
 
 const EditForm = ({ id }) => {
+
+  const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
+
   const initialValues = {
     imageUrl: "",
     category: "",
@@ -28,7 +31,7 @@ const EditForm = ({ id }) => {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`);
+        const response = await fetch(`${baseURL}/product/${id}`);
         console.log(response);
         
         if (!response.ok) {
@@ -73,7 +76,11 @@ const EditForm = ({ id }) => {
         formData.append('image', imageFile);
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`, {
+      if(!id) {
+        return console.log("El dato del id no llega");
+      }
+
+      const response = await fetch(`${baseURL}/product/${id}`, {
         method: 'PATCH',
         body: formData,
       });
@@ -105,7 +112,7 @@ const EditForm = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`, {
+          const response = await fetch(`${baseURL}/product/${id}`, {
             method: 'DELETE',
           });
 

@@ -22,7 +22,6 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(initialValues);
     const router = useRouter();
 
-    // Load user data from localStorage on initial render
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -31,7 +30,6 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     useEffect(() => {
-        // Save user data to localStorage whenever it changes
         if (user.logged) {
             localStorage.setItem('user', JSON.stringify(user));
         } else {

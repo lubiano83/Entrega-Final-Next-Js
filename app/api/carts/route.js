@@ -3,29 +3,29 @@ import { db } from '../../firebase/config';
 import { addDoc, getDocs, collection, updateDoc, doc, getDoc } from 'firebase/firestore';
 
 export async function GET() {
-
   try {
     const collectionRef = collection(db, 'carts');
     const querySnapshot = await getDocs(collectionRef);
 
     const carts = querySnapshot.docs.map(doc => {
-      const data = doc.data();
+      const cart = doc.data();
+      console.log(`Cart ID: ${doc.id}, Last Updated: ${cart.lastUpdated}`);
+      return {
+        email: doc.id,
+        ...cart
+      };
+    });
 
-      if (!data.isSold) {
-        return {
-          email: doc.id,
-          ...data
-        };
-      }
-      return null;
-    }).filter(cart => cart !== null);
-    
-    carts.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+    carts.sort((a, b) => {
+      const dateA = new Date(a.lastUpdated);
+      const dateB = new Date(b.lastUpdated);
+      return dateB - dateA;
+    });
 
     return NextResponse.json(carts, { status: 200 });
   } catch (error) {
-    console.error('Error al obtener los carritos no vendidos de Firestore:', error);
-    return NextResponse.json({ error: 'Hubo un problema al obtener los carritos no vendidos' }, { status: 500 });
+    console.error('Error al obtener los carritos de Firestore:', error);
+    return NextResponse.json({ error: 'Hubo un problema al obtener los carritos' }, { status: 500 });
   }
 }
 
@@ -50,10 +50,10 @@ export async function POST(request) {
 
     await addDoc(cartsCollection, {
       email: data.email,
-      name: data.email,
-      lastname: data.lastname,
-      address: data.address,
-      phone: data.phone,
+      name: data.name ?? "",
+      lastname: data.lastname ?? "",
+      address: data.address ?? "",
+      phone: data.phone ?? "",
       products: processedProducts,
       lastUpdated: new Date().toISOString()
     });

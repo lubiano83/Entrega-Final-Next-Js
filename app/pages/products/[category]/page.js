@@ -18,15 +18,10 @@ export async function generateMetadata ({params}) {
   };
 };
 
-export function generateStaticParams () {
-  return [
-    {category: "all"},
-    {category: "neumaticos"},
-    {category: "baterias"},
-    {category: "aceites"},
-    {category: "filtros"},
-    {category: "aromatizantes"},
-  ]
+export function generateStaticParams() {
+  const categories = ["all", "neumaticos", "baterias", "aceites", "filtros", "aromatizantes"];
+  
+  return categories.map(category => ({ category }));
 }
 
 export const revalidate = 3600;

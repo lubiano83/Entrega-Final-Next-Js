@@ -18,20 +18,19 @@ export async function generateMetadata ({params}) {
   };
 };
 
-export function generateStaticParams () {
-  return [
-    {category: "all"},
-    {category: "neumaticos"},
-    {category: "baterias"},
-    {category: "aceites"},
-    {category: "filtros"},
-    {category: "aromatizantes"},
-    {brand: "all"},
-    {brand: "hankook"},
-    {brand: "shell"},
-    {brand: "mann"},
-    {brand: "paloma"},
-  ]
+export function generateStaticParams() {
+  const categories = ["all", "neumaticos", "baterias", "aceites", "filtros", "aromatizantes"];
+  const brands = ["all", "hankook", "shell", "mann", "paloma"];
+  
+  const params = [];
+  
+  categories.forEach(category => {
+    brands.forEach(brand => {
+      params.push({ category, brand });
+    });
+  });
+
+  return params;
 }
 
 export const revalidate = 3600;

@@ -12,7 +12,11 @@ export const AuthProvider = ({children}) => {
     const initialValues = {
         logged: false,
         email: null,
-        uid: null
+        uid: null,
+        name: null,
+        lastname: null,
+        address: null,
+        phone: null
     };
 
     const [user, setUser] = useState(initialValues);
@@ -78,6 +82,29 @@ export const AuthProvider = ({children}) => {
         }
     };
 
+    const editUser = async (newUserData) => {
+        try {
+            const userRef = doc(db, "users", user.uid);
+            await updateDoc(userRef, newUserData);
+
+            setUser(prevUser => ({
+                ...prevUser,
+                ...newUserData
+            }));
+
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Datos actualizados con éxito.",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+        } catch (error) {
+            console.log('Error al actualizar los datos del usuario:', error);
+        }
+    };
+
     const logOut = async () => {
         try {
             await signOut(auth);
@@ -104,7 +131,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, registerUser, loginUser, logOut, checkEmailExists }}>
+        <AuthContext.Provider value={{ user, registerUser, loginUser, logOut, checkEmailExists, editUser }}>
             {children}
         </AuthContext.Provider>
     )

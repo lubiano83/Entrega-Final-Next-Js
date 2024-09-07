@@ -18,12 +18,15 @@ export async function generateMetadata ({params}) {
 };
 
 const Detail = ({ params }) => {
-
-  const { id } = params;
-
-  return (
-    <div className="bg-white flex justify-evenly items-center h-full w-full">
-      <ProductDetail id={id}/>
-    </div>
-  )
+  try {
+    const { id } = params;
+  
+    return (
+      <div className="bg-white flex justify-evenly items-center h-full w-full">
+        <ProductDetail id={id} />
+      </div>
+    )
+  } catch (error) {
+    console.log(error.message);
+  }
 }; export default Detail;

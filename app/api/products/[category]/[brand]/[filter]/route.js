@@ -7,7 +7,7 @@ export async function GET(request, { params }) {
     
     try {
         const { category, brand, filter } = params;
-        const searchParams = new URL(request.url).searchParams;
+        const { searchParams } = new URL(request.url);
         const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 20;
         const page = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
         const sort = searchParams.get('sort') || null;

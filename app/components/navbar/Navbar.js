@@ -26,7 +26,7 @@ const Navbar = ({children}) => {
           <Link href={"/pages/cart"}>
             <SvgImage src={"/cart-large-minimalistic-svgrepo-com.svg"} />
           </Link>
-          <p className='absolute top-7 text-xs'>{totalQuantity === 0 ? "" : totalQuantity}</p>
+          <p className='absolute top-7 text-xs text-white'>{totalQuantity === 0 ? "" : totalQuantity}</p>
         </div>
     </div>
   )

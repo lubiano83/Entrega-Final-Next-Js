@@ -11,10 +11,8 @@ const EmailList = async ({ email }) => {
     }
   
     const newEmail = decodeEmail(email)
-    console.log(email);
     
     const items = await fetch(`${baseURL}/contact/${newEmail}`, {cache: "no-store"}).then(res => res.json());
-    
     const itemsArray = Array.isArray(items) ? items : [items];
   
     return (
@@ -27,6 +25,6 @@ const EmailList = async ({ email }) => {
       </div>
     )
   } catch (error) {
-    console.log(error.message);
+    console.log("EmailList", error.message);
   }
 }; export default EmailList;

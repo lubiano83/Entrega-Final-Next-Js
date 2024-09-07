@@ -18,6 +18,9 @@ const Admin = () => {
         <Link href={`/pages/admin/messages`}>
           <Button>Ver Mensajes</Button>
         </Link>
+        <Link href={`/pages/admin/carts`}>
+          <Button>Ver Carritos</Button>
+        </Link>
       </div>
     </div>
   )

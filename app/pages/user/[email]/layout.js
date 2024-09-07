@@ -1,0 +1,15 @@
+import React from 'react';
+import { useAuth } from '@/app/hooks/useAuth';
+import Banner from '@/app/components/Banner';
+
+const UserLayout = ({children}) => {
+
+    const { user } = useAuth();
+
+  return (
+    <div className='bg-white h-full flex flex-col justify-between items-center text-center'>
+        <Banner>{user.logged && `Bienvenido ${user.email}...`}</Banner>
+        {children}
+    </div>
+  )
+}; export default UserLayout;

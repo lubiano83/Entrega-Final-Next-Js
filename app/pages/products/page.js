@@ -5,8 +5,8 @@ import ProductsList from '@/app/components/products/ProductsList';
 export const metadata = {
   title: "AutoShop: todos",
   description: "Venta en respuestos y accesorios de vehiculos en linea",
-  keywords: ["autoshop", "repuestos", "accesorios", "autos", "baterias", "neumaticos", "online", ],
-  openGraph: { // extension para el uso de redes sociales.
+  keywords: ["autoshop", "repuestos", "accesorios", "autos", "baterias", "neumaticos", "online"],
+  openGraph: {
     title: "AutoShop: todos",
     description: "AutoShop ahora con su tienda online",
     type: "website",
@@ -15,20 +15,21 @@ export const metadata = {
   },
 };
 
-const All = ({ searchParams }) => {
-  try {
-    const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
-    const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
-    const sort = searchParams.sort || null;
-  
-    return (
-      <div className='w-full h-full flex justify-center items-center'>
-        <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
-          <ProductsList limit={limit} page={page} sort={sort} />
-        </Suspense>
-      </div>
-    );
-  } catch (error) {
-    console.log(error.message);
-  }
-}; export default All;
+// Explicitamente haciendo la página dinámica
+export const dynamic = 'force-dynamic'; // o 'force-static' si es necesario forzar la estática
+
+const All = async ({ searchParams }) => {
+  const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
+  const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
+  const sort = searchParams.sort || null;
+
+  return (
+    <div className='w-full h-full flex justify-center items-center'>
+      <Suspense fallback={<Title style="text-3xl">Loading...</Title>}>
+        <ProductsList limit={limit} page={page} sort={sort} />
+      </Suspense>
+    </div>
+  );
+};
+
+export default All;

@@ -10,7 +10,7 @@ const EmailList = async ({ email }) => {
   const newEmail = decodeEmail(email)
   console.log(email);
   
-  const items = await fetch(`http:localhost:3000/api/contact/${newEmail}`, {cache: "no-store"}).then(res => res.json());
+  const items = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact/${newEmail}`, {cache: "no-store"}).then(res => res.json());
   
   const itemsArray = Array.isArray(items) ? items : [items];
 

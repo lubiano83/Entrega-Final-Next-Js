@@ -3,7 +3,7 @@ import EditForm from './EditForm';
 
 const EditList = async ({ id }) => {
 
-  const items = await fetch(`http://localhost:3000/api/product/${id}`, {next: {revalidate: 3600, tags: ['products', 'cart']}}).then(res => res.json());
+  const items = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`, {next: {revalidate: 3600, tags: ['products', 'cart']}}).then(res => res.json());
   const itemsArray = Array.isArray(items) ? items : [items];
 
   return (

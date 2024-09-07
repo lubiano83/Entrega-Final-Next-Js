@@ -181,13 +181,7 @@ const EditForm = ({ id }) => {
             </div>
             <Button type="button" handleClick={handleDelete}>Eliminar</Button>
           </div>
-          : <div className='flex flex-col justify-center items-center gap-2 opacity-50'>
-              <div className='flex justify-center items-center gap-2'>
-                <Button>Limpiar</Button>
-                <Button>Guardar</Button>
-              </div>
-              <Button>Eliminar</Button>
-            </div> }
+          : "" }
         </form>
       </div>
     </>

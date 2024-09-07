@@ -22,6 +22,10 @@ const TotalCart = ({ totalPrice, totalQuantity }) => {
                 // Construye el objeto con los datos necesarios
                 const cartData = {
                     email: user.email,
+                    name: user.name ?? "",
+                    lastname: user.lastname ?? "",
+                    address: user.address ?? "",
+                    phone: user.phone ?? "",
                     products: cart.map(item => ({
                         id: item.item.id,
                         brand: item.item.brand,

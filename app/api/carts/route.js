@@ -50,6 +50,10 @@ export async function POST(request) {
 
     await addDoc(cartsCollection, {
       email: data.email,
+      name: data.email,
+      lastname: data.lastname,
+      address: data.address,
+      phone: data.phone,
       products: processedProducts,
       lastUpdated: new Date().toISOString()
     });

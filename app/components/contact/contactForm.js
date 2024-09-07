@@ -8,6 +8,9 @@ import { useAuth } from '@/app/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 
 const ContactForm = () => {
+
+  const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
+
   const initialValues = {
     email: "",
     text: "",
@@ -37,7 +40,7 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/api/contact`, {
+      const response = await fetch(`${baseURL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values)

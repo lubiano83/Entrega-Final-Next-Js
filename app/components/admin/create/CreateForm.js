@@ -5,6 +5,7 @@ import Button from '../../Button';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
 import Title from '../../Title';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/hooks/useAuth';
 
 const CreateForm = () => {
 
@@ -26,6 +27,7 @@ const CreateForm = () => {
   const [imageFile, setImageFile] = useState(null);
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
+  const { user } = useAuth();
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -117,10 +119,12 @@ const CreateForm = () => {
               { values.status === true ? "Producto disponible" : "Producto no disponible" }
             </label>
         </div>
-        <div className='flex justify-center gap-2'>
-          <Button color="danger" size="md" style="w-24" type="reset" onClick={handleReset}>Limpiar</Button>
-          <Button color="primary" size="md" style="w-24" type="submit">Ingresar</Button>
-        </div>
+        { user.email === "lubiano83@gmail.com" ?
+          <div className='flex justify-center gap-2'>
+            <Button color="danger" size="md" style="w-24" type="reset" onClick={handleReset}>Limpiar</Button>
+            <Button color="primary" size="md" style="w-24" type="submit">Ingresar</Button>
+          </div>
+        : "" }
       </form>
     </div>
   );

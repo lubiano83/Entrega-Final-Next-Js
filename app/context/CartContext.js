@@ -5,12 +5,10 @@ import Swal from 'sweetalert2';
 export const CartContext = createContext();
 
 export const CartProvider = ({children}) => {
-
-    const [ cart, setCart ] = useState([]);
+    const [cart, setCart] = useState([]);
 
     const addToCart = (productToAdd) => {
-
-        if(!isInCart(productToAdd.item.id)) {
+        if (!isInCart(productToAdd.item.id)) {
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -18,14 +16,12 @@ export const CartProvider = ({children}) => {
                 showConfirmButton: false,
                 timer: 1500
             });
-            setTimeout(() => {
-                setCart(prev => [...prev, productToAdd]);
-            }, 1500);
+            setCart(prev => [...prev, productToAdd]);
         } else {
             Swal.fire({
                 position: "center",
                 icon: "warning",
-                title: "Este producto ya esta en el Carrito!!",
+                title: "Este producto ya está en el carrito.",
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -33,44 +29,30 @@ export const CartProvider = ({children}) => {
     };
 
     const getTotalPrice = () => {
-        let totalPrice = 0;
-        
-        cart.forEach(prod => {
-            totalPrice += prod.counter * prod.item.price;
-        })
-        
-        return totalPrice;
+        return cart.reduce((total, prod) => total + prod.counter * prod.item.price, 0);
     };
-    
+
     const getTotalQuantity = () => {
-        let accu = 0;
-
-        cart.forEach(prod => {
-            accu += prod.counter
-        })
-
-        return accu
-    }
+        return cart.reduce((total, prod) => total + prod.counter, 0);
+    };
 
     const totalQuantity = getTotalQuantity()
 
     const removeItem = (id) => {
-        const cartUpdated = cart.filter(prod => prod.item.id !== id);
-        setCart(cartUpdated);
-    }
+        setCart(cart.filter(prod => prod.item.id !== id));
+    };
 
     const clearCart = () => {
-        setCart([])
-    }
+        setCart([]);
+    };
 
     const isInCart = (id) => {
-        return cart.some(prod => prod.item.id === id)
-    }
+        return cart.some(prod => prod.item.id === id);
+    };
 
-    
     return (
-        <CartContext.Provider value={{cart, addToCart, getTotalPrice, getTotalQuantity, removeItem, clearCart, isInCart, totalQuantity}}>
+        <CartContext.Provider value={{ cart, addToCart, getTotalPrice, getTotalQuantity, removeItem, clearCart, isInCart, totalQuantity }}>
             {children}
         </CartContext.Provider>
-    )
+    );
 };

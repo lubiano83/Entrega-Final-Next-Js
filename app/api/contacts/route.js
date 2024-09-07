@@ -7,23 +7,18 @@ export async function GET() {
     const collectionRef = collection(db, 'contacts');
     const querySnapshot = await getDocs(collectionRef);
 
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
     const contacts = querySnapshot.docs.map(doc => {
       const data = doc.data();
       const messages = data.messages || [];
-
-      const recentMessages = messages.filter(message => new Date(message.timestamp) >= sevenDaysAgo);
-
-      recentMessages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      
+      messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
       
       return {
         email: doc.id,
-        messages: recentMessages
+        messages: messages
       };
-    }).filter(contact => contact.messages.length > 0);
-    
+    });
+
     contacts.sort((a, b) => {
       const lastMessageA = a.messages[0] ? new Date(a.messages[0].timestamp) : new Date(0);
       const lastMessageB = b.messages[0] ? new Date(b.messages[0].timestamp) : new Date(0);
@@ -36,6 +31,7 @@ export async function GET() {
     return NextResponse.json({ error: 'Hubo un problema al obtener los contactos' }, { status: 500 });
   }
 }
+
 
 export async function POST(request) {
   try {

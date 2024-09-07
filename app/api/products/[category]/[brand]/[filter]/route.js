@@ -7,6 +7,11 @@ export async function GET(request, { params }) {
     
     try {
         const { category, brand, filter } = params;
+
+        if(!category || !brand || !filter) {
+            return console.log("No estan llegando los params");
+        }
+
         const searchParams = new URL(request.url).searchParams;
         const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 20;
         const page = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;

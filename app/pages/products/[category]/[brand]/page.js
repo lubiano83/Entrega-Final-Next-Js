@@ -39,6 +39,11 @@ export const revalidate = 3600;
 const Brand = ({ params, searchParams }) => {
   try {
     const { category, brand } = params;
+
+    if(!category || !brand) {
+      return console.log("No estan llegando los params");
+    }
+
     const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 20;
     const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
     const sort = searchParams.sort || null;

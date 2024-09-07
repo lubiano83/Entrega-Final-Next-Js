@@ -35,6 +35,11 @@ export async function PATCH(request, { params }) {
   
   try {
       const { id } = params;
+
+      if (!id) {
+        return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
+      }
+
       const formData = await request.formData();
 
       const productRef = doc(db, "products", id);
@@ -76,6 +81,11 @@ export async function DELETE(request, { params }) {
   
   try {
         const { id } = params;
+
+        if (!id) {
+          return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
+        }
+
         const productRef = doc(db, "products", id);
         await deleteDoc(productRef);
         return NextResponse.json({ message: 'Producto eliminado con éxito' });

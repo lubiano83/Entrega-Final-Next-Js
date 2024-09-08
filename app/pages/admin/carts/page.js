@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import CartsList from '@/app/components/admin/carts/CartsList';
 
-const carts = () => {
+const Carts = () => {
   return (
     <div className='h-full w-full bg-white flex flex-col justify-center p-8 items-center gap-8 text-gray-700'>
-      Aqui veremos los ultimos carritos creados
+      <CartsList />
     </div>
   )
-}; export default carts;
+}; export default Carts;

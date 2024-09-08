@@ -7,21 +7,24 @@ export async function GET() {
     const collectionRef = collection(db, 'carts');
     const querySnapshot = await getDocs(collectionRef);
 
+    // Mapear cada documento a un objeto que incluye el ID del carrito y los datos
     const carts = querySnapshot.docs.map(doc => {
       const cart = doc.data();
-      console.log(`Cart ID: ${doc.id}, Last Updated: ${cart.lastUpdated}`);
       return {
-        email: doc.id,
+        id: doc.id, // Incluye el ID del carrito
+        email: doc.id, // Si necesitas también el email
         ...cart
       };
     });
 
+    // Ordenar por fecha de actualización (de más reciente a más antigua)
     carts.sort((a, b) => {
       const dateA = new Date(a.lastUpdated);
       const dateB = new Date(b.lastUpdated);
       return dateB - dateA;
     });
 
+    // Responder con los carritos ordenados
     return NextResponse.json(carts, { status: 200 });
   } catch (error) {
     console.error('Error al obtener los carritos de Firestore:', error);
@@ -55,7 +58,7 @@ export async function POST(request) {
       address: data.address ?? "",
       phone: data.phone ?? "",
       products: processedProducts,
-      lastUpdated: new Date().toISOString()
+      lastUpdated: new Date().toLocaleString()
     });
 
     const productsCollection = collection(db, 'products');

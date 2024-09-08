@@ -5,12 +5,14 @@ import SvgImage from '../SvgImage';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
 import { useCart } from '@/app/hooks/useCart';
 import { useCapitalize } from '@/app/hooks/useCapitalize';
+import { usePathname } from 'next/navigation';
 
 const CartCard = ({ item, counter, removeItem }) => {
     const { setPrice } = usePrice();
     const { isDarkMode } = useDarkMode();
     const { cart } = useCart();
     const { capitalize } = useCapitalize();
+    const path = usePathname();
 
     return (
         <>
@@ -29,7 +31,9 @@ const CartCard = ({ item, counter, removeItem }) => {
                     <div className='w-36'>
                         <p>${item.price ? setPrice(item.price * counter) : ""}</p>
                     </div>
-                    <SvgImage src={"/delete-2-svgrepo-com.svg"} handleClick={() => removeItem(item.id)} />
+                    { path !== "/pages/admin/carts" ?
+                        <SvgImage src={"/delete-2-svgrepo-com.svg"} handleClick={() => removeItem(item.id)} />
+                    : "" }
                 </div>
             ) : ""}
         </>

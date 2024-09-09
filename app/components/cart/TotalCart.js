@@ -55,6 +55,7 @@ const TotalCart = ({ totalPrice, totalQuantity }) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    router.refresh();
                     setTimeout(() => {
                         clearCart(); // Limpia el carrito después de guardar
                         router.push('/'); // Redirige a la página de inicio o a donde quieras

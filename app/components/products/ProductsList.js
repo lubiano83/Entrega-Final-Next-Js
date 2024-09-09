@@ -16,7 +16,7 @@ const ProductsList = async ({ category = "all", brand = "all", filter = "all", p
     const nextPage = page <= totalPages ? page + 1 : page;
   
     return (
-      <section className='flex flex-col w-full h-full gap-8 justify-center items-center m-8'>
+      <section className='flex flex-col w-full h-full gap-8 justify-start items-center p-8'>
         <DynamicTitle brand={brand} category={category} />
         <div className='flex flex-wrap gap-8 justify-evenly items-center w-full'>
           {items.map(item => (

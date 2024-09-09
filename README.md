@@ -1,39 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Mi Proyecto de E-commerce en Next.js
 
-## Getting Started
+Este es un proyecto de una aplicación de e-commerce desarrollado con Next.js. El objetivo del proyecto es ofrecer una experiencia de compra en línea, con funcionalidades como carrito de compras, filtrado de productos, ordenamiento, integración con Firebase y más.
 
-First, run the development server:
+Funcionalidades Principales
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Listados de Productos: Visualización de productos obtenidos de una API alojada en Firebase.
+Filtrado y Ordenamiento: Filtra los productos por categoría, marca y más, y ordénalos por precio.
+Carrito de Compras: Los usuarios pueden agregar productos al carrito, ajustar cantidades y proceder con la compra.
+Gestión de Carrito en Firebase: El carrito de compras se guarda en una colección de Firebase Database.
+Paginación: Implementación de paginación desde el lado del servidor para los productos.
+Modo Oscuro: Soporte para modo oscuro utilizando useDarkMode.
+Autenticación: Autenticación de usuarios utilizando Firebase Auth.
+Notificaciones: Manejo de alertas y notificaciones con SweetAlert2.
+SEO Dinámico: Utilización de DynamicTitle para generar títulos dinámicos en las páginas.
+Optimización de Imágenes: Integración con el componente next/image para cargar imágenes optimizadas desde Firebase Storage.
+Manejo de Errores: Página personalizada para manejar errores de la aplicación (error.js).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tecnologías Utilizadas
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Next.js 14: Framework de React con renderizado del lado del servidor (SSR).
+React: Biblioteca para la creación de interfaces de usuario.
+Tailwind CSS: Framework de CSS para diseño responsivo y componentes.
+Firebase: Utilizado para la autenticación, almacenamiento y base de datos.
+Firebase Firestore: Base de datos para almacenamiento de productos y carritos.
+Firebase Storage: Almacenamiento de imágenes.
+Firebase Auth: Manejo de la autenticación de usuarios.
+SweetAlert2: Para notificaciones de éxito y advertencias.
+GitHub: Control de versiones y manejo de código.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+/* Links */
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# 2da-Entrega-NextJs
-# entrega-final-next-js
-# Entrega-Final-Next-Js
+https://entrega-final-next-js.vercel.app/

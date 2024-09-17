@@ -73,7 +73,6 @@ export const AuthProvider = ({children}) => {
                     timer: 1500
                 });
                 // Puedes actualizar el estado para reflejar el error o mostrar un mensaje al usuario
-                // setError('El correo electrónico ya está registrado');
             } else if (error.code === 'auth/weak-password') {
                 console.log('La contraseña es demasiado débil');
                 Swal.fire({
@@ -83,10 +82,8 @@ export const AuthProvider = ({children}) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                // setError('La contraseña debe tener al menos 6 caracteres');
             } else {
                 console.log('Error al registrar el usuario:', error.message);
-                // setError('Hubo un problema al registrar el usuario');
             }
         }
     };
@@ -130,29 +127,6 @@ export const AuthProvider = ({children}) => {
         }
     };
 
-    const editUser = async (newUserData) => {
-        try {
-            const userRef = doc(db, "users", user.uid);
-            await updateDoc(userRef, newUserData);
-
-            setUser(prevUser => ({
-                ...prevUser,
-                ...newUserData
-            }));
-
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Datos actualizados con éxito.",
-                showConfirmButton: false,
-                timer: 1500
-            });
-
-        } catch (error) {
-            console.log('Error al actualizar los datos del usuario:', error);
-        }
-    };
-
     const logOut = async () => {
         try {
             await signOut(auth);
@@ -171,6 +145,7 @@ export const AuthProvider = ({children}) => {
                 timer: 1500
             });
             setTimeout(() => {
+                router.refresh();
                 router.push("/");
             }, 1500);
         } catch (error) {
@@ -179,7 +154,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, registerUser, loginUser, logOut, editUser }}>
+        <AuthContext.Provider value={{ user, registerUser, loginUser, logOut }}>
             {children}
         </AuthContext.Provider>
     )

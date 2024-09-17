@@ -4,13 +4,10 @@ import Title from '../Title';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
 import Button from '../Button';
 import { useAuth } from '@/app/hooks/useAuth';
-import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
 
     const { registerUser, loginUser } = useAuth();
-    const router = useRouter();
 
     const initialValues = {
         email: "",

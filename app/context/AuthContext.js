@@ -57,7 +57,8 @@ export const AuthProvider = ({children}) => {
                 timer: 1500
             });
             setTimeout(() => {
-                router.back();
+                router.refresh();
+                router.push("/");
             }, 1500);
 
         } catch (error) {
@@ -110,17 +111,22 @@ export const AuthProvider = ({children}) => {
                 timer: 1500
             });
             setTimeout(() => {
-                router.back();
+                router.refresh();
+                router.push("/");
             }, 1500);
 
         } catch (error) {
-            Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "El email o contraseña son incorrectos..",
-                showConfirmButton: false,
-                timer: 1500
-            });
+            if (error.code === 'auth/invalid-credential') {
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "El email o password son incorrectos..",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                console.log(error.message);
+            }
         }
     };
 

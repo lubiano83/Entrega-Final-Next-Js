@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import Button from '../../Button';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
@@ -29,24 +29,6 @@ const EditForm = ({ id }) => {
   const [imageFile, setImageFile] = useState(null);
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
-
-  useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        const response = await fetch(`${baseURL}/product/${id}`);
-        console.log(response);
-        
-        if (!response.ok) {
-          throw new Error('Producto no encontrado');
-        }
-        const data = await response.json();
-        setValues(data);
-      } catch (error) {
-        console.error("Error fetching product: ", error);
-      }
-    };
-    loadProduct();
-  }, [id]);
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;

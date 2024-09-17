@@ -49,16 +49,20 @@ export async function PATCH(request, { params }) {
         return NextResponse.json({ error: 'Producto no encontrado' }, { status: 404 });
       }
   
+      // Datos actuales del producto
+      const currentProductData = productSnap.data();
+
+      // Campos a actualizar (solo si se proporcionan nuevos valores)
       let updatedValues = {
-        category: formData.get('category'),
-        brand: formData.get('brand'),
-        model: formData.get('model'),
-        description: formData.get('description'),
-        filter: formData.get('filter'),
-        quantity: parseInt(formData.get('quantity'), 10),
-        price: parseFloat(formData.get('price')),
-        status: formData.get('status') === 'true',
-        detail: formData.get('detail')
+        category: formData.get('category') || currentProductData.category,
+        brand: formData.get('brand') || currentProductData.brand,
+        model: formData.get('model') || currentProductData.model,
+        description: formData.get('description') || currentProductData.description,
+        filter: formData.get('filter') || currentProductData.filter,
+        quantity: formData.get('quantity') ? parseInt(formData.get('quantity'), 10) : currentProductData.quantity,
+        price: formData.get('price') ? parseFloat(formData.get('price')) : currentProductData.price,
+        status: formData.get('status') ? formData.get('status') === 'true' : currentProductData.status,
+        detail: formData.get('detail') || currentProductData.detail
       };
   
       if (formData.get('image')) {

@@ -32,36 +32,35 @@ export async function GET() {
   }
 }
 
-
 export async function POST(request) {
   try {
-    const data = await request.json();
-    console.log('Received data:', data);
+    const formData = await request.formData();
+    const email = formData.get('email');
+    const text = formData.get('text');
 
-    if (!data.email || !data.text) {
-      console.log('Missing data:', data);
+    if (!email || !text) {
       return NextResponse.json({ error: 'Faltan datos necesarios' }, { status: 400 });
     }
 
-    const docRef = doc(db, 'contacts', data.email);
+    const docRef = doc(db, 'contacts', email);
     const docSnapshot = await getDoc(docRef);
 
     if (docSnapshot.exists()) {
       const existingData = docSnapshot.data();
       await setDoc(docRef, {
-        email: data.email,
+        email: email,
         messages: [...existingData.messages, {
-          text: data.text,
+          text: text,
           timestamp: new Date().toISOString()
         }],
       }, { merge: true });
     } else {
       await setDoc(docRef, {
-        email: data.email,
+        email: email,
         messages: [{
-          text: data.text,
+          text: text,
           timestamp: new Date().toISOString()
-        }],
+        }]
       });
     }
 

@@ -1,7 +1,7 @@
 "use client";
 import { auth } from "../firebase/config";
 import { createContext, useState, useEffect } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, fetchSignInMethodsForEmail } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
@@ -37,15 +37,6 @@ export const AuthProvider = ({children}) => {
         }
     }, [user]);
 
-    const checkEmailExists = async (email) => {
-        try {
-            const signInMethods = await fetchSignInMethodsForEmail(auth, email);
-            return signInMethods.length > 0;
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-
     const registerUser = async (values) => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
@@ -57,9 +48,45 @@ export const AuthProvider = ({children}) => {
             };
 
             setUser(newUser);
+            
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Registro exitoso",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout(() => {
+                router.back();
+            }, 1500);
 
         } catch (error) {
-            console.log(error.message);
+            // Maneja los errores de registro
+            if (error.code === 'auth/email-already-in-use') {
+                console.log('El correo electrónico ya está registrado');
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "El correo electrónico ya está registrado",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                // Puedes actualizar el estado para reflejar el error o mostrar un mensaje al usuario
+                // setError('El correo electrónico ya está registrado');
+            } else if (error.code === 'auth/weak-password') {
+                console.log('La contraseña es demasiado débil');
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "La contraseña debe tener al menos 6 caracteres",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                // setError('La contraseña debe tener al menos 6 caracteres');
+            } else {
+                console.log('Error al registrar el usuario:', error.message);
+                // setError('Hubo un problema al registrar el usuario');
+            }
         }
     };
 
@@ -75,8 +102,25 @@ export const AuthProvider = ({children}) => {
 
             setUser(newUser);
 
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Ingreso exitoso",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout(() => {
+                router.back();
+            }, 1500);
+
         } catch (error) {
-            console.log(error.message);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "El email o contraseña son incorrectos..",
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     };
 
@@ -129,7 +173,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, registerUser, loginUser, logOut, checkEmailExists, editUser }}>
+        <AuthContext.Provider value={{ user, registerUser, loginUser, logOut, editUser }}>
             {children}
         </AuthContext.Provider>
     )

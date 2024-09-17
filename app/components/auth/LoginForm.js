@@ -36,31 +36,12 @@ const LoginForm = () => {
         try {
             if (action === 'register') {
                 await registerUser(values);
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Registro exitoso.",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                setTimeout(() => {
-                    handleReset();
-                    router.back();
-                }, 1500);
             } else if (action === 'login') {
                 await loginUser(values);
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Inicio de sesión exitoso.",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                setTimeout(() => {
-                    handleReset();
-                    router.back();
-                }, 1500);
             }
+            setTimeout(() => {
+                handleReset();
+            }, 1500);
         } catch (error) {
             console.error('Error:', error.message);
         }

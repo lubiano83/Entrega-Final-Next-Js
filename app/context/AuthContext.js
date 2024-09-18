@@ -58,7 +58,7 @@ export const AuthProvider = ({children}) => {
             });
             setTimeout(() => {
                 router.refresh();
-                router.push("/");
+                router.push(`/pages/user/${newUser.email}`);
             }, 1500);
 
         } catch (error) {
@@ -109,7 +109,7 @@ export const AuthProvider = ({children}) => {
             });
             setTimeout(() => {
                 router.refresh();
-                router.push("/");
+                router.push(`/pages/user/${newUser.email}`);
             }, 1500);
 
         } catch (error) {

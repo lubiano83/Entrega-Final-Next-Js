@@ -1,5 +1,6 @@
 import Button from '@/app/components/Button';
 import Title from '@/app/components/Title';
+import UserRegistered from '@/app/components/user/UserRegistered';
 import Link from 'next/link';
 import React from 'react';
 
@@ -22,6 +23,7 @@ const Admin = () => {
           <Button>Ultimos Carritos</Button>
         </Link>
       </div>
+      <UserRegistered />
     </div>
   )
 }; export default Admin;

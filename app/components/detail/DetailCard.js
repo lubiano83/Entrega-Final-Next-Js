@@ -28,7 +28,7 @@ const DetailCard = ({id, imageUrl, category, brand, model, quantity, price, desc
                       <p><strong>Precio:</strong> ${price ? setPrice(price) : ""}</p>
                   </div>
               </div>
-              <div className='px-7 text-gray-700 w-1/2 text-m'>
+              <div className='px-7 text-gray-700 w-1/2 min-w-80 text-m'>
               <p><strong>Detalle:</strong> {detail}</p>
               </div>
               <div>

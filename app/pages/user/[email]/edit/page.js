@@ -1,5 +1,5 @@
 import React from 'react';
-import UserEdit from '@/app/components/user/edit/UserEdit';
+import UserEdit from '@/app/components/user/UserEdit';
 
 const Edit = ({ params }) => {
 

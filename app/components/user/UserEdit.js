@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import Title from '../../Title';
-import Button from '../../Button';
+import Title from '../Title';
+import Button from '../Button';
 import { useDarkMode } from '@/app/hooks/useDarkMode';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';

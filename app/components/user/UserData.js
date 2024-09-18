@@ -7,7 +7,7 @@ import Image from 'next/image';
 const UserData = ({ email, name, lastname, address, phone }) => {
   
   return (
-    <div className={`p-8 gap-4 rounded-3xl flex flex-wrap flex-col justify-center items-center bg-gray-700 bg-opacity-25`}>
+    <div className={`w-1/2 min-w-72 p-8 gap-4 rounded-3xl flex flex-wrap flex-col justify-center items-center bg-gray-700 bg-opacity-25`}>
         <Title style="text-lg text-center">{email && decodeURIComponent(email)}</Title>
         <div className='flex justify-center items-center gap-4 flex-wrap'>
           <Image priority={false} src={"/no-image.webp"} alt={"imagen profile autoshop"} width={230} height={230}/>

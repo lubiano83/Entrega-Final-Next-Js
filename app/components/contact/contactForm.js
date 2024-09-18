@@ -81,7 +81,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className={`w-1/2 min-w-80 p-8 gap-4 rounded-3xl flex flex-col justify-center items-center bg-gray-700 bg-opacity-25`}>
+    <div className={`w-2/3 min-w-80 p-8 gap-4 rounded-3xl flex flex-col justify-center items-center bg-gray-700 bg-opacity-25`}>
       <Title style="text-3xl">Contáctanos...</Title>
       <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center gap-4 w-full'>
         {user.logged ?

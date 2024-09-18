@@ -26,22 +26,21 @@ export async function GET(request, { params }) {
   }
 }
 
-
-
-export async function PATCH(req, { params }) {
+export async function PUT(req, { params }) {
   const { email } = params;
+
   try {
     const { name, lastname, address, phone } = await req.json();
-    
+
     if (!email || !name || !lastname || !address || !phone) {
       return NextResponse.json({ message: 'Datos incompletos' }, { status: 400 });
     }
-    
+
     const userDocRef = doc(db, 'users', email);
     await setDoc(userDocRef, { name, lastname, address, phone }, { merge: true });
     return NextResponse.json({ message: 'Datos actualizados correctamente' }, { status: 200 });
   } catch (error) {
     console.error('Error al actualizar los datos del usuario:', error);
-    return NextResponse.json({ message: 'Error al actualizar los datos del usuario' }, { status: 500 });
+    return NextResponse.json({ message: 'Error al actualizar los datos del usuario', error: error.message }, { status: 500 });
   }
 }

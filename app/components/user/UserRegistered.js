@@ -6,8 +6,6 @@ const UserRegistered = async() => {
     const items = await fetch(`${baseURL}/user/`, {cache: "no-store"}).then(res => res.json());
     const itemsArray = Array.isArray(items) ? items : [items];
 
-    console.log(itemsArray.length)
-
   return (
     <div className='text-gray-700 text-lg'>
         Usuarios Registados: {itemsArray.length}

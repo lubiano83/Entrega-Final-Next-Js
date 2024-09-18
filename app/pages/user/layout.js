@@ -8,8 +8,8 @@ const UserLayout = ({ children }) => {
     const { user } = useAuth();
 
   return (
-    <div className='bg-white w-full h-full flex flex-col justify-between items-center'>
-        <Banner>{user.logged ? `Bienvenido ${user.email}...` : ""}</Banner>
+    <div className='bg-white w-full h-full flex flex-col justify-between items-center text-center'>
+        <Banner>{user.logged ? `Bienvenido ${user.email}` : ""}</Banner>
         {children}
     </div>
   )

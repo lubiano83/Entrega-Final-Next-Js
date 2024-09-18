@@ -12,20 +12,20 @@ export async function GET(request, { params }) {
 
     const docRef = doc(db, "users", email);
     const docSnapshot = await getDoc(docRef);
-    console.log(docSnapshot);
 
     if (!docSnapshot.exists()) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     const userData = docSnapshot.data();
-    const user = { id: docSnapshot.id, ...userData };
+    const user = { email: email, ...userData };
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
     console.error("Error fetching user from Firestore:", error);
     return NextResponse.json({ error: "Error fetching user from Firestore" }, { status: 500 });
   }
 }
+
 
 
 export async function PATCH(req, { params }) {

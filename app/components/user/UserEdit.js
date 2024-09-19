@@ -99,6 +99,7 @@ const UserEdit = ({ email }) => {
         />
         <input 
           type="text" 
+          accept="image/*"
           placeholder='Ingresa un Nombre..' 
           name="name" 
           value={values.name}

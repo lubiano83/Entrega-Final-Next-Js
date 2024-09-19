@@ -1,6 +1,7 @@
-import { db } from '@/app/firebase/config';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db, storage } from '@/app/firebase/config';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export async function GET(request, { params }) {
   try {
@@ -26,18 +27,46 @@ export async function GET(request, { params }) {
   }
 }
 
-export async function PUT(req, { params }) {
+export async function PATCH(req, { params }) {
   const { email } = params;
 
   try {
-    const { name, lastname, address, phone } = await req.json();
+    const formData = await req.formData(); // Extracción de todos los campos del formulario
 
-    if (!email || !name || !lastname || !address || !phone) {
-      return NextResponse.json({ message: 'Datos incompletos' }, { status: 400 });
+    if (!email) {
+      return NextResponse.json({ error: "User email is required" }, { status: 400 });
     }
 
-    const userDocRef = doc(db, 'users', email);
-    await setDoc(userDocRef, { name, lastname, address, phone }, { merge: true });
+    // Referencia al usuario en Firestore
+    const userRef = doc(db, "users", email);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) {
+      return NextResponse.json({ error: 'Usuario no encontrado' }, { status: 404 });
+    }
+
+    const currentUserData = userSnap.data();
+
+    // Preparar los nuevos valores para la actualización
+    let updatedValues = {
+      name: formData.get('name') || currentUserData.name,
+      lastname: formData.get('lastname') || currentUserData.lastname,
+      city: formData.get('city') || currentUserData.city,
+      address: formData.get('address') || currentUserData.address,
+      phone: formData.get('phone') || currentUserData.phone,
+    };
+
+    // Subida de la imagen si se ha proporcionado una
+    if (formData.get('image')) {
+      const imageFile = formData.get('image');
+      const storageRef = ref(storage, `users/${imageFile.name}`); // Usar el correo como ID
+      const fileSnapshot = await uploadBytes(storageRef, imageFile);
+      const fileUrl = await getDownloadURL(fileSnapshot.ref);
+      updatedValues.imageUrl = fileUrl; // Guardar la URL de la imagen subida
+    }
+
+    // Actualizar los datos en Firestore
+    await updateDoc(userRef, updatedValues);
     return NextResponse.json({ message: 'Datos actualizados correctamente' }, { status: 200 });
   } catch (error) {
     console.error('Error al actualizar los datos del usuario:', error);

@@ -78,6 +78,15 @@ const UserEdit = ({ email }) => {
     <div className={`w-1/2 min-w-72 p-8 gap-4 rounded-3xl flex flex-wrap flex-col justify-center items-center bg-gray-700 bg-opacity-25`}>
       <Title style="text-lg">{email && decodeURIComponent(email)}</Title>
       <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-4 w-full">
+      <input 
+          type="file" 
+          placeholder='Ingresa un Nombre..' 
+          name="image" 
+          value={values.image}
+          onChange={handleChange}
+          required 
+          className={`w-full min-w-60 h-10 rounded-xl px-2 text-gray-700 text-lg overflow-hidden`} 
+        />
         <input 
           type="text" 
           placeholder='Ingresa un Nombre..' 
@@ -92,6 +101,15 @@ const UserEdit = ({ email }) => {
           placeholder='Ingresa un Apellido..' 
           name="lastname" 
           value={values.lastname}
+          onChange={handleChange}
+          required 
+          className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} 
+        />
+        <input 
+          type="text" 
+          placeholder='Ingresa una Ciudad..' 
+          name="city" 
+          value={values.city}
           onChange={handleChange}
           required 
           className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} 

@@ -82,8 +82,8 @@ const UserEdit = ({ email }) => {
       showConfirmButton: false,
       timer: 1500,
     });
+    router.refresh();
     setTimeout(() => {
-      router.refresh();
       router.back();
     }, 1500);
   };

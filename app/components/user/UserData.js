@@ -11,7 +11,7 @@ const UserData = ({ email, imageUrl, name, lastname, city, address, phone, item 
         <Title style="text-lg text-center">{email && decodeURIComponent(email)}</Title>
         <div className='flex justify-center items-center gap-4 flex-wrap'>
           <Image priority={false} src={imageUrl ? imageUrl : "/no-image.webp"} alt={"imagen profile autoshop"} width={230} height={230}/>
-          <div className='flex flex-col gap-1 text-lg text-left'>
+          <div className='flex flex-col gap-2 text-lg text-left'>
               <div><strong>Nombre:</strong> <span>{name ?? "sin datos"}</span></div>
               <div><strong>Apellido:</strong> <span>{lastname ?? "sin datos"}</span></div>
               <div><strong>Ciudad:</strong> <span>{city ?? "sin datos"}</span></div>

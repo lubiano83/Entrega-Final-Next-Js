@@ -19,13 +19,30 @@ const TotalCart = ({ totalPrice, totalQuantity }) => {
     const handlePayment = async () => {
         if (user.logged) {
             try {
-                // Construye el objeto con los datos necesarios
+                // Verificar si los datos del usuario están completos
+                const userResponse = await fetch(`/api/user/${user.email}`);
+                const userDetails = await userResponse.json();
+
+                console.log(userDetails);
+                
+    
+                // Suponiendo que la API de usuarios devuelve los datos del usuario
+                if (!userDetails.name || !userDetails.address || !userDetails.phone || !userDetails.lastname || !userDetails.city) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Faltan datos en tu perfil. Por favor, completa tu información antes de realizar la compra.',
+                        showConfirmButton: true,
+                    });
+                    setTimeout(() => {
+                        router.push(`/pages/user/${user.email}`); // Redirige a la página de perfil para que el usuario complete los datos
+                    }, 2000);
+                    return; // Detener el proceso de compra si faltan datos
+                }
+    
+                // Construir el objeto con los datos necesarios para la API del carrito
                 const cartData = {
                     email: user.email,
-                    name: user.name ?? "",
-                    lastname: user.lastname ?? "",
-                    address: user.address ?? "",
-                    phone: user.phone ?? "",
                     products: cart.map(item => ({
                         id: item.item.id,
                         brand: item.item.brand,
@@ -35,8 +52,8 @@ const TotalCart = ({ totalPrice, totalQuantity }) => {
                         price: item.item.price
                     }))
                 };
-
-                // Envía los datos a la API
+    
+                // Enviar los datos del carrito a la API
                 const response = await fetch('/api/carts', {
                     method: 'POST',
                     headers: {
@@ -44,9 +61,9 @@ const TotalCart = ({ totalPrice, totalQuantity }) => {
                     },
                     body: JSON.stringify(cartData)
                 });
-
+    
                 const result = await response.json();
-
+    
                 if (response.ok) {
                     Swal.fire({
                         position: 'center',
@@ -58,7 +75,7 @@ const TotalCart = ({ totalPrice, totalQuantity }) => {
                     router.refresh();
                     setTimeout(() => {
                         clearCart(); // Limpia el carrito después de guardar
-                        router.push('/'); // Redirige a la página de inicio o a donde quieras
+                        router.push('/pages/order'); // Redirige a la página de orden
                     }, 1500);
                 } else {
                     Swal.fire({

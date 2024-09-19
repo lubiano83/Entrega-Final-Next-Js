@@ -9,7 +9,7 @@ const UserLayout = ({ children }) => {
 
   return (
     <div className='bg-white w-full h-full flex flex-col justify-between items-center text-center'>
-        <Banner>{user.logged ? `Bienvenido ${user.email}` : ""}</Banner>
+        <Banner>Recuerda mantener tus datos actualizados..</Banner>
         {children}
     </div>
   )

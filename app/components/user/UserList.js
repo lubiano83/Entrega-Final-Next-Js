@@ -11,7 +11,7 @@ const UserList = async({ email }) => {
     <div className='w-full flex justify-center items-center'>
         {
             itemsArray.map(item => (
-                <UserData key={item.email} {...item} item={item} />
+                <UserData key={item.email} {...item} item={item}/>
             ))
         }
     </div>

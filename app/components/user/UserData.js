@@ -12,11 +12,11 @@ const UserData = ({ email, imageUrl, name, lastname, city, address, phone, item 
         <div className='flex justify-center items-center gap-4 flex-wrap'>
           <Image priority={false} src={imageUrl ? imageUrl : "/no-image.webp"} alt={"imagen profile autoshop"} width={230} height={230}/>
           <div className='flex flex-col gap-2 text-lg text-left'>
-              <div><strong>Nombre:</strong> <span>{name ?? "sin datos"}</span></div>
-              <div><strong>Apellido:</strong> <span>{lastname ?? "sin datos"}</span></div>
-              <div><strong>Ciudad:</strong> <span>{city ?? "sin datos"}</span></div>
-              <div><strong>Dirección:</strong> <span>{address ?? "sin datos"}</span></div>
-              <div><strong>Telefono:</strong> <span>{phone ?? "sin datos"}</span></div>
+              <div><strong>Nombre:</strong> <span>{name}</span></div>
+              <div><strong>Apellido:</strong> <span>{lastname}</span></div>
+              <div><strong>Ciudad:</strong> <span>{city}</span></div>
+              <div><strong>Dirección:</strong> <span>{address}</span></div>
+              <div><strong>Telefono:</strong> <span>{phone}</span></div>
           </div>
         </div>
         <Link href={`/pages/user/${email}/edit`}>

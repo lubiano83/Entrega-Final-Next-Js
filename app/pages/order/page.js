@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import OrderDetail from '@/app/components/cart/OrderDetail';
 
 const Order = () => {
   return (
     <div className="bg-white flex justify-evenly items-center h-full w-full text-gray-700">
-        Aqui mostraremos tu orden de compra
+        <OrderDetail />
     </div>
   )
 }

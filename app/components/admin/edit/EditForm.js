@@ -141,7 +141,7 @@ const EditForm = ({ id }) => {
       <div className={`w-1/2 min-w-72 p-8 gap-4 rounded-3xl flex flex-wrap flex-col justify-center items-center bg-gray-700 bg-opacity-25`}>
         <Title style="text-3xl">{id}</Title>
         <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center gap-4 w-full'>
-          <input type="file" name="image" onChange={handleChange} className='min-w-60 h-10 text-gray-700 text-lg text-center' />
+          <input type="file" name="image" onChange={handleChange} className='min-w-60 h-10 text-gray-700 text-lg text-center overflow-hidden' />
           <input type="text" placeholder='Ingresa una Categoria..' name="category" value={values.category} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
           <input type="text" placeholder='Ingresa una Marca..' name="brand" value={values.brand} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />
           <input type="text" placeholder='Ingresa un Modelo..' name="model" value={values.model} onChange={handleChange} className={`w-full min-w-60 h-10 rounded-xl px-2 shadow-gray-700 shadow-sm text-gray-700 border-2 text-lg ${isDarkMode ? "border-orange-600" : "border-blue-600"}`} />

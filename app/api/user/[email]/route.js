@@ -54,6 +54,7 @@ export async function PATCH(req, { params }) {
       city: formData.get('city') || currentUserData.city,
       address: formData.get('address') || currentUserData.address,
       phone: formData.get('phone') || currentUserData.phone,
+      admin: false
     };
 
     // Subida de la imagen si se ha proporcionado una

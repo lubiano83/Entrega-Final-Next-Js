@@ -2,6 +2,20 @@ import { NextResponse } from 'next/server';
 import { db } from '../../firebase/config';
 import { addDoc, getDocs, collection, updateDoc, doc, getDoc } from 'firebase/firestore';
 
+async function getUserData(email) {
+  try {
+    const baseURL = process.env.NEXT_PUBLIC_FIREBASE_API_URL;
+    const response = await fetch(`${baseURL}/user/${email}`);
+    if (!response.ok) {
+      throw new Error('Error al obtener los datos del usuario');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error al obtener los datos del usuario:', error);
+    throw new Error('Error al obtener los datos del usuario');
+  }
+}
+
 export async function GET() {
   try {
     const collectionRef = collection(db, 'carts');
@@ -37,6 +51,13 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Faltan datos necesarios' }, { status: 400 });
     }
 
+    let userData;
+    try {
+      userData = await getUserData(data.email);
+    } catch (error) {
+      return NextResponse.json({ error: 'No se pudo obtener la información del usuario' }, { status: 500 });
+    }
+
     const processedProducts = data.products.map(product => ({
       id: product.id,
       brand: product.brand,
@@ -50,10 +71,11 @@ export async function POST(request) {
 
     await addDoc(cartsCollection, {
       email: data.email,
-      name: data.name ?? "",
-      lastname: data.lastname ?? "",
-      address: data.address ?? "",
-      phone: data.phone ?? "",
+      name: userData.name ?? "",
+      lastname: userData.lastname ?? "",
+      city: userData.city ?? "",
+      address: userData.address ?? "",
+      phone: userData.phone ?? "",
       products: processedProducts,
       lastUpdated: new Date().toLocaleString()
     });

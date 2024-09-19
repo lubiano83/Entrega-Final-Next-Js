@@ -13,10 +13,6 @@ export const AuthProvider = ({children}) => {
         logged: false,
         email: null,
         uid: null,
-        name: null,
-        lastname: null,
-        address: null,
-        phone: null
     };
 
     const [user, setUser] = useState(initialValues);

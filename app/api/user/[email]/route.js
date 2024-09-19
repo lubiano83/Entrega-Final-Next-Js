@@ -1,7 +1,7 @@
 import { db, storage } from '@/app/firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 
 export async function GET(request, { params }) {
   try {
@@ -57,13 +57,24 @@ export async function PATCH(req, { params }) {
       admin: false
     };
 
-    // Subida de la imagen si se ha proporcionado una
+    // Eliminar la foto anterior si hay una
+    if (currentUserData.imageUrl) {
+      const oldImageRef = ref(storage, currentUserData.imageUrl);
+      try {
+        await deleteObject(oldImageRef);
+      } catch (deleteError) {
+        console.error('Error al eliminar la foto anterior:', deleteError);
+        // Puedes manejar este error según necesites
+      }
+    }
+
+    // Subida de la nueva imagen si se ha proporcionado una
     if (formData.get('image')) {
       const imageFile = formData.get('image');
-      const storageRef = ref(storage, `users/${imageFile.name}`); // Usar el correo como ID
-      const fileSnapshot = await uploadBytes(storageRef, imageFile);
+      const imageRef = ref(storage, `users/${email}`); // Usa el email como nombre de archivo
+      const fileSnapshot = await uploadBytes(imageRef, imageFile);
       const fileUrl = await getDownloadURL(fileSnapshot.ref);
-      updatedValues.imageUrl = fileUrl; // Guardar la URL de la imagen subida
+      updatedValues.imageUrl = fileUrl; // Guardar la URL de la nueva imagen subida
     }
 
     // Actualizar los datos en Firestore

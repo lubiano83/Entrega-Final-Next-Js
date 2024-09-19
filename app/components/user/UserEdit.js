@@ -10,7 +10,7 @@ const UserEdit = ({ email }) => {
   console.log(email);
 
   const initialValues = {
-    image: "",
+    imageUrl: "",
     name: "",
     lastname: "",
     city: "",
@@ -83,6 +83,7 @@ const UserEdit = ({ email }) => {
       timer: 1500,
     });
     setTimeout(() => {
+      router.refresh();
       router.back();
     }, 1500);
   };
@@ -93,13 +94,13 @@ const UserEdit = ({ email }) => {
       <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-4 w-full">
         <input 
           type="file" 
+          accept="image/*"
           name="image" 
           onChange={handleChange}
           className={`w-full min-w-60 h-10 rounded-xl px-2 text-gray-700 text-lg overflow-hidden`} 
         />
         <input 
           type="text" 
-          accept="image/*"
           placeholder='Ingresa un Nombre..' 
           name="name" 
           value={values.name}

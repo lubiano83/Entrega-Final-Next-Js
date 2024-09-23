@@ -34,9 +34,8 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const formData = await request.formData();
-    const email = formData.get('email');
-    const text = formData.get('text');
+    const formData = await request.json(); // Cambiado a json()
+    const { email, text } = formData;
 
     if (!email || !text) {
       return NextResponse.json({ error: 'Faltan datos necesarios' }, { status: 400 });

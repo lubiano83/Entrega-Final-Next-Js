@@ -155,7 +155,7 @@ const EditForm = ({ id }) => {
             <input type="checkbox" name="status" checked={values.status} onChange={handleChange} />
             { values.status ? "Producto disponible" : "Producto no disponible" }
           </label>
-        {user.email === "lubiano83@gmail.com" ? 
+        {/* {user.email === "lubiano83@gmail.com" ?  */}
           <div className='flex flex-col justify-center items-center gap-2'>
             <div className='flex justify-center items-center gap-2'>
               <Button type="reset" handleClick={handleReset}>Limpiar</Button>
@@ -163,7 +163,7 @@ const EditForm = ({ id }) => {
             </div>
             <Button type="button" handleClick={handleDelete}>Eliminar</Button>
           </div>
-          : "" }
+          {/* : "" } */}
         </form>
       </div>
     </>

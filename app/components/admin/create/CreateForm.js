@@ -119,12 +119,12 @@ const CreateForm = () => {
               { values.status === true ? "Producto disponible" : "Producto no disponible" }
             </label>
         </div>
-        { user.email === "lubiano83@gmail.com" ?
+        {/* { user.email === "lubiano83@gmail.com" ? */}
           <div className='flex justify-center gap-2'>
             <Button color="danger" size="md" style="w-24" type="reset" onClick={handleReset}>Limpiar</Button>
             <Button color="primary" size="md" style="w-24" type="submit">Ingresar</Button>
           </div>
-        : "" }
+        {/* : "" } */}
       </form>
     </div>
   );
